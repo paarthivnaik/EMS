@@ -38,7 +38,8 @@ namespace RBACv3
                         user.GenerateUserIdentityAsync(manager),
                     getUserIdCallback: (id) => (id.GetUserId<int>()))
 
-                }
+                },
+                  CookieName = "kalams",
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
