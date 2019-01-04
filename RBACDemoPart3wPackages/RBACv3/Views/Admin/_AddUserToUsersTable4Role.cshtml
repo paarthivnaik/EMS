@@ -28,7 +28,8 @@
     border-width: thin; border-color: Silver; width: 650px">
     <legend style="width:auto; border-style:none"><strong>Add User To Role</strong></legend>
     <br />
+
     <label>User:  </label>
-    @Html.DropDownList("UserId", null, string.Empty, new { style = "width:250px" })
+    @Html.DropDownList("UserId", null, string.Empty, new { style = "width:250px", @class = "form-control" })
     <input class="btn btn-default" type="button" id="AddUser" value="Add User To Role" />
 </fieldset>

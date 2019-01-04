@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<RBACv3.Models.ApplicationUser>
 @{
-    ViewBag.Title = "RBAC Administration";
+    ViewBag.Title = "Administration";
 }
 
 
@@ -11,6 +11,6 @@
 @Html.Partial("_ListUserTable", Model)
 <br />
 <div>
-    <input class="btn btn-default" type="button" value="Create User" onclick="location.href='@Url.Action("UserCreate", "Admin")'" />
+    <input class="btn btn-default" type="button" value="Create User" onclick="location.href='@Url.Action("Register", "Account")'" />
     <br />
 </div>
