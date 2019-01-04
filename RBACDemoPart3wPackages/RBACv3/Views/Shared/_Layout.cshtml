@@ -41,8 +41,12 @@
         @Html.Partial("_Footer")
         @Html.Partial("_RightSideTools")
     </div>
-
+  
     @Scripts.Render("~/AdminLTE/plugins/jquery/js")
+    @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js")
+    <link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+    <script src="~/AdminLTE/plugins/jquery/js/jQuery-2.1.4.min.js"></script>
+    <script src="~/AdminLTE/plugins/jquery-ui/js/jquery-ui.min.js"></script>
     @RenderSection("menu", required: false)
     @Scripts.Render("~/AdminLTE/bootstrap/js")
     @Scripts.Render("~/AdminLTE/plugins/slimscroll/js")

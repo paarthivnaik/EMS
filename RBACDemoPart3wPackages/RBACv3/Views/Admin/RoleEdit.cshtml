@@ -2,97 +2,175 @@
 @{
     ViewBag.Title = "Edit " + Model.RoleDescription + " Role";
 }
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>WebApplication</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-@{if (Model != null)
-{
-    <div class="panel">
-        @using (Html.BeginForm())
-        {
-            @Html.ValidationSummary(true)
-            @Html.HiddenFor(model => model.Id)
+    @Styles.Render("~/AdminLTE/bootstrap/css")
+    @Styles.Render("~/AdminLTE/plugins/font-awesome/css")
+    @Styles.Render("~/AdminLTE/plugins/ionicons/css")
+    @Styles.Render("~/AdminLTE/dist/css")
+    @Styles.Render("~/AdminLTE/plugins/icheck/css/sqare/blue")
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    @{if (Model != null)
+    {
+        <div class="panel">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.Id)
+                <fieldset>
+                    <legend>
+                        <h3 style="font-weight:bold; font-size:x-large">
+                            Role Details
+                        </h3>
+                    </legend>
+                    <div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                                    <div class='input-group'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                        </span>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.RoleDescription, htmlAttributes: new { @class = "control-label" })
+                                    <div class='input-group'>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                        </span>
+                                        @Html.TextAreaFor(model => model.RoleDescription, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.RoleDescription, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class='input-group'>
+
+                                        @Html.EditorFor(model => model.IsSysAdmin)
+                                        @Html.LabelFor(model => model.IsSysAdmin, "System Role")
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.IsSysAdmin)
+                                </div>
+                            </div>
+                        </div>
+                        @*<table style='width: 100%'>
+                <tr>
+                    <td style='width: 120px;font-weight: bold'>
+                        @Html.LabelFor(model => model.Name)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.Name, new { @class = "singlelinetextinput"})
+                        @Html.ValidationMessageFor(model => model.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <td style='font-weight: bold'>
+                        @Html.LabelFor(model => model.RoleDescription, new { style = "vertical-align:top" })
+                    </td>
+                    <td>
+                        @Html.TextAreaFor(model => model.RoleDescription, new { @class = "multilinetextinput" })
+                        @Html.ValidationMessageFor(model => model.RoleDescription)
+                    </td>
+                </tr>
+                <tr>
+                    <td style='font-weight: bold'>
+                        @Html.LabelFor(model => model.IsSysAdmin, "System Role")
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.IsSysAdmin)
+                        @Html.ValidationMessageFor(model => model.IsSysAdmin)
+                    </td>
+                </tr>
+            </table>*@
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <input class="btn btn-su" type="submit" value="Save" />
+                                </div>
+                            </div>
+                        </div>
+</fieldset>
+            }
             <fieldset>
                 <legend>
-                    <h3 style="font-weight:bold; font-size:x-large">
-                        Role Details
+                    <h3>
+                        Users Associated with this Role
                     </h3>
                 </legend>
-                <div>
-                    <table style='width: 100%'>
-                        <tr>
-                            <td style='width: 120px;font-weight: bold'>
-                                @Html.LabelFor(model => model.Name)
-                            </td>
-                            <td>
-                                @Html.TextBoxFor(model => model.Name, new { @class = "singlelinetextinput" })
-                                @Html.ValidationMessageFor(model => model.Name)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style='font-weight: bold'>
-                                @Html.LabelFor(model => model.RoleDescription, new { style = "vertical-align:top" })
-                            </td>
-                            <td>
-                                @Html.TextAreaFor(model => model.RoleDescription, new { @class = "multilinetextinput" })
-                                @Html.ValidationMessageFor(model => model.RoleDescription)
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style='font-weight: bold'>
-                                @Html.LabelFor(model => model.IsSysAdmin, "System Role")
-                            </td>
-                            <td>
-                                @Html.EditorFor(model => model.IsSysAdmin)
-                                @Html.ValidationMessageFor(model => model.IsSysAdmin)
-                            </td>
-                        </tr>
-                    </table>
+                <div id="UsersTable">
+                    @Html.Partial("_ListUsersTable4Role", Model)
                     <br />
-                    <input class="btn btn-default" type="submit" value="Save" />
+                </div>
+                <div>
+                    @Html.Partial("_AddUserToUsersTable4Role", Model)
+                </div>
+                <br />
+                <div>
+                    <input class="btn btn-primary" type="button" value="Go to Users" onclick="location.href='@Url.Action("Index", "Admin")'" style="float:left" />
+                    @*@Html.ActionLink("Go to Users", "Index", "Admin")*@
+                </div>
             </fieldset>
-        }
-        <fieldset>
-            <legend>
-                <h3>
-                    Users Associated with this Role
-                </h3>
-            </legend>
-            <div id="UsersTable">
-                @Html.Partial("_ListUsersTable4Role", Model)
-                <br />
-            </div>
-            <div>
-                @Html.Partial("_AddUserToUsersTable4Role", Model)
-            </div>
             <br />
-            <div>
-                @Html.ActionLink("Go to Users", "Index", "Admin")
-            </div>
-        </fieldset>
-        <br />
-        <br />
-        <fieldset>
-            <legend>
-                <h3>
-                    Permissions Associated with this Role
-                </h3>
-            </legend>
+            <br />
+            <fieldset>
+                <legend>
+                    <h3>
+                        Permissions Associated with this Role
+                    </h3>
+                </legend>
 
-            <div id="PermissionsTable">
-                @Html.Partial("_ListPermissions", Model)
+                <div id="PermissionsTable">
+                    @Html.Partial("_ListPermissions", Model)
+                    <br />
+                </div>
+                <div>
+                    @Html.Partial("_AddPermission2PermissionsTable4Role", Model)
+                </div>
                 <br />
-            </div>
-            <div>
-                @Html.Partial("_AddPermission2PermissionsTable4Role", Model)
-            </div>
-            <br />
-            <div>
-                @Html.ActionLink("Go to Permissions", "PermissionIndex", "Admin")
-            </div>
-        </fieldset>
-    </div>
-    <br />
-    <div>
-        @Html.ActionLink("Go to Roles", "RoleIndex", "Admin")
-    </div>
-}
-}
+                <div>
+                    <input class="btn btn-primary" type="button" value="Go to Permissions" onclick="location.href='@Url.Action("PermissionIndex", "Admin")'" style="float:left" />
+                    @*@Html.ActionLink("Go to Permissions", "PermissionIndex", "Admin")*@
+                </div>
+            </fieldset>
+        </div>
+        <br />
+        <div>
+            <input class="btn btn-primary" type="button" value="Go to Roles" onclick="location.href='@Url.Action("RoleIndex", "Admin")'" style style="float:left" />
+            @*@Html.ActionLink("Go to Roles", "RoleIndex", "Admin")*@
+        </div>
+    }
+    }
+    @Scripts.Render("~/AdminLTE/plugins/jquery/js")
+    @Scripts.Render("~/AdminLTE/bootstrap/js")
+    @Scripts.Render("~/AdminLTE/plugins/icheck/js")
+    @Scripts.Render("~/AdminLTE/plugins/jquery-validate/js")
+
+
+</body>

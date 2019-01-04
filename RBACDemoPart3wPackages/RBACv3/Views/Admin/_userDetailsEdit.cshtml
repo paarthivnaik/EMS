@@ -2,12 +2,82 @@
 @{if (Model != null)
 {
     <div id="expanderContent">
-        <table style='width: 100%'>
+       
+            <div class="form-group">
+
+                <div class="col-md-12">
+                    <div class="col-lg-6">
+                        @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+                        <div class='input-group'>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.LabelFor(model => model.Firstname, new { @class = "control-label" })
+                        <div class='input-group'>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            @Html.TextBoxFor(model => model.Firstname, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <div class="col-md-12">
+                    <div class="col-lg-6">
+                        @Html.LabelFor(model => model.Lastname, new { @class = "control-label" })
+                        <div class='input-group'>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            @Html.TextBoxFor(model => model.Lastname, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-lg-6">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                        <div class='input-group'>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+            </div>
+        
+            <div class="form-group">
+
+                <div class="col-md-12">
+                    <div class="col-lg-6">
+
+                        <div class='input-group'>
+
+                            @Html.EditorFor(model => model.Inactive, new { @class = "form-control" })
+                            @Html.LabelFor(model => model.Inactive, new { @class = "control-label" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Inactive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        @*<table style='width: 100%'>
             <tr>
                 <td style='width: 10%; font-weight: bold' class='userTable'>
                     @Html.LabelFor(model => model.UserName)
                 </td>
-                <td style='width: 28%' class='userTable'>
+                <td  class='userTable'>
                     @Html.TextBoxFor(model => model.UserName, new { @class = "singlelinetextinput" })
                     @Html.ValidationMessageFor(model => model.UserName)
                 </td>
@@ -45,7 +115,7 @@
                 </td>
                 <td></td>
             </tr>
-        </table>
-    </div>
+        </table>*@
+    
 }
 }

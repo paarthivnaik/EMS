@@ -42,10 +42,14 @@
     border-width: thin; border-color: Silver; width: 740px">
     <legend style="width:auto; border-style:none"><strong>Add Permission To Role</strong></legend>
     <br />
-    <label>
-        Permission:
-    </label>    
-    @Html.DropDownList("PermissionId", null, string.Empty, new { style = "width:350px" })
-    <input class="btn btn-default" type="button" id="AddPermission" value="Add Permission" />
-    <input class="btn btn-default" type="button" id="AddAllPermissions" value="Add All Permissions" />
+   
+        <label>
+            Permission:
+        </label>
+        @Html.DropDownList("PermissionId", null, string.Empty, new { @class = "form-control" })
+    
+    
+    <br/>
+    <input class="btn btn-success" type="button" id="AddPermission" value="Add Permission" />
+    <input class="btn btn-success" type="button" id="AddAllPermissions" value="Add All Permissions" />
 </fieldset>
