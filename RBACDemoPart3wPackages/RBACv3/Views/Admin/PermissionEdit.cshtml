@@ -19,10 +19,18 @@
                         @Html.TextBoxFor(model => model.PermissionDescription, new { style = "width:450px" })
                         @Html.ValidationMessageFor(model => model.PermissionDescription)
                     </td>
+                    <td>
+                       
+                            <input class="btn btn-success" type="submit" value="Update Permission" />
+                       
+                    </td>
                 </tr>
             </table>
             <br />
-            <input class="btn btn-default" type="submit" value="Update Permission" />
+            @*<div class="text-center">
+                <input class="btn btn-success" type="submit" value="Update Permission" />
+            </div>*@
+           
             <br />
             <br />
         }
@@ -38,16 +46,22 @@
             </h3>
         </legend>
 
-        <div id="RolesTable">
-            @Html.Partial("_ListRolesTable4Permission", Model)
+        <div id="RolesTable" class="box">
+            <div class="box-body no-padding">
+                @Html.Partial("_ListRolesTable4Permission", Model)
+            </div>
+           
         </div>
-        <div>
+        <div class="box">
             @Html.Partial("_AddRole4Permission", Model)
         </div>        
     </fieldset>
 
 </div>
 <br />
-<div>
+@*<div>
     @Html.ActionLink("Go to Permissions", "PermissionIndex", "Admin")
+</div>*@
+<div class="box-tools pull-left">
+    <input class="btn btn-primary" type="button" value="Go to Permissions" onclick="location.href='@Url.Action("PermissionIndex", "Admin")'" />
 </div>

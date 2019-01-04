@@ -1,4 +1,7 @@
 ﻿@model RBACv3.Models.PERMISSION
+<link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+<script src="~/AdminLTE/plugins/jquery/js/jQuery-2.1.4.min.js"></script>
+<script src="~/AdminLTE/plugins/jquery-ui/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#AddPermission').click(function () {          
@@ -25,12 +28,12 @@
 </script>
 @Html.HiddenFor(model => model.PermissionId)
 <fieldset style="padding: 1em; font: 100%; color: Black; border-color: Black; border-style: solid;
-    border-width: thin; border-color: Silver; width: 850px">
+    border-width: thin; border-color: Silver; width: 100%">
     <legend style="width:auto; border-style:none"><strong>Add Permission To Role</strong></legend>
     <br />
     <label>
         Role:
     </label>
     @Html.DropDownList("RoleId", null, string.Empty, new { style = "width:350px" })
-    <input class="btn btn-default" type="button" id="AddPermission" value="Add Permission" />    
+    <input class="btn btn-success" type="button" id="AddPermission" value="Add Permission" />    
 </fieldset>

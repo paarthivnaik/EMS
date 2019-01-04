@@ -40,6 +40,9 @@
         </fieldset>
         }
         <br />
-        <div>
+        @*<div>
             @Html.ActionLink("Go to Users", "Index", "Admin")
-        </div>
+        </div>*@
+<div class="box-tools pull-left">
+    <input class="btn btn-primary" type="button" value="Go to Users" onclick="location.href='@Url.Action("Index", "Admin")'" />
+</div>

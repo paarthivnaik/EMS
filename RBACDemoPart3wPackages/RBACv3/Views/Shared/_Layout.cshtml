@@ -25,17 +25,21 @@
         </aside>
         <div class="content-wrapper">
             <section class="content-header">
-                <h1>
-                    @ViewBag.Title
-                    <small>@ViewBag.SubTitle</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i>@ViewBag.SubTitle</a></li>
-                    <li class="active">@ViewBag.Title</li>
-                </ol>
-            </section>
+               
+                    <h1>
+                        @ViewBag.Title
+                        <small>@ViewBag.SubTitle</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i>@ViewBag.SubTitle</a></li>
+                        <li class="active">@ViewBag.Title</li>
+                    </ol>
+                
+</section>
             <section class="content">
-                @RenderBody()
+                
+                    @RenderBody()
+                
             </section>
         </div>
         @Html.Partial("_Footer")

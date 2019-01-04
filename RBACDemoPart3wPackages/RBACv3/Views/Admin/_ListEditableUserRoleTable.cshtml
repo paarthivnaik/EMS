@@ -22,13 +22,21 @@
     });
 </script>
 <input name='UserId' id='UserId' type="hidden" value="@ViewBag.UserId" />
-<fieldset style="padding: 1em; font: 100%; color: Black; border-color: Black; border-style: solid;
-    border-width: thin; border-color: Silver; width: 650px">
-    <legend><strong>Add Role To User</strong></legend>
-    <br />
-    <label>
-        Role:
-    </label>
-    @Html.DropDownList("RoleId", null, string.Empty, new { style = "width:250px" })
-    <input class="btn btn-default" type="button" id="AddRole" value="Add Role" />
-</fieldset>
+<div class="box box-info">
+    <fieldset>
+        <legend><strong>Add Role To User</strong></legend>
+        <br />
+        <label>
+            Role:
+        </label>
+        @Html.DropDownList("RoleId", null, string.Empty, new { style = "width:250px" })
+        <input class="btn btn-default" type="button" id="AddRole" value="Add Role" />
+        <div class="form-group">
+
+
+
+
+        </div>
+    </fieldset>
+</div>
+

@@ -4,13 +4,19 @@
 }
 
 
-<h3 style="font-weight:bold; font-size:x-large">
+@*<h3 style="font-weight:bold; font-size:x-large">
     System Users
 </h3>
-
-@Html.Partial("_ListUserTable", Model)
-<br />
 <div>
     <input class="btn btn-default" type="button" value="Create User" onclick="location.href='@Url.Action("Register", "Account")'" />
     <br />
+</div>*@
+<div class="box-header with-border">
+    <h3 class="box-title" style="font-weight:bold; font-size:x-large"> System Users</h3>
+
+    <div class="box-tools pull-right">
+        <input class="btn btn-success" type="button" value="Create User" onclick="location.href='@Url.Action("Register", "Account")'" />
+    </div>
 </div>
+@Html.Partial("_ListUserTable", Model)
+<br />
