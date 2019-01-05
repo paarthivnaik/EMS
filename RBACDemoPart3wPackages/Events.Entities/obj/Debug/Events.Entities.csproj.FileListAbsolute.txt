@@ -1,5 +1,9 @@
+E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\Events.Entities.dll.config
 E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\Events.Entities.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\Events.Entities.pdb
-E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\obj\Debug\Events.Entities.csprojResolveAssemblyReference.cache
+E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\EntityFramework.dll
+E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\EntityFramework.SqlServer.dll
+E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\EntityFramework.xml
+E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\EntityFramework.SqlServer.xml
 E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\obj\Debug\Events.Entities.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\obj\Debug\Events.Entities.pdb
