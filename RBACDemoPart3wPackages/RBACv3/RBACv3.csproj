@@ -1244,6 +1244,16 @@
     </Content>
     <None Include="Project_Readme.html" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Events.Entities\Events.Entities.csproj">
+      <Project>{dc527a06-a18a-423d-93bb-147f779df318}</Project>
+      <Name>Events.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Events.Repo\Events.Repo.csproj">
+      <Project>{5c9394c2-abb4-4637-add0-7a266824e0f1}</Project>
+      <Name>Events.Repo</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

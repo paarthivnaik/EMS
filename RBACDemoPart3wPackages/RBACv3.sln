@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RBACv3", "RBACv3\RBACv3.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Entities", "Events.Entities\Events.Entities.csproj", "{DC527A06-A18A-423D-93BB-147F779DF318}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Repo", "Events.Repo\Events.Repo.csproj", "{5C9394C2-ABB4-4637-ADD0-7A266824E0F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DC527A06-A18A-423D-93BB-147F779DF318}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC527A06-A18A-423D-93BB-147F779DF318}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC527A06-A18A-423D-93BB-147F779DF318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C9394C2-ABB4-4637-ADD0-7A266824E0F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C9394C2-ABB4-4637-ADD0-7A266824E0F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C9394C2-ABB4-4637-ADD0-7A266824E0F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C9394C2-ABB4-4637-ADD0-7A266824E0F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
