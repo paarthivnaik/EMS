@@ -4,206 +4,18 @@
 $(document).ready(function () {    
 
     $(".modal").attr("data-backdrop", "static");
-
+    var apiBaseUrl = 'http://localhost:64075/api/';
 });
-function hideCfActions() {
-    $('#save-CustomFields').css('display', 'none');
-    $('#cancel-CustomFields').css('display', 'none');
-}
-
-/**
-  * Summer Notes Script
- */
-
-function notes() {
-    $('.summernote1')
-          .summernote({
-              height: 115,
-              toolbar: [
-                 ['style', ['style']],
-        ['font', ['bold', 'italic', 'underline', 'clear']],
-        // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-        ['fontname', ['fontname']],
-        ['fontsize', ['fontsize']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['height', ['height']],
-        ['table', ['table']],
-        //['insert', ['link', 'picture', 'hr']],
-        ['view', ['fullscreen', 'codeview']],
-        ['help', ['help']]
-              ],
-              callbacks: {
-
-                  onKeydown: function (e) {
-                      debugger;
-
-                      var t = e.currentTarget.innerText;
-
-                      if (t.trim().length >= 2001) {
-                          if (e.ctrlKey == true && (e.which == '118' || e.which == '86')) {
-                              alert('thou. shalt. not. PASTE!');
-                              e.preventDefault();
-                          }
-                          //delete key
-                          if (e.keyCode != 8)
-                              e.preventDefault();
-                      }
-                  },
-                  onKeyup: function (e) {
-                      debugger;
-                      var t = e.currentTarget.innerText;
-
-                      if (t.trim().length >= 2001) {
-                          //delete key
-                          if (e.keyCode != 8)
-                              e.preventDefault();
-                      }
-                  },
-                  onPaste: function (e) {
-
-                      var t = e.currentTarget.innerText;
-                      var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-
-                      if (t.trim().length >= 2001) {
-
-
-                          e.preventDefault();
-                      }
-                      if (bufferText.trim().length >= 2001) {
-
-                          e.preventDefault();
-                      }
-                      if (bufferText.trim().length + t.trim().length >= 2001) {
-
-                          e.preventDefault();
-                      }
-                  }
-              }
-
-          });
-
-}
-/**
-  * Spin Control Script
- */
-function spin() {
-    $(".Spin").TouchSpin({
-        verticalbuttons: true
-    });
-}
-
-
-/**
-  * Bind progress buttons and simulate loading progress
- */
-function buttonload() {
-
-    $('.ladda-button').ladda('bind', { timeout: 2000 });
-    Ladda.bind('.progress-demo .ladda-button', {
-        callback: function (instance) {
-            var progress = 0;
-            var interval = setInterval(function () {
-                progress = Math.min(progress + Math.random() * 0.1, 1);
-                instance.setProgress(progress);
-
-                if (progress === 1) {
-                    instance.stop();
-                    clearInterval(interval);
-                }
-            }, 200);
-        }
-    });
-    var l = $('.ladda-button-demo').ladda();
-
-    l.click(function () {
-        // Start loading
-        l.ladda('start');
-        // Timeout example
-        // Do something in backend and then stop ladda
-        setTimeout(function () {
-            l.ladda('stop');
-        },
-            12000);
-    });
-
-
-}
-
-
-
-/**
-  * Toggle Plus-Minus icons on Accordians
- */
-function toggleIcon(e) {
-    $(e.target)
-        .prev('.panel-heading')
-        .find(".more-less")
-        .toggleClass('glyphicon-plus glyphicon-minus');
-}
-$('.panel-group').on('hidden.bs.collapse', toggleIcon);
-$('.panel-group').on('shown.bs.collapse', toggleIcon);
-
 
 
 /**
   * Post Section data to API
  */
-function post(role, cfrole, route, tableId, cfContextName, mode) {
+function post(role, route, mode) {
+    var resultID = 0;
     var arr = [];
     var i = 0;
-    if ($('#cfsection').length == 1) {
-        var recordId = GetQueryStringValues(location.href, 'keyId');
-        $("[data-role='" + cfrole + "'] [data-customfieldid]").each(function () {
-
-            //NEW CODE
-            if (($(this).prop("tagName") === 'SELECT') && (document.getElementById(this.id).multiple == true)) {
-                var values = "";
-                var selVals = $(this).val();
-                if ($(this).val() != null) {
-                    for (var ms = 0; ms < $(this).val().length; ms++) {
-                        if (ms == $(this).val().length - 1) {
-                            values += selVals[ms];
-                        }
-                        else {
-                            values += selVals[ms] + ",";
-                        }
-                    }
-                }
-
-
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": values };
-                arr[i][tableId] = parseInt(recordId);
-                i = i + 1;
-            }
-            else if ($(this).is(':checkbox') || $(this).is(':radio')) {
-                var cbLrbL = "";
-                if ($("[name=" + this.name + "]").length > 1) {
-                    for (var cr = 0; cr < $("[name=" + this.name + "]").length; cr++) {
-                        if (cr == $("[name=" + this.name + "]").length - 1) {
-                            cbLrbL += $("#" + this.name + cr).prop('checked');
-                        }
-                        else {
-                            cbLrbL += $("#" + this.name + cr).prop('checked') + ",";
-                        }
-                    }
-                }
-                else {
-                    cbLrbL = $(this).prop('checked');
-                }
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": cbLrbL };
-                arr[i][tableId] = parseInt(recordId);
-                i = i + 1;
-            }
-            else {
-                //OLD CODE
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": $(this).val() };
-                arr[i][tableId] = parseInt(recordId);
-                i = i + 1;
-            }
-        });
-
-    }
+    var apiBaseUrl = 'http://localhost:64075/api/';
     var obj = new Object();
     $("[data-role='" + role + "'] [data-attr]").each(function () {
         obj[$(this).data('attr')] = $(this).val();
@@ -235,37 +47,17 @@ function post(role, cfrole, route, tableId, cfContextName, mode) {
     $("[data-role='mandatory-sec'] [data-attr]").each(function () {
         obj[$(this).data('attr')] = $(this).val();
     });
-
-    obj['TenantID'] = getCookie('TenantId');
-    //obj['TenantId'] = getCookie('TenantId');
-    obj['UserId'] = getCookie('UserId');
-    obj['RecordOwner'] = getCookie('UserId');
-    obj['CreatedBy'] = getCookie('UserId');
-    obj['ProvisionStatus'] = 'Provisioned';
-    obj['WorkflowStatus'] = 'Completed';
-    if (mode === 'Insert') {
-        obj['VersionNumber'] = 1;
-        obj['ViewAccess'] = true;
-        obj['Status'] = 'Active';
-        obj['CreateDate'] = GetCurrentDate();
-        obj['ModifyDate'] = GetCurrentDate();
-    }
-    else {
-        obj['LastModifiedBy'] = getCookie('UserId');
-        obj['ModifyDate'] = GetCurrentDate();
-    }
-
-    obj[cfContextName] = arr;
-
     console.log(obj);
 
     $.ajax({
         url: apiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
+        //headers: {
+        //    'ORSUS': getCookie('ORSUS')
+        //},
         type: "POST",
         data: obj,
+        dataType: "json",
+        contentType: "application/json",
         async: false,
         success: function (data) {
             resultID = data;
@@ -276,27 +68,12 @@ function post(role, cfrole, route, tableId, cfContextName, mode) {
             if (res > 0) {
                 if (mode === 'Insert') {
                     //  InsertedSuccessfullyAlert();    // Insert Alert
-                    SuccessAlert('Your Information Saved Successfully.')
+                    
+                    ToastSuccess('Your Information Saved Successfully.')
                 }
                 else if (mode === 'Update') {
                     // UpdatedSuccessfullyAlert(); // Update Alert
-                    SuccessAlert('Your Information Updated Successfully.')
-                }
-                else if (mode === 'UpdateRefresh') {
-                    UpdatedSuccessfullyRefreshAlert();  // Update Alert & then Refresh Page
-                }
-                else if (mode === 'InsertAndClose') {
-                    InsertedSuccessfullyAndCloseAlert();  // Insert and Close the modal popup
-                }
-                else if (mode === "PopupInsertAndNew") {
-                    SuccessAlert("Your Information Saved Successfully");
-                    ResetPage(role, undefined);
-                }
-
-                else if (mode === "PopupUpdateAndNew") {
-                    debugger
-                    SuccessAlert("Your Information Updated Successfully");
-                    ResetPage(role, undefined);
+                    ToastSuccess('Your Information Updated Successfully.')
                 }
             }
             else if (res === -1) {
@@ -637,205 +414,6 @@ function postToGlobal(role, route, ableId, mode) {
 
 
 /**
-  * Post CF Section Data To API
- */
-
-function postCF(cfrole, route, tableId, cfContextName, keyId, onSucessRouteto) {
-    var arr = [];
-    var i = 0;
-    if ($('#cfsection').length == 1) {
-        $("[data-role='" + cfrole + "'] [data-customfieldid]").each(function () {
-
-            //NEW CODE
-            if (($(this).prop("tagName") === 'SELECT') && (document.getElementById(this.id).multiple == true)) {
-                var values = "";
-                var selVals = $(this).val();
-                if ($(this).val() != null) {
-                    for (var ms = 0; ms < $(this).val().length; ms++) {
-                        if (ms == $(this).val().length - 1) {
-                            values += selVals[ms];
-                        }
-                        else {
-                            values += selVals[ms] + ",";
-                        }
-                    }
-                }
-
-
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": values };
-                arr[i][tableId] = parseInt(recordId);
-                i = i + 1;
-            }
-            else if ($(this).is(':checkbox') || $(this).is(':radio')) {
-                var cbLrbL = "";
-                if ($("[name=" + this.name + "]").length > 1) {
-                    for (var cr = 0; cr < $("[name=" + this.name + "]").length; cr++) {
-                        if (cr == $("[name=" + this.name + "]").length - 1) {
-                            cbLrbL += $("#" + this.name + cr).prop('checked');
-                        }
-                        else {
-                            cbLrbL += $("#" + this.name + cr).prop('checked') + ",";
-                        }
-                    }
-                }
-                else {
-                    cbLrbL = $(this).prop('checked').toString();
-                }
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": cbLrbL };
-                arr[i][tableId] = parseInt(recordId);
-                i = i + 1;
-            }
-            else {
-                //OLD CODE
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": $(this).val() };
-                arr[i][tableId] = parseInt(recordId);
-                i = i + 1;
-            }
-        });
-
-    }
-    var obj = new Object();
-
-    obj[cfContextName] = arr;
-    obj['TenantId'] = getCookie('TenantId');
-    obj['TenantID'] = getCookie('TenantId');
-    obj['UserId'] = getCookie('UserId');
-    obj['RecordOwner'] = getCookie('UserId');
-    obj['CreatedBy'] = getCookie('UserId');
-    obj['LastModifiedBy'] = getCookie('UserId');
-    console.log(obj);
-
-    $.ajax({
-        url: apiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(arr),
-        async: false,
-        success: function (data) {
-            result = data;
-            if (result != null) {
-                for (var j = 0; j < result.length; j++) {
-                    result["cst" + result[j].FieldName.replace(" ", "")] = result[j].FieldValue;
-                }
-                for (var j = 0; j < result.length; j++) {
-                    $("#cst" + result[j].FieldName.replace(" ", "")).data('keyid', result[j].KeyCFID);
-                }
-
-                UpdatedSuccessfullyAlert();
-            }
-
-            else {
-                TransactionFailedAlert();
-            }
-
-        },
-        error: function () {
-            result = 0;
-            TransactionFailedAlert();
-        }
-    });
-    return result;
-}
-
-
-function postCF(cfrole, route, tableId, cfContextName, keyId) {
-    var arr = [];
-    var i = 0;
-    //if ($('#cfsection').length == 1) {
-    if (document.getElementById('customFields').style.display != "none") {
-        $("[data-role='" + cfrole + "'] [data-customfieldid]").each(function () {
-
-            //NEW
-            if (($(this).prop("tagName") === 'SELECT') && (document.getElementById(this.id).multiple == true)) {
-                var values = "";
-                var selVals = $(this).val();
-                if ($(this).val() != null) {
-                    for (var ms = 0; ms < $(this).val().length; ms++) {
-                        if (ms == $(this).val().length - 1) {
-                            values += selVals[ms];
-                        }
-                        else {
-                            values += selVals[ms] + ",";
-                        }
-                    }
-                }
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": values };
-                arr[i][tableId] = parseInt(keyId);
-                i = i + 1;
-            }
-            else if ($(this).is(':checkbox') || $(this).is(':radio')) {
-                var cbLrbL = "";
-                if ($("[name=" + this.name + "]").length > 1) {
-                    for (var cr = 0; cr < $("[name=" + this.name + "]").length; cr++) {
-                        if (cr == $("[name=" + this.name + "]").length - 1) {
-                            cbLrbL += $("#" + this.name + cr).prop('checked');
-                        }
-                        else {
-                            cbLrbL += $("#" + this.name + cr).prop('checked') + ",";
-                        }
-                    }
-                }
-                else {
-                    cbLrbL = $(this).prop('checked');
-                }
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": cbLrbL };
-                arr[i][tableId] = parseInt(keyId);
-                i = i + 1;
-            }
-            else {
-                //OLD
-                arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": $(this).val() };
-                arr[i][tableId] = parseInt(keyId);
-                i = i + 1;
-            }
-        });
-    }
-
-    var obj = new Object();
-    obj[cfContextName] = arr;
-
-    $.ajax({
-        url: apiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(arr),
-        async: false,
-        success: function (data) {
-            result = data;
-
-            if (result != null) {
-
-                for (var j = 0; j < result.length; j++) {
-                    //NEW
-                    if ($("[name=" + "cst" + result[j].FieldName.replace(" ", "") + "]").is(':checkbox') || $("[name=" + "cst" + result[j].FieldName.replace(" ", "") + "]").is(':radio')) {
-                        $("#cst" + result[j].FieldName.replace(" ", "") + "0").data('keyid', result[j].KeyCFID);
-                    }
-                    else {
-                        $("#cst" + result[j].FieldName.replace(" ", "")).data('keyid', result[j].KeyCFID);
-                    }
-                }
-                // UpdatedSuccessfullyAlert();
-                SuccessAlert('Your Information Saved Successfully.')
-            }
-
-            else {
-                TransactionFailedAlert();
-            }
-        },
-        error: function () {
-            ErrorAlert(' Please Contact Administrator.');
-            resultID = 0;
-        }
-    });
-    return result;
-}
-/**
   * Get data from the API and to controls
 
  */
@@ -1165,80 +743,6 @@ function BindLELV(listEntryNames) {
     });
 }
 
-function BindLELVfromGlobal(listEntryNames) {
-    var listEntryNamesCollection = listEntryNames.split(',');
-
-    $(listEntryNamesCollection).each(function (e) {
-        $("." + listEntryNamesCollection[e]).html("<option value='0'>---Select---</option>");
-    });
-    $.ajax({
-        url: globalApiBaseUrl + 'ListValues/GetByListEntryName?tenantid=' + getCookie('TenantId') + '&listEntryName=' + listEntryNames,
-        type: 'GET',
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        async: false,
-        success: function (data) {
-            var optionhtml;
-            $(data)
-                .each(function (key, value) {
-
-                    $(listEntryNamesCollection).each(function (k, v) {
-                        if (value.ListEntryName === v) {
-                            optionhtml = '<option value="' + value.ListValueId + '">' + value.ListValue + '</option>';
-                            $("." + v).append(optionhtml);
-                        }
-
-                    });
-                });
-        },
-        error: function (error) {
-            ErrorAlert('Error while fetching LELV data.');
-        }
-    });
-}
-//function BindLELV(listEntryNames) {
-
-//    $.ajax({
-
-//        url: apiBaseUrl + 'ListValuesASAPI/GetByListEntryName?tenantid=' + getCookie('TenantId') + '&listEntryName=' + listEntryNames,
-//        type: 'GET',
-//        headers: {
-//            'ORSUS': getCookie('ORSUS')
-//        },
-//        async: false,
-//        success: function (data) {
-//            var optionhtml;
-//            $(data)
-//                .each(function (key, value) {
-//                    var listEntryNamesCollection = listEntryNames.split(',');
-//                    $(listEntryNamesCollection).each(function (k, v) {
-//                        if (value.ListEntryName === v) {
-//                            optionhtml = '<option value="' + value.ListValueId + '">' + value.ListValue + '</option>';
-//                            $("#" + v).append(optionhtml);
-//                        }
-
-//                    });
-//                });
-//        },
-//        error: function (xhr, textStatus, errorThrown) {
-//            if (errorThrown == 'Unauthorized') {
-//                NotAuthorized();
-//            }
-//            else {
-//                ErrorAlert('Please Contact Administrator.');
-//            }
-//        }
-//    });
-//}
-
-
-
-
-/**
- * Call API & get Json result.
- */
-
 function GetJsonFromApi(route) {
 
     var result = '';
@@ -1264,83 +768,6 @@ function GetJsonFromApi(route) {
 
 
 
-
-/**
- * Call API & get Json result.
- */
-function GetJsonFromGlobalApi(route) {
-  
-    var result = '';
-    $.ajax({
-        url: globalApiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        type: "GET",
-        data: {},
-        dataType: "json",
-        async: false,
-        success: function (data, textStatus, xhr) {
-            result = data;
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            ErrorAlert('You are not authorized to perform this action.');
-        }
-    });
-    return result;
-}
-/**
- * Call API From HR & get Json result.
- */
-
-//function GetJsonFromHRApi(route) {
-//    var result = '';
-//    $.ajax({
-//        url: WrkfrsapiBaseUrl + route,
-//        headers: {
-//            'ORSUS': getCookie('ORSUS')
-//        },
-//        type: "GET",
-//        data: {},
-//        dataType: "json",
-//        async: false,
-//        success: function (data, textStatus, xhr) {
-//            result = data;
-//        },
-//        error: function (xhr, textStatus, errorThrown) {
-//            ErrorAlert('Error while getting Json from API');
-//        }
-//    });
-//    return result;
-//}
-
-
-
-function GetJsonFromHRApi(route) {
-    var result = '';
-    $.ajax({
-        url: WrkfrsapiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        type: "GET",
-        data: {},
-        dataType: "json",
-        async: false,
-        success: function (data, textStatus, xhr) {
-            result = data;
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            if (errorThrown == 'Unauthorized') {
-                NotAuthorized();
-            }
-            else {
-                ErrorAlert('Please Contact Administrator.');
-            }
-        }
-    });
-    return result;
-}
 
 function NotAuthorized() {
     swal({
@@ -1749,31 +1176,6 @@ function postJsonData(route, jsondata) {
     return flag;
 }
 
-//function BindCountries(country) {
-//    $.ajax({
-//        type: "Get",
-//        contentType: "application/json; charset=utf-8",
-//        url: globalApiBaseUrl + "System/GetCountryNames",
-//        headers: {
-//            'ORSUS': getCookie('ORSUS')
-//        },
-//        data: "{}",
-//        async: false,
-//        dataType: "json",
-//        success: function (data) {
-//            var optionhtml = '<option value="0">---Select---</option>';
-//            $.each(data,
-//                function (key, value) {
-//                    optionhtml += '<option value="' + data[key].CountryID + '">' + data[key].CountryName + '</option>';
-//                });
-//            $("#" + country).empty();
-//            $("#" + country).append(optionhtml);
-//        },
-//        error: function (error) {
-//            ErrorAlert("Error while fetching Countries data.");
-//        }
-//    });
-//}
 
 
 
@@ -2118,69 +1520,7 @@ function SimplePost(role, cfrole, route, tableId, cfContextName) {
     return flag;
 }
 
-/**
- * Call API & get Json result.
- */
-//function PostJsonToGlobalApi(route, dataToPost) {
-//    debugger;
-//    var result = '';
-//    $.ajax({
-//        url: globalApiBaseUrl + route,
-//        headers: {
-//            'ORSUS': getCookie('ORSUS')
-//        },
-//        type: "POST",
-//        data: dataToPost,
-//        dataType: "json",
-//        contentType: "application/json",
-//        async: false,
-//        success: function (data, textStatus, xhr) {
-//            result = data;
 
-//            return 1;
-//        },
-//        error: function (xhr, textStatus, errorThrown) {
-//            //TransactionFailedAlert('Error while inserting record.');
-//            return 0;
-//        }
-//    });
-//    return result;
-//}
-
-
-function PostJsonToGlobalApi(route, dataToPost) {
-
-    var result = '';
-    $.ajax({
-        url: globalApiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        type: "POST",
-        data: dataToPost,
-        contentType: "application/json",
-        dataType: "json",
-        async: false,
-        success: function (data, textStatus, xhr) {
-            result = data;
-            if (result != -1) {
-                SuccessAlert('Your Information Saved Successfully')
-            }
-            else {
-                ErrorAlert('Record cannot be deleted');
-            }
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            if (errorThrown == 'Unauthorized') {
-                NotAuthorized();
-            }
-            else {
-                ErrorAlert('Please Contact Administrator.');
-            }
-        }
-    });
-    return result;
-}
 
 
 function ErrorAlert(msg) {
@@ -3160,23 +2500,6 @@ function OrsusGridResize(grid) {
     }, 100);
 }
 
-//ON Tab Click
-//$('[data-toggle="tab"]').click(function () {
-//    //alert('tab');
-//    $(".ui-jqgrid").each(function () {
-//        var grdResId = this.id.split('gbox_')[1];
-
-//        $("#" + grdResId).parents('div.ui-jqgrid-bdiv').css("max-height", "230px");
-//        setTimeout(function () {
-//            var $grid = $("#" + grdResId),
-//              newWidth = $grid.closest("#gbox_" + grdResId).parent().width();
-//            if (newWidth != 0) {
-//                $grid.jqGrid("setGridWidth", newWidth, true);
-//            }
-//        }, 100);
-//    });
-//});
-
 
 //ON Tab Click
 $('[data-toggle="tab"],.header-link').click(function () {
@@ -3491,5 +2814,30 @@ function PostJsonToApiStringifyAppWF(route, dataToPost) {
         //}
     });
     return result;
+}
+function ToastSuccess(msg) {
+    iziToast.success({
+        title: 'Success!',
+        position: 'topRight',
+        message: msg,
+    });
+
+}
+
+function ToastError(msg) {
+    iziToast.error({
+        title: 'Error!',
+        position: 'topRight',
+        message: msg,
+    });
+
+}
+
+function ToastNotAuthorized() {
+    iziToast.warning({
+        title: 'Warning!',
+        position: 'topRight',
+        message: 'You are Not Authorized for this Action.',
+    });
 }
 

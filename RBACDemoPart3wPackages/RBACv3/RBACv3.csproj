@@ -51,6 +51,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -58,6 +62,14 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -164,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Action Filters\RBACAttribute.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\RBAC_ExtendedMethods.cs" />
     <Compile Include="Common\RBAC_IdentityExtendedMethods.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -174,12 +187,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\EventsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EventsModel.cs" />
     <Compile Include="Models\RBACInitializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -905,6 +920,8 @@
     <Content Include="AdminLTE\plugins\ionslider\img\sprite-skin-flat.png" />
     <Content Include="AdminLTE\plugins\ionslider\img\sprite-skin-nice.png" />
     <Content Include="AdminLTE\plugins\ionslider\js\ion.rangeSlider.min.js" />
+    <Content Include="AdminLTE\plugins\iziToast\iziToast.min.css" />
+    <Content Include="AdminLTE\plugins\iziToast\iziToast.min.js" />
     <Content Include="AdminLTE\plugins\jquery-ui\js\jquery-ui.js" />
     <Content Include="AdminLTE\plugins\jquery-ui\js\jquery-ui.min.js" />
     <None Include="AdminLTE\plugins\jquery-validate\js\jquery.validate-vsdoc.js" />
