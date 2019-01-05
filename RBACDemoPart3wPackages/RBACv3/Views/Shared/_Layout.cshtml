@@ -12,7 +12,8 @@
     @Styles.Render("~/AdminLTE/bootstrap/css")
     @Styles.Render("~/AdminLTE/dist/css")
     @Styles.Render("~/AdminLTE/dist/css/skins")
-
+    @Styles.Render("~/bundles/JQGrid/css")
+    <link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -34,7 +35,7 @@
                         <li><a href="#"><i class="fa fa-dashboard"></i>@ViewBag.SubTitle</a></li>
                         <li class="active">@ViewBag.Title</li>
                     </ol>
-                
+           
 </section>
             <section class="content">
                 
@@ -48,12 +49,10 @@
   
     @Scripts.Render("~/AdminLTE/plugins/jquery/js")
     @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js")
-    <link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
-    <script src="~/AdminLTE/plugins/jquery/js/jQuery-2.1.4.min.js"></script>
-    <script src="~/AdminLTE/plugins/jquery-ui/js/jquery-ui.min.js"></script>
+    @Scripts.Render("~/bundles/JQGrid/js")
     @RenderSection("menu", required: false)
     @Scripts.Render("~/AdminLTE/bootstrap/js")
-    @Scripts.Render("~/AdminLTE/plugins/slimscroll/js")
+    @Scripts.Render("~/AdminLTE/plugins/slimscroll/js") 
     @Scripts.Render("~/AdminLTE/plugins/fastclick/js")
     @Scripts.Render("~/Scripts/Shared/_Layout")
     @Scripts.Render("~/AdminLTE/dist/js")

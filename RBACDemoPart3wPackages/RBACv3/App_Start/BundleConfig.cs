@@ -7,6 +7,7 @@ namespace RBACv3
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.IgnoreList.Clear();  
             RegisterLayout(bundles);
 
             RegisterShared(bundles);
@@ -32,6 +33,8 @@ namespace RBACv3
             RegisterExamples(bundles);
 
             RegisterDocumentation(bundles);
+           // RegisterJqGrid(bundles);
+
         }
 
         private static void RegisterDocumentation(BundleCollection bundles)
@@ -435,5 +438,30 @@ namespace RBACv3
                                          "~/AdminLTE/plugins/morris/js/morris.min.js"));
 
         }
+
+
+        //private static void RegisterJqGrid(BundleCollection bundles)
+        //{
+        //    //JQGrid css
+        //    bundles.Add(new StyleBundle("~/bundles/JQGrid/css").Include(
+        //        "~/Scripts/JQGrid/ui.multiselect.css",
+        //        "~/Scripts/JQGrid/jquery-ui.css",
+        //        "~/Scripts/JQGrid/ui.jqgrid.css"
+        //        ));
+
+        //    // JQGrid Js
+        //    bundles.Add(new ScriptBundle("~/bundles/JQGrid/js").Include(
+        //               "~/Scripts/JQGrid/jquery.jqGrid.min.js",
+        //               "~/Scripts/JQGrid/ui.multiselect.js",
+        //              "~/Scripts/JQGrid/grid.locale-en.js",
+        //              "~/Scripts/underscore.js",
+        //              "~/Scripts/JQGrid/js/GridComponent.js",
+        //              "~/Scripts/JQGrid/pdfmake.min.js",
+        //              "~/Scripts/JQGrid/jszip.min.js",
+        //              "~/Scripts/JQGrid/vfs_fonts.js",
+        //              "~/Scripts/JQGrid/jqGridExportToExcel.js"
+        //              ));
+        //}
+        
     }
 }

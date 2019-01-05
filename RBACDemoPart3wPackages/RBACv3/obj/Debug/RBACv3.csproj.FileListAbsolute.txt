@@ -175,6 +175,5 @@ E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.Owin.Security.OAuth.xml
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.Owin.Security.Google.xml
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.Owin.Security.Twitter.xml
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.csprojResolveAssemblyReference.cache
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.pdb
