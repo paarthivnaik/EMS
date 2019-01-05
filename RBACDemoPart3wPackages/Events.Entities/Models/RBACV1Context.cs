@@ -16,21 +16,21 @@ namespace Events.Entities.Models
         {
         }
 
-        public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        //public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        //public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public DbSet<EventInfo> EventInfoes { get; set; }
-        public DbSet<PERMISSION> PERMISSIONS { get; set; }
-        public DbSet<ROLE> ROLES { get; set; }
-        public DbSet<USER> USERS { get; set; }
+        //public DbSet<PERMISSION> PERMISSIONS { get; set; }
+        //public DbSet<ROLE> ROLES { get; set; }
+        //public DbSet<USER> USERS { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new AspNetUserClaimMap());
-            modelBuilder.Configurations.Add(new AspNetUserLoginMap());
+           // modelBuilder.Configurations.Add(new AspNetUserClaimMap());
+           // modelBuilder.Configurations.Add(new AspNetUserLoginMap());
             modelBuilder.Configurations.Add(new EventInfoMap());
-            modelBuilder.Configurations.Add(new PERMISSIONMap());
-            modelBuilder.Configurations.Add(new ROLEMap());
-            modelBuilder.Configurations.Add(new USERMap());
+           // modelBuilder.Configurations.Add(new PERMISSIONMap());
+           // modelBuilder.Configurations.Add(new ROLEMap());
+           // modelBuilder.Configurations.Add(new USERMap());
         }
     }
 }
