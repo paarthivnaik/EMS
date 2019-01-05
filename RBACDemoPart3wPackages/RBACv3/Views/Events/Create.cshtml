@@ -3,7 +3,7 @@
     ViewBag.Title = "Create";
 }
 
-
+<link href="~/AdminLTE/plugins/datepicker/css/datepicker3.css" rel="stylesheet" />
  <!-- /.row -->
 <div class="row">
     <div class="col-md-12">
@@ -71,7 +71,7 @@
                                 <strong class="m-b-xs">Event Start Date</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-sitemap input-group-addon"></i>
-                                    <input type="text" id="LostDestroyedStolenFrom" class="form-control" placeholder="Event Start Date" name="LostDestroyedStolenFrom" data-attr="LostDestroyedStolenFromName">
+                                    <input type="text" id="entStartDate" class="form-control datepicker" placeholder="Event Start Date" name="LostDestroyedStolenFrom" data-attr="LostDestroyedStolenFromName">
 
                                 </div>
 
@@ -80,7 +80,7 @@
                                 <strong class="m-b-xs">Event End Date</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-sitemap input-group-addon"></i>
-                                    <input type="text" id="LostDestroyedStolenFrom" class="form-control" placeholder="Event End Date" name="LostDestroyedStolenFrom" data-attr="LostDestroyedStolenFromName">
+                                    <input type="text" id="eventEndDate" class="form-control datepicker" placeholder="Event End Date" name="LostDestroyedStolenFrom" data-attr="LostDestroyedStolenFromName">
 
                                 </div>
 
@@ -89,7 +89,7 @@
                                 <strong class="m-b-xs">* Venue</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" placeholder="Venue" id="LostDestroyedStolenDate" class="form-control datepicker" data-attr="Venue" max="9999-12-31">
+                                    <input type="text" placeholder="Venue" id="LostDestroyedStolenDate" class="form-control" data-attr="Venue" max="9999-12-31">
                                 </div>
 
                             </div>
@@ -97,7 +97,7 @@
                                 <strong class="m-b-xs">* Package Name</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" placeholder="Package Name" id="LostDestroyedStolenDate" class="form-control datepicker" data-attr="Package Name" max="9999-12-31">
+                                    <input type="text" placeholder="Package Name" id="LostDestroyedStolenDate" class="form-control" data-attr="Package Name" max="9999-12-31">
                                 </div>
 
                             </div>
@@ -105,7 +105,7 @@
                                 <strong class="m-b-xs">* Package Price</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" placeholder="Package Cost" id="LostDestroyedStolenDate" class="form-control datepicker" data-attr="Package Price" max="9999-12-31">
+                                    <input type="text" placeholder="Package Cost" id="LostDestroyedStolenDate" class="form-control" data-attr="Package Price" max="9999-12-31">
                                 </div>
 
                             </div>
@@ -113,7 +113,7 @@
                                 <strong class="m-b-xs">*Total Cost</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" placeholder="Total Cost" id="LostDestroyedStolenDate" class="form-control datepicker" data-attr="Total Cost" max="9999-12-31">
+                                    <input type="text" placeholder="Total Cost" id="LostDestroyedStolenDate" class="form-control" data-attr="Total Cost" max="9999-12-31">
                                 </div>
 
                             </div>
@@ -121,7 +121,7 @@
                                 <strong class="m-b-xs">Advance</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" placeholder="Advance" id="LostDestroyedStolenDate" class="form-control datepicker" data-attr="Advance" max="9999-12-31">
+                                    <input type="text" placeholder="Advance" id="LostDestroyedStolenDate" class="form-control" data-attr="Advance" max="9999-12-31">
                                 </div>
 
                             </div>
@@ -130,7 +130,7 @@
                                 <strong class="m-b-xs">*Event Manager Name</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" placeholder="Manager Name" id="LostDestroyedStolenDate" class="form-control datepicker" data-attr="Event Manager Name" max="9999-12-31">
+                                    <input type="text" placeholder="Manager Name" id="LostDestroyedStolenDate" class="form-control" data-attr="Event Manager Name" max="9999-12-31">
                                 </div>
 
                             </div>
@@ -138,7 +138,7 @@
                                 <strong class="m-b-xs">*Mobile</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" placeholder="Mobile" id="LostDestroyedStolenDate" class="form-control datepicker" data-attr="Mobile" max="9999-12-31">
+                                    <input type="text" placeholder="Mobile" id="LostDestroyedStolenDate" class="form-control" data-attr="Mobile" max="9999-12-31">
                                 </div>
 
                             </div>
@@ -162,7 +162,15 @@
 </div>
 <!-- /.row -->
  
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<script>
+    //Date picker
+    $('.datepicker').datepicker({
+        autoclose: true
+    })
 
+</script>
 
 
 
