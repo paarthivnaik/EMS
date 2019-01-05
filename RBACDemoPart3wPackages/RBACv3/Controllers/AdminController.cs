@@ -12,6 +12,7 @@ using System.Web.Routing;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Web.Http.Controllers;
 
 
 namespace RBACDemo.Controllers
