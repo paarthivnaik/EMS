@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseContext.cs" />
+    <Compile Include="EventsRepo\EventsContext.cs" />
+    <Compile Include="EventsRepo\EventsRepo.cs" />
+    <Compile Include="EventsRepo\IEventsRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
