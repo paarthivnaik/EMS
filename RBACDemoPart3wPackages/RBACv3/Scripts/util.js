@@ -744,7 +744,7 @@ function BindLELV(listEntryNames) {
 }
 
 function GetJsonFromApi(route) {
-
+    var apiBaseUrl = 'http://localhost:64075/api/';
     var result = '';
     $.ajax({
         url: apiBaseUrl + route,

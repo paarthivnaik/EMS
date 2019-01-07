@@ -12,7 +12,7 @@ namespace Events.Repo.EventsRepo
       Task<long> Save(EventInfo obj);
       Task<long> Update(EventInfo obj);
       Task<EventInfo> GetById(long eventInfoId);
-      Task<List<EventInfo>> GetAll(long eventInfoId);
+      Task<List<EventInfo>> GetAll();
       Task<bool> Delete(long eventInfoId);
     }
 }

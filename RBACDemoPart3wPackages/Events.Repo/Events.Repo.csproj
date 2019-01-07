@@ -52,6 +52,12 @@
     <Compile Include="EventsRepo\EventsContext.cs" />
     <Compile Include="EventsRepo\EventsRepo.cs" />
     <Compile Include="EventsRepo\IEventsRepo.cs" />
+    <Compile Include="ListEntryRep\IListEntryRepo.cs" />
+    <Compile Include="ListEntryRep\ListEntryContext.cs" />
+    <Compile Include="ListEntryRep\ListEntryRepo.cs" />
+    <Compile Include="ListValueRep\IListValueRepo.cs" />
+    <Compile Include="ListValueRep\ListValueContext.cs" />
+    <Compile Include="ListValueRep\ListValueRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

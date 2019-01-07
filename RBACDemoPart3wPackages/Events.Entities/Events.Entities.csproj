@@ -49,7 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\EventInfo.cs" />
+    <Compile Include="Models\Flat\ListValueFlat.cs" />
+    <Compile Include="Models\ListEntry.cs" />
+    <Compile Include="Models\ListValue.cs" />
     <Compile Include="Models\Mapping\EventInfoMap.cs" />
+    <Compile Include="Models\Mapping\ListEntryMap.cs" />
+    <Compile Include="Models\Mapping\ListValueMap.cs" />
     <Compile Include="Models\RBACV1Context.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,34 +1,132 @@
-﻿
-@{
-    ViewBag.Title = "Manage";
+﻿@{
+    ViewBag.Title = "Employee List";
 }
 
-<h2>Manage</h2>
-<div class="content animate-panel">
 
-
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="hpanel">
-                <div class="btn-group btn-group-justified">
-                    <a class=" btn btn-default" id="btn_New" href="/Events/Create">New</a>
-                    <a class="btn btn-default disabled" id="btn_Clone">Clone</a>
-                    <a class="btn btn-default disabled" id="btn_Edit">Edit</a>
-                    <a class="btn btn-default disabled" id="btn_Delete">Delete</a>
-                    <a class="btn btn-default disabled" id="btn_View">View</a>
-                    <a class="btn btn-default" id="btn_Refresh">Refresh</a>
-                </div>
-
-                <div class="panel-body">
-                    <div id="managegridwidth">
-                        <table id="grid"></table>
-                        <div id="pager"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddOrEdit","Employee")')"><i class="fa fa-plus"></i> Add New</a>
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Hover Data Table</h3>
     </div>
-
+    <div class="box-body">
+        <table id="employeeTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Event RefID</th>
+                    <th>Customer Name</th>
+                    <th>MobileNo</th>
+                    <th>EventStartDate</th>
+                    <th>EventTypeValue</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    @section scripts{
+        <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+        <script>
+            var Popup, dataTable;
+            $(document).ready(function () {
+                dataTable = $("#employeeTable").DataTable({
+                    "scrollX": true,
+                    "ajax": {
+                        "url": "/api/Events",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "EventRefID" },
+                        { "data": "CustomerName" },
+                        { "data": "MobileNo" },
+                        { "data": "EventStartDate" },
+                        { "data": "EventTypeValue" },
+                        {
+                            "data": "EventInfoID", "render": function (data) {
+                                return "<a class='btn btn-primary btn-sm' href=/Events/Edit?id=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
+                            },
+                            "orderable": false,
+                            "searchable": false,
+                            "width": "150px"
+                        }
+
+                    ],
+                    "language": {
+
+                        "emptyTable": "No data found, Please click on <b>Add New</b> Button"
+                    }
+                });
+            });
+
+            function PopupForm(url) {
+                var formDiv = $('<div/>');
+                $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Fill Employee Details',
+                        height: 500,
+                        width: 700,
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+            }
+
+            function SubmitForm(form) {
+                $.validator.unobtrusive.parse(form);
+                if ($(form).valid()) {
+                    $.ajax({
+                        type: "POST",
+                        url: form.action,
+                        data: $(form).serialize(),
+                        success: function (data) {
+                            if (data.success) {
+                                Popup.dialog('close');
+                                dataTable.ajax.reload();
+
+                                $.notify(data.message, {
+                                    globalPosition: "top center",
+                                    className: "success"
+                                })
+
+                            }
+                        }
+                    });
+                }
+                return false;
+            }
+
+            function Delete(id) {
+                if (confirm('Are You Sure to Delete this Employee Record ?')) {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("Delete","Employee")/' + id,
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+
+                                $.notify(data.message, {
+                                    globalPosition: "top center",
+                                    className: "success"
+                                })
+
+                            }
+                        }
+
+                    });
+                }
+            }
+        </script>
+    }

@@ -12,7 +12,8 @@
     @Styles.Render("~/AdminLTE/bootstrap/css")
     @Styles.Render("~/AdminLTE/dist/css")
     @Styles.Render("~/AdminLTE/dist/css/skins")
-    @Styles.Render("~/bundles/JQGrid/css")
+
+    <script src="~/Scripts/CustomValidation.js"></script>
     <link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -49,7 +50,6 @@
   
     @Scripts.Render("~/AdminLTE/plugins/jquery/js")
     @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js")
-    @Scripts.Render("~/bundles/JQGrid/js")
     @RenderSection("menu", required: false)
     @Scripts.Render("~/AdminLTE/bootstrap/js")
     @Scripts.Render("~/AdminLTE/plugins/slimscroll/js") 
