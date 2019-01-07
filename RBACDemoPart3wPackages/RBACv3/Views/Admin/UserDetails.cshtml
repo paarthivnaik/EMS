@@ -2,16 +2,25 @@
 @using (Html.BeginForm("UserDetails", "Admin", FormMethod.Post))
 {
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>
-            <h3 style="font-weight:bold; font-size:x-large">
-                User Details
-            </h3>
-        </legend>
-        @Html.Partial("_userDetails", Model)
+    <div class="box box-info">
+        <fieldset>
+            <legend>
+                <h3 style="font-weight:bold; font-size:x-large">
+                    User Details
+                </h3>
+            </legend>
+            @Html.Partial("_userDetails", Model)
+            <br />
+           
+        </fieldset>
+        <br/>
+       
+        <div class="text-center">
+            <input class="btn btn-default" type="button" value="Edit" onclick="location.href='@Url.Action("UserEdit", "Admin", new { id = Model.Id })'" />
+        </div>
         <br />
-        <input class="btn btn-default" type="button" value="Edit" onclick="location.href='@Url.Action("UserEdit", "Admin", new { id = Model.Id })'" />
-    </fieldset>
+    </div>
+  
 
     <fieldset>
         <legend>
@@ -24,6 +33,9 @@
         </div>        
     </fieldset>
 }
-<div>
-    @Html.ActionLink("Go to Users", "Index", "Admin")
+<div style="float:left">
+    <input class="btn btn-primary" type="button" value="Go to Users" onclick="location.href='@Url.Action("Index", "Admin")'" />
 </div>
+@*<div>
+    @Html.ActionLink("Go to Users", "Index", "Admin")
+</div>*@

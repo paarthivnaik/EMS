@@ -28,7 +28,7 @@ namespace RBACv3.DatabaseInitializer
             }              
             
             //Create User...
-            var user = new ApplicationUser { UserName = "Admin", Email = "sayyadm@issquaredinc.com", Firstname = "System", Lastname = "Administrator", LastModified = DateTime.Now, Inactive = false, EmailConfirmed = true };
+            var user = new ApplicationUser { UserName = "Admin", Email = "bmudavu@issquaredinc.com", Firstname = "System", Lastname = "Administrator", LastModified = DateTime.Now, Inactive = false, EmailConfirmed = true };
 
             ApplicationUserManager UserManager = new ApplicationUserManager(new ApplicationUserStore(context));
             var result = UserManager.Create(user, "!QAZ2wsx");
@@ -41,7 +41,7 @@ namespace RBACv3.DatabaseInitializer
 
 
             //Create Default User...
-            user = new ApplicationUser { UserName = "DefaultUser", Email = "mehatab.matlab@gmail.com", Firstname = "Default", Lastname = "User", LastModified = DateTime.Now, Inactive = false, EmailConfirmed = true };
+            user = new ApplicationUser { UserName = "Balaji", Email = "mbnaik.net@gmail.com", Firstname = "Balaji", Lastname = "Naik", LastModified = DateTime.Now, Inactive = false, EmailConfirmed = true };
             result = UserManager.Create(user, "!QAZ2wsx");            
 
             if (result.Succeeded)

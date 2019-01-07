@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<link href="~/AdminLTE/plugins/datepicker/css/datepicker3.css" rel="stylesheet" />
+<link href="~/AdminLTE/plugins/iziToast/iziToast.min.css" rel="stylesheet" />
+ <!-- /.row -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Create Event</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row" data-role="create-sec">
+
+                    <div class="col-lg-12">
+                        <div class="row">
+
+
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">*Customer Name</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-sort-alpha-asc input-group-addon"></i>
+                                    <input type="text" id="CustomerName" class="form-control" placeholder="Customer Name" name="CustomerName" data-attr="CustomerName" data-valt="required">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">*Mobile Number</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-list-alt input-group-addon"></i>
+                                    <input type="text" placeholder="Mobile Number" class="form-control" data-attr="MobileNumber" id="MobileNumber" name="MobileNumber">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">Alternate Mobile</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-sort-numeric-asc input-group-addon"></i>
+                                    <input type="text" placeholder="Alternate Mobile" class="form-control" data-attr="AlternateMobileNumber" id="AlternateMobileNumber" name="AlternateMobileNumber">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">Event Type</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-list-alt input-group-addon"></i>
+                                    <select class="form-control" id="EventType" name="DisposalReason" data-attr="EventType" data-listentry="">
+                                        <option value="">-- Select --</option>
+                                        <option value="">Mehandi</option>
+                                        <option value="">Sangeeth</option>
+                                        <option value="">Birth Day</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">Event Start Date</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-sitemap input-group-addon"></i>
+                                    <input type="text" id="entStartDate" class="form-control datepicker" placeholder="Event Start Date" name="EventStartDate" data-attr="EventStartDate">
+
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">Event End Date</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-sitemap input-group-addon"></i>
+                                    <input type="text" id="eventEndDate" class="form-control datepicker" placeholder="Event End Date" name="EventEndDate" data-attr="EventEndDate">
+
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">* Venue</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" placeholder="Venue" id="Venue" class="form-control" data-attr="Venue" max="9999-12-31">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">* Package Name</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" placeholder="Package Name" id="PackageName" class="form-control" data-attr="PackageName" max="9999-12-31">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">* Package Price</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" placeholder="Package Cost" id="PackagePrice" class="form-control" data-attr="PackagePrice" max="9999-12-31">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">*Total Cost</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" placeholder="Total Cost" id="LostDestroyedStolenDate" class="form-control" data-attr="TotalCost" max="9999-12-31">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">Advance</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" placeholder="Advance" id="LostDestroyedStolenDate" class="form-control" data-attr="Advance" max="9999-12-31">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">*Event Manager Name</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" placeholder="Manager Name" id="LostDestroyedStolenDate" class="form-control" data-attr="EventManager" max="9999-12-31">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">*Mobile</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" placeholder="Mobile" id="LostDestroyedStolenDate" class="form-control" data-attr="Mobile" max="9999-12-31">
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <div class="box-footer clearfix">
+                <button id="saveEvent" class="btn btn-sm btn-info btn-flat pull-left">Save Event</button>
+                <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Back</a>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+ 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+<script src="~/AdminLTE/plugins/iziToast/iziToast.min.js"></script>
+<script src="~/Scripts/util.js"></script>
+<script>
+    //Date picker
+    $('.datepicker').datepicker({
+        autoclose: true
+    });
+
+    $('#saveEvent').click(function () {
+
+        var resObj = post("create-sec", 'EventsData/Save', 'Insert');
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

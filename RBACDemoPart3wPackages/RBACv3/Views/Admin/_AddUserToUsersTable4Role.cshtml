@@ -1,4 +1,7 @@
 ﻿@model RBACv3.Models.ApplicationRole
+<link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+<script src="~/AdminLTE/plugins/jquery/js/jQuery-2.1.4.min.js"></script>
+<script src="~/AdminLTE/plugins/jquery-ui/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         //$('#AddUser').attr("disabled", true);
@@ -28,7 +31,9 @@
     border-width: thin; border-color: Silver; width: 650px">
     <legend style="width:auto; border-style:none"><strong>Add User To Role</strong></legend>
     <br />
+
     <label>User:  </label>
-    @Html.DropDownList("UserId", null, string.Empty, new { style = "width:250px" })
-    <input class="btn btn-default" type="button" id="AddUser" value="Add User To Role" />
+    @Html.DropDownList("UserId", null, string.Empty, new { style = "width:250px", @class = "form-control" })
+    <br/>
+    <input class="btn btn-success" type="button" id="AddUser" value="Add User To Role" />
 </fieldset>

@@ -124,6 +124,8 @@ E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\RBACv3.pdb
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Antlr3.Runtime.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\EntityFramework.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\EntityFramework.SqlServer.dll
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Events.Entities.dll
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Events.Repo.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.AspNet.Identity.Core.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -140,7 +142,10 @@ E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.Web.Infrastructure.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Newtonsoft.Json.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Owin.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\RestSharp.dll
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Net.Http.Formatting.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Helpers.dll
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Http.dll
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Http.WebHost.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Mvc.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Optimization.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Razor.dll
@@ -149,7 +154,12 @@ E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.WebPages.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.WebPages.Razor.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Twilio.Api.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\WebGrease.dll
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Events.Entities.pdb
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Events.Repo.pdb
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\RestSharp.xml
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Net.Http.Formatting.xml
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Http.xml
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Http.WebHost.xml
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Helpers.xml
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Mvc.xml
 E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\System.Web.Optimization.xml

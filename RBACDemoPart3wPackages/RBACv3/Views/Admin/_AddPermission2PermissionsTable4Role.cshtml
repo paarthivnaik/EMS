@@ -1,4 +1,7 @@
 ﻿@model RBACv3.Models.ApplicationRole
+<link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
+<script src="~/AdminLTE/plugins/jquery/js/jQuery-2.1.4.min.js"></script>
+<script src="~/AdminLTE/plugins/jquery-ui/js/jquery-ui.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {     
         $('#AddPermission').click(function () {               
@@ -42,10 +45,14 @@
     border-width: thin; border-color: Silver; width: 740px">
     <legend style="width:auto; border-style:none"><strong>Add Permission To Role</strong></legend>
     <br />
-    <label>
-        Permission:
-    </label>    
-    @Html.DropDownList("PermissionId", null, string.Empty, new { style = "width:350px" })
-    <input class="btn btn-default" type="button" id="AddPermission" value="Add Permission" />
-    <input class="btn btn-default" type="button" id="AddAllPermissions" value="Add All Permissions" />
+   
+        <label>
+            Permission:
+        </label>
+        @Html.DropDownList("PermissionId", null, string.Empty, new { @class = "form-control" })
+    
+    
+    <br/>
+    <input class="btn btn-success" type="button" id="AddPermission" value="Add Permission" />
+    <input class="btn btn-success" type="button" id="AddAllPermissions" value="Add All Permissions" />
 </fieldset>

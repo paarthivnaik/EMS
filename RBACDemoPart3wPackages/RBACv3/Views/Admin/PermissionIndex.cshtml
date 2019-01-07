@@ -9,13 +9,16 @@
             Permissions
         </h3>
     </legend>
-    @Html.Partial("_ListPermissionsTable", Model)
-    <br />
     <div>
-        <input class="btn btn-default" type="button" value="Create Permission" onclick="location.href='@Url.Action("PermissionCreate", "Admin")'" />
-        <input class="btn btn-default" type="button" id="importPermissions2" name="importPermissions2" value="Import Permissions" onclick="location.href='@Url.Action("PermissionsImport", "Admin")'" />
+        <input class="btn btn-success" type="button" value="Create Permission" onclick="location.href='@Url.Action("PermissionCreate", "Admin")'" />
+        <input class="btn btn-success" type="button" id="importPermissions2" name="importPermissions2" value="Import Permissions" onclick="location.href='@Url.Action("PermissionsImport", "Admin")'" />
+        <input class="btn btn-primary" type="button" id="GotoUsers" name="importPermissions2" value="Go to Roles" onclick="location.href='@Url.Action("RoleIndex", "Admin")'" />
         <br />
     </div>
+    <br />
+    @Html.Partial("_ListPermissionsTable", Model)
+    <br />
+  
 </fieldset>
 <br />
-@Html.ActionLink("Go to Roles", "RoleIndex", "Admin")
+@*@Html.ActionLink("Go to Roles", "RoleIndex", "Admin")*@

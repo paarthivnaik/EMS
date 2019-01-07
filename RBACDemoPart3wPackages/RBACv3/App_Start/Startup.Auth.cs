@@ -31,14 +31,19 @@ namespace RBACv3
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
+                    // https://www.jamessturtevant.com/posts/ASPNET-Identity-Cookie-Authentication-Timeouts/ 
                     OnValidateIdentity = SecurityStampValidator
                 .OnValidateIdentity<ApplicationUserManager, ApplicationUser, int>(
-                    validateInterval: TimeSpan.FromMinutes(30),
+                 
+                    validateInterval: TimeSpan.FromMinutes(15),
                     regenerateIdentityCallback: (manager, user) =>
                         user.GenerateUserIdentityAsync(manager),
                     getUserIdCallback: (id) => (id.GetUserId<int>()))
 
-                }
+                },
+                 SlidingExpiration = true,
+                  ExpireTimeSpan = TimeSpan.FromMinutes(30),
+                  CookieName = "kalams",
             });            
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 

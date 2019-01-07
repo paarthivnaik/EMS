@@ -24,5 +24,13 @@ namespace RBACv3.Controllers
         {
             return View();
         }
+        public ActionResult DashboardV1()
+        {
+            return View();
+        }
+        public ActionResult DashboardV2()
+        {
+            return View();
+        }
     }
 }
