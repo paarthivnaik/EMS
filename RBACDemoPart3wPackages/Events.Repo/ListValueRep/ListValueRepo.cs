@@ -25,8 +25,7 @@ namespace Events.Repo.ListValueRep
                     {
                         obj.CreatedOn = DateTime.Now;
                         obj.Status = true;
-                        obj.EntryType = "System";
-                        _context.Entry(obj).State = obj.ListEntryID == 0 ? EntityState.Added : EntityState.Modified;
+                        _context.Entry(obj).State = obj.ListValueID == 0 ? EntityState.Added : EntityState.Modified;
                         await _context.SaveChangesAsync();
                         return obj.ListValueID;
                     }
@@ -64,10 +63,11 @@ namespace Events.Repo.ListValueRep
                 {
                     if (!_context.ListValues.Any(m => m.ListValueName == obj.ListValueName && m.ListValueID == obj.ListValueID && m.Status == true))
                     {
-                        obj.CreatedOn = DateTime.Now;
-                        obj.Status = true;
-                        obj.EntryType = "System";
-                        _context.Entry(obj).State = obj.ListEntryID == 0 ? EntityState.Added : EntityState.Modified;
+                        obj.ModifiedOn = DateTime.Now;
+                        _context.Entry(obj).Property(x => x.CreatedOn).IsModified = false;
+                        _context.Entry(obj).Property(x => x.CreatedBy).IsModified = false;
+                        _context.Entry(obj).Property(x => x.Status).IsModified = false;
+                        _context.Entry(obj).State = obj.ListValueID == 0 ? EntityState.Added : EntityState.Modified;
                         await _context.SaveChangesAsync();
                         return obj.ListValueID;
                     }
@@ -97,14 +97,15 @@ namespace Events.Repo.ListValueRep
             }
         }
 
-        public async Task<ListValue> GetById(long listValueId)
+        public  object GetById(long listentryId)
         {
             try
             {
                 using (_context = new ListEntryContext())
                 {
-                    var resObj = await _context.ListValues.Where(x => x.ListValueID == listValueId && x.Status == true).FirstOrDefaultAsync();
-                    return resObj;
+                    var resObj = _context.ListValues.Where(x => x.ListEntryID == listentryId && x.Status == true).ToList();
+                 var jsondata  = new { Result = "OK", Records = resObj };
+                 return jsondata;
                 }
             }
             catch (Exception exception)
@@ -141,7 +142,7 @@ namespace Events.Repo.ListValueRep
                     var delListEntries = new Events.Entities.Models.ListValue()
                     {
 
-                        ListEntryID = listValueId,
+                        ListValueID = listValueId,
                         Status = false,
                         ListValueName = String.Empty,
                         EntryType = "System",
@@ -178,41 +179,41 @@ namespace Events.Repo.ListValueRep
         }
 
 
-        public async Task<List<ListValueFlat>> GetByListEntryName(string listEntryName)
-        {
-            try
-            {
-                using (_context = new ListEntryContext())
-                {
-                    var listEntryNamesCollection = listEntryName.Split(',');
-                    var listvalue = from le in _context.ListEntrys
-                                    join lv in _context.ListValues on le.ListEntryID equals lv.ListEntryID into lv_Default
-                                    from lvDefault in lv_Default.DefaultIfEmpty()
+        //public async Task<List<ListValueFlat>> GetByListEntryName(string listEntryName)
+        //{
+        //    try
+        //    {
+        //        using (_context = new ListEntryContext())
+        //        {
+        //            var listEntryNamesCollection = listEntryName.Split(',');
+        //            var listvalue = from le in _context.ListEntrys
+        //                            join lv in _context.ListValues on le.ListEntryID equals lv.ListEntryID into lv_Default
+        //                            from lvDefault in lv_Default.DefaultIfEmpty()
 
                                    
-                                    .Where(l =>  l.Status == true && listEntryNamesCollection.Contains(l.ListEntries.ListEntryName))
+        //                            .Where(l =>  l.Status == true && listEntryNamesCollection.Contains(l.ListEntries.ListEntryName))
                                    
-                                    select new ListValueFlat
-                                    {
-                                        ListValueID = lvDefault != null ? lvDefault.ListValueID : 0,
-                                        ListEntryID = le.ListEntryID,
-                                        ListEntryName = le.ListEntryName,
-                                        ListValueName = lvDefault.ListValueName,
-                                        EntryType = le.EntryType,
-                                        Status = le.Status,
-                                    };
+        //                            select new ListValueFlat
+        //                            {
+        //                                ListValueID = lvDefault != null ? lvDefault.ListValueID : 0,
+        //                                ListEntryID = le.ListEntryID,
+        //                                ListEntryName = le.ListEntryName,
+        //                                ListValueName = lvDefault.ListValueName,
+        //                                EntryType = le.EntryType,
+        //                                Status = le.Status,
+        //                            };
 
-                    var result = listvalue.ToList();
-                    return result;
-                }
+        //            var result = listvalue.ToList();
+        //            return result;
+        //        }
 
-            }
+        //    }
 
-            catch (Exception exception)
-            {
+        //    catch (Exception exception)
+        //    {
                 
-                return null;
-            }
-        }
+        //        return null;
+        //    }
+        //}
     }
 }

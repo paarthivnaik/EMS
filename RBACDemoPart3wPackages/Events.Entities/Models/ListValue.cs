@@ -17,7 +17,7 @@ namespace Events.Entities.Models
         public System.DateTime CreatedOn { get; set; }
         public Nullable<long> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-        public virtual ListEntry ListEntries { get; set; }
+       // public virtual ListEntry ListEntries { get; set; }
        
     }
 }

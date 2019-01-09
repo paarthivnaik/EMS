@@ -15,45 +15,47 @@ namespace RBACv3.Controllers
     {
         IListValueRepo _repo = new ListValueRepo();
        
-        [HttpGet]
-        public async Task<object> Get()
+        [HttpPost]
+        public async Task<object> GetAll()
         {
             var result = await _repo.GetAll();
             return result;
         }
 
-       
-        [HttpGet]
-        public async Task<ListValue> Get(int id)
+
+       [HttpPost]
+        public object GetById(int id)
         {
-            var result = await _repo.GetById(id);
+            var result =  _repo.GetById(id);
             return result;
         }
 
-       
-        [HttpPost]
-        public async Task<long> Post(ListValue value)
+
+       [HttpPost]
+        public async Task<long> Save(ListValue value)
         {
+            value.CreatedBy = User.Identity.GetUserId();
             return await _repo.Save(value);
         }
 
-      
-        [HttpPut]
-        public async Task<long> Put(ListValue value)
+
+      [HttpPost]
+        public async Task<long> Update(ListValue value)
         {
+            value.ModifiedBy = User.Identity.GetUserId();
             return await _repo.Update(value);
         }
 
-       
-        [HttpPost]
+
+       [HttpPost]
         public async Task<bool> Delete(int id)
         {
             return await _repo.Delete(id);
         }
-        [HttpGet]
-        public async Task<List<ListValueFlat>>GetByListEntryName(string listentryName)
-        {
-            return await _repo.GetByListEntryName(listentryName);
-        }
+        //[HttpGet]
+        //public async Task<List<ListValueFlat>>GetByListEntryName(string listentryName)
+        //{
+        //    return await _repo.GetByListEntryName(listentryName);
+        //}
     }
 }

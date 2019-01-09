@@ -443,23 +443,18 @@ namespace RBACv3
         //private static void RegisterJqGrid(BundleCollection bundles)
         //{
         //    //JQGrid css
-        //    bundles.Add(new StyleBundle("~/bundles/JQGrid/css").Include(
-        //        "~/Scripts/JQGrid/ui.multiselect.css",
-        //        "~/Scripts/JQGrid/jquery-ui.css",
-        //        "~/Scripts/JQGrid/ui.jqgrid.css"
+        //    bundles.Add(new StyleBundle("~/bundles/JtableUI/css").Include(
+        //        "~/Content/themes/base/jquery.ui.base.css",
+        //        "~/Scripts/jtable/themes/metro/blue/jtable.css"
+             
         //        ));
 
         //    // JQGrid Js
-        //    bundles.Add(new ScriptBundle("~/bundles/JQGrid/js").Include(
-        //               "~/Scripts/JQGrid/jquery.jqGrid.min.js",
-        //               "~/Scripts/JQGrid/ui.multiselect.js",
-        //              "~/Scripts/JQGrid/grid.locale-en.js",
-        //              "~/Scripts/underscore.js",
-        //              "~/Scripts/JQGrid/js/GridComponent.js",
-        //              "~/Scripts/JQGrid/pdfmake.min.js",
-        //              "~/Scripts/JQGrid/jszip.min.js",
-        //              "~/Scripts/JQGrid/vfs_fonts.js",
-        //              "~/Scripts/JQGrid/jqGridExportToExcel.js"
+        //    bundles.Add(new ScriptBundle("~/bundles/Jatable/js").Include(
+        //               "~/Scripts/jquery-1.10.2.js",
+        //               "~/Scripts/JQGrid/jquery-ui-1.9.2.js",
+        //              "~/Scripts/JQGrid/jszip.Scripts/jtable/jquery.jtable.js.js"
+                    
         //              ));
         //}
         

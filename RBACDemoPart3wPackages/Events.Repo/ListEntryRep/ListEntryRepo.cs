@@ -23,7 +23,6 @@ namespace Events.Repo.ListEntryRep
                     {
                         obj.CreatedOn = DateTime.Now;
                         obj.Status = true;
-                        obj.EntryType = "System";
                         _context.Entry(obj).State = obj.ListEntryID == 0 ? EntityState.Added : EntityState.Modified;
                         await _context.SaveChangesAsync();
                         return obj.ListEntryID;
@@ -116,14 +115,19 @@ namespace Events.Repo.ListEntryRep
 
         }
 
-        public async Task<object> GetAll()
+        public object GetAll(int startIndex, int count, string sorting)
         {
             try
             {
                 using (_context = new ListEntryContext())
                 {
-                    var resObj = await _context.ListEntrys.Where(x => x.Status == true).ToListAsync();
-                    return resObj;
+                    var resObj =  _context.ListEntrys.Where(x => x.Status == true);
+                    var query = resObj.OrderBy(p => p.ListEntryName); //Default!
+                    var finalobj = count > 0
+                       ? query.Skip(startIndex).Take(count).ToList() //Paging
+                       : query.ToList(); //No paging
+                    var jsonData = new { Result = "OK", Records = finalobj, TotalRecordCount = query.Count() };
+                  return  jsonData;
                 }
             }
             catch (Exception exception)

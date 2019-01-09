@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace Events.Repo.EventsRepo
 {
-  public  interface IEventsRepo
+    public interface IEventsRepo
     {
-      Task<long> Save(EventInfo obj);
-      Task<long> Update(EventInfo obj);
-      Task<EventInfo> GetById(long eventInfoId);
-      Task<List<EventInfo>> GetAll();
-      Task<bool> Delete(long eventInfoId);
+        Task<long> Save(EventInfo obj);
+        Task<long> Update(EventInfo obj);
+        Task<EventInfo> GetById(long eventInfoId);
+        Task<List<EventInfo>> GetAll();
     }
 }

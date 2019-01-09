@@ -14,16 +14,16 @@ namespace RBACv3.Controllers
     {
         IListEntryRepo _repo = new ListEntryRepo();
         // GET: api/ListEntries
-        [HttpGet]
-        public async Task<object> Get()
+        [HttpPost]
+        public  object GetAll(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
-            var result = await _repo.GetAll();
+            var result =  _repo.GetAll(jtStartIndex, jtPageSize, jtSorting);
             return result;
         }
 
         // GET: api/ListEntries/5
-        [HttpGet]
-        public async Task<ListEntry> Get(int id)
+       [HttpPost]
+        public async Task<ListEntry> GetById(int id)
         {
             var result = await _repo.GetById(id);
             return result;
@@ -31,15 +31,17 @@ namespace RBACv3.Controllers
 
         // POST: api/ListEntries
         [HttpPost]
-        public async Task<long> Post(ListEntry value)
+        public async Task<long> Save(ListEntry value)
         {
+            value.CreatedBy = User.Identity.GetUserId();
             return await _repo.Save(value);
         }
 
         // PUT: api/ListEntries/5
-        [HttpPut]
-        public async Task<long> Put(ListEntry value)
+       [HttpPost]
+        public async Task<long> Update(ListEntry value)
         {
+            value.ModifiedBy = User.Identity.GetUserId();
             return await _repo.Update(value);
         }
 

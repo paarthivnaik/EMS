@@ -8,11 +8,11 @@ namespace Events.Entities.Models
 {
   public  class ListEntry
     {
-      public ListEntry()
-        {
-            ListValues = new List<ListValue>();
+      //public ListEntry()
+        //{
+        //    ListValues = new List<ListValue>();
 
-        }
+        //}
 
         public long ListEntryID { get; set; }
         public string ListEntryName { get; set; }
@@ -23,7 +23,7 @@ namespace Events.Entities.Models
         public System.DateTime CreatedOn { get; set; }
         public Nullable<long> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
-        public virtual ICollection<ListValue> ListValues { get; set; }
+       // public virtual ICollection<ListValue> ListValues { get; set; }
        
     }
 }

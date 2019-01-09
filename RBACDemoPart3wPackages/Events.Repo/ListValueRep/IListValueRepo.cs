@@ -12,8 +12,8 @@ namespace Events.Repo.ListValueRep
     {
       Task<long> Save(ListValue obj);
       Task<long> Update(ListValue obj);
-      Task<List<ListValueFlat>> GetByListEntryName(string listEntryName);
-      Task<ListValue> GetById(long listValueId);
+     // Task<List<ListValueFlat>> GetByListEntryName(string listEntryName);
+      object GetById(long listentryId);
       Task<object> GetAll();
       Task<bool> Delete(long listValueId);
     }

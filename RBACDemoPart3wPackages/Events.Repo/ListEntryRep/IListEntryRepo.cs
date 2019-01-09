@@ -13,7 +13,7 @@ namespace Events.Repo.ListEntryRep
         Task<long> Save(ListEntry obj);
         Task<long> Update(ListEntry obj);
         Task<ListEntry> GetById(long listEntryId);
-        Task<object> GetAll();
+        object GetAll(int startIndex, int count, string sorting);
         Task<bool> Delete(long listEntryId);
     }
 }
