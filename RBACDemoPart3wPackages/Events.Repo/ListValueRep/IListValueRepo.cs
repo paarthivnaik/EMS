@@ -12,7 +12,7 @@ namespace Events.Repo.ListValueRep
     {
       Task<object> Save(ListValue obj);
       Task<object> Update(ListValue obj);
-     // Task<List<ListValueFlat>> GetByListEntryName(string listEntryName);
+      Task<List<ListValueFlat>> GetByListEntryName(string listEntryName);
       object GetById(long listentryId);
       Task<object> GetAll();
       Task<object> Delete(long listValueId);

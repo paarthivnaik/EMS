@@ -15,6 +15,7 @@ namespace Events.Repo.ListValueRep
    public class ListValueRepo:IListValueRepo
     {
        private ListEntryContext _context;
+       private ListValueContext _LvContext;
         public async  Task<object> Save(ListValue obj)
         {
             using (_context = new ListEntryContext())
@@ -65,10 +66,11 @@ namespace Events.Repo.ListValueRep
                     if (!_context.ListValues.Any(m => m.ListValueName == obj.ListValueName && m.ListValueID == obj.ListValueID && m.Status == true))
                     {
                         obj.ModifiedOn = DateTime.Now;
+                       
+                        _context.Entry(obj).State = obj.ListValueID == 0 ? EntityState.Added : EntityState.Modified;
                         _context.Entry(obj).Property(x => x.CreatedOn).IsModified = false;
                         _context.Entry(obj).Property(x => x.CreatedBy).IsModified = false;
                         _context.Entry(obj).Property(x => x.Status).IsModified = false;
-                        _context.Entry(obj).State = obj.ListValueID == 0 ? EntityState.Added : EntityState.Modified;
                         await _context.SaveChangesAsync();
                         var jsonobj = new { Result = "OK", Record = obj };
                         return jsonobj;
@@ -181,41 +183,41 @@ namespace Events.Repo.ListValueRep
         }
 
 
-        //public async Task<List<ListValueFlat>> GetByListEntryName(string listEntryName)
-        //{
-        //    try
-        //    {
-        //        using (_context = new ListEntryContext())
-        //        {
-        //            var listEntryNamesCollection = listEntryName.Split(',');
-        //            var listvalue = from le in _context.ListEntrys
-        //                            join lv in _context.ListValues on le.ListEntryID equals lv.ListEntryID into lv_Default
-        //                            from lvDefault in lv_Default.DefaultIfEmpty()
+        public async Task<List<ListValueFlat>> GetByListEntryName(string listEntryName)
+        {
+            try
+            {
+                using (_LvContext = new ListValueContext())
+                {
+                    var listEntryNamesCollection = listEntryName.Split(',');
+                    var listvalue = from le in _LvContext.ListEntriesCustoms
+                                    join lv in _LvContext.ListValuesCustoms on le.ListEntryID equals lv.ListEntryID into lv_Default
+                                    from lvDefault in lv_Default.DefaultIfEmpty()
 
-                                   
-        //                            .Where(l =>  l.Status == true && listEntryNamesCollection.Contains(l.ListEntries.ListEntryName))
-                                   
-        //                            select new ListValueFlat
-        //                            {
-        //                                ListValueID = lvDefault != null ? lvDefault.ListValueID : 0,
-        //                                ListEntryID = le.ListEntryID,
-        //                                ListEntryName = le.ListEntryName,
-        //                                ListValueName = lvDefault.ListValueName,
-        //                                EntryType = le.EntryType,
-        //                                Status = le.Status,
-        //                            };
 
-        //            var result = listvalue.ToList();
-        //            return result;
-        //        }
+                                    .Where(l => l.Status == true && listEntryNamesCollection.Contains(l.ListEntriesCustoms.ListEntryName))
 
-        //    }
+                                    select new ListValueFlat
+                                    {
+                                        ListValueID = lvDefault != null ? lvDefault.ListValueID : 0,
+                                        ListEntryID = le.ListEntryID,
+                                        ListEntryName = le.ListEntryName,
+                                        ListValueName = lvDefault.ListValueName,
+                                        EntryType = le.EntryType,
+                                        Status = le.Status,
+                                    };
 
-        //    catch (Exception exception)
-        //    {
-                
-        //        return null;
-        //    }
-        //}
+                    var result = await listvalue.ToListAsync();
+                    return result;
+                }
+
+            }
+
+            catch (Exception exception)
+            {
+
+                return null;
+            }
+        }
     }
 }

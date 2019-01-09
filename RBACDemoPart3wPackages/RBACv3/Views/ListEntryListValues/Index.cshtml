@@ -1,25 +1,27 @@
 ﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Manage List Entris";
 
 }
-
-<h2>Index</h2>
-<!-- jTableOrders r1.01 - 23.05.2013 -->
 
 <!DOCTYPE html>
 
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Just another jTable example</title>
+   
+    
 </head>
 <body>
+    <br/>
+    <br/>
     <div id="OrdersTableContainer"></div>
 </body>
 </html>
+
+<link href="~/Scripts/jtable/themes/lightcolor/blue/jtable.min.css" rel="stylesheet" />
+
 @section Scripts{
-    <link href="~/Scripts/jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" />
+   
     <script src="~/Scripts/jtable/jquery.jtable.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {

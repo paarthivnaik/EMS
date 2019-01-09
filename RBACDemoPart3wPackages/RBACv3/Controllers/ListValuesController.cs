@@ -52,10 +52,10 @@ namespace RBACv3.Controllers
         {
             return await _repo.Delete(id);
         }
-        //[HttpGet]
-        //public async Task<List<ListValueFlat>>GetByListEntryName(string listentryName)
-        //{
-        //    return await _repo.GetByListEntryName(listentryName);
-        //}
+       [HttpGet]
+       public async Task<List<ListValueFlat>> GetByListEntryName(string listentryName)
+       {
+           return await _repo.GetByListEntryName(listentryName);
+       }
     }
 }

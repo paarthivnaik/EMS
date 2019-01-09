@@ -717,11 +717,8 @@ function BindLELV(listEntryNames) {
         $("." + listEntryNamesCollection[e]).html("<option value='0'>---Select---</option>");
     });
     $.ajax({
-        url: apiBaseUrl + 'ListValuesASAPI/GetByListEntryName?tenantid=' + getCookie('TenantId') + '&listEntryName=' + listEntryNames,
+        url: '/api/ListValues/GetByListEntryName?listEntryName=' + listEntryNames,
         type: 'GET',
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
         async: false,
         success: function (data) {
             var optionhtml;
@@ -730,7 +727,7 @@ function BindLELV(listEntryNames) {
 
                     $(listEntryNamesCollection).each(function (k, v) {
                         if (value.ListEntryName === v) {
-                            optionhtml = '<option value="' + value.ListValueId + '">' + value.ListValue + '</option>';
+                            optionhtml = '<option value="' + value.ListValueID + '">' + value.ListValueName + '</option>';
                             $("." + v).append(optionhtml);
                         }
 

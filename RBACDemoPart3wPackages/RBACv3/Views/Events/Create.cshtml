@@ -57,7 +57,7 @@
 
                                 <div class="input-group m-b">
                                     <i class="fa fa-glass input-group-addon"></i>
-                                    <select class="form-control" id="EventType" name="DisposalReason" data-attr="EventType" data-listentry="" data-valt="required">
+                                    <select class="form-control EventType" id="EventType" name="EventType" data-attr="EventType" data-listentry="" data-valt="required">
                                         <option value="0">-- Select --</option>
                                         <option value="1">Mehandi</option>
                                         <option value="2">Sangeeth</option>
@@ -174,6 +174,96 @@
         <!-- /.box -->
     </div>
     <!-- /.col -->
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Add Items</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row" data-role="create-sec">
+
+                    <div class="col-lg-12">
+                        <div class="row">
+
+
+                            <div class="form-group col-lg-3">
+                                <strong class="m-b-xs">*Category</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-glass input-group-addon"></i>
+                                    <select class="form-control Categories" id="Categories" name="Categories" data-attr="Categories" data-listentry="" data-valt="required">
+                                        <option value="0">-- Select --</option>
+                                       
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-3">
+                                <strong class="m-b-xs">*Items</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-cubes input-group-addon"></i>
+                                    <select class="form-control" id="Items" name="Items" data-attr="Items" data-listentry="" data-valt="required">
+                                        <option value="0">-- Select --</option>
+                                        <option value="1">Mehandi</option>
+                                        <option value="2">Sangeeth</option>
+                                        <option value="3">Birth Day</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-2">
+                                <strong class="m-b-xs">*Quantity</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-hourglass input-group-addon"></i>
+                                    <input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity" name="Quantity">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-2">
+                                <strong class="m-b-xs">*Price</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-money input-group-addon"></i>
+                                    <input type="text" placeholder="Price" class="form-control" data-attr="Price" id="Price" name="Price">
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group col-lg-2">
+                                <div class="input-group m-b" style="padding-top: 8px;">
+                                    <div class="input-group m-b">
+                                        
+                                        <button type="button" class="btn bg-purple btn-flat margin"><i class="fa fa-plus" aria-hidden="true"></i> Add Item</button>
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <section data-role="mandatory-sec">
+                        <input type="hidden" data-attr="EventInfoID" id="KeyId" />
+                        <input type="hidden" data-attr="EventRefID" />
+                        <input type="hidden" data-attr="CreatedBy" />
+                        <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
+                        <input type="hidden" data-attr="ModifiedBy" />
+                        <input type="hidden" data-attr="ModifiedOn" />
+                        <input type="hidden" data-attr="Status" />
+
+                    </section>
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
 </div>
 <!-- /.row -->
  
@@ -182,16 +272,20 @@
 <script src="~/AdminLTE/plugins/iziToast/iziToast.min.js"></script>
 <script src="~/Scripts/util.js"></script>
 <script>
-    //Date picker
-    $('.datepicker').datepicker({
-        autoclose: true
-    });
+    $(document).ready(function () {
+        BindLELV('EventType,Categories');
+        //Date picker
+        $('.datepicker').datepicker({
+            autoclose: true
+        });
 
-    $('#saveEvent').click(function () {
-        if (displayvalidation('create-sec')) {
-            var resObj = post("create-sec", 'EventsData/Save', 'Insert');
-        }
-    });
+        $('#saveEvent').click(function () {
+            if (displayvalidation('create-sec')) {
+                var resObj = post("create-sec", 'EventsData/Save', 'Insert');
+            }
+        });
+    })
+   
 </script>
 
 
