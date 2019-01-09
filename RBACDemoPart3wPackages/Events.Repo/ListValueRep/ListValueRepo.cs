@@ -15,7 +15,7 @@ namespace Events.Repo.ListValueRep
    public class ListValueRepo:IListValueRepo
     {
        private ListEntryContext _context;
-        public async  Task<long> Save(ListValue obj)
+        public async  Task<object> Save(ListValue obj)
         {
             using (_context = new ListEntryContext())
             {
@@ -27,11 +27,12 @@ namespace Events.Repo.ListValueRep
                         obj.Status = true;
                         _context.Entry(obj).State = obj.ListValueID == 0 ? EntityState.Added : EntityState.Modified;
                         await _context.SaveChangesAsync();
-                        return obj.ListValueID;
+                        var jsonobj = new { Result = "OK", Record = obj };
+                        return jsonobj;
                     }
                     else
                     {
-                        return 0;
+                        return null;
                     }
                 }
                 catch (DbEntityValidationException dbEx)
@@ -45,17 +46,17 @@ namespace Events.Repo.ListValueRep
                                                     validationError.ErrorMessage);
                         }
                     }
-                    return 0;
+                    return null;
                 }
                 catch (Exception exception)
                 {
 
-                    return 0;
+                    return (new { Result = "ERROR", Message = exception.Message });
                 }
             }
         }
 
-        public async Task<long> Update(ListValue obj)
+        public async Task<object> Update(ListValue obj)
         {
             using (_context = new ListEntryContext())
             {
@@ -69,7 +70,8 @@ namespace Events.Repo.ListValueRep
                         _context.Entry(obj).Property(x => x.Status).IsModified = false;
                         _context.Entry(obj).State = obj.ListValueID == 0 ? EntityState.Added : EntityState.Modified;
                         await _context.SaveChangesAsync();
-                        return obj.ListValueID;
+                        var jsonobj = new { Result = "OK", Record = obj };
+                        return jsonobj;
                     }
                     else
                     {
@@ -91,8 +93,8 @@ namespace Events.Repo.ListValueRep
                 }
                 catch (Exception exception)
                 {
-
-                    return 0;
+                    return (new { Result = "ERROR", Message = exception.Message });
+                 
                 }
             }
         }
@@ -111,7 +113,7 @@ namespace Events.Repo.ListValueRep
             catch (Exception exception)
             {
 
-                return null;
+                return (new { Result = "ERROR", Message = exception.Message });
             }
         }
 
@@ -129,10 +131,10 @@ namespace Events.Repo.ListValueRep
             catch (Exception exception)
             {
 
-                return null;
+                return (new { Result = "ERROR", Message = exception.Message });
             }
         }
-        public async Task<bool> Delete(long listValueId)
+        public async Task<object> Delete(long listValueId)
         {
             using (_context = new ListEntryContext())
             {
@@ -153,7 +155,7 @@ namespace Events.Repo.ListValueRep
                     _context.Entry(delListEntries).Property(x => x.Status).IsModified = true;
                     await _context.SaveChangesAsync();
 
-                    return true;
+                    return (new { Result = "OK" });
                 }
                 catch (DbEntityValidationException dbEx)
                 {
@@ -173,7 +175,7 @@ namespace Events.Repo.ListValueRep
                 catch (Exception exception)
                 {
 
-                    return false;
+                    return (new { Result = "ERROR", Message = exception.Message });
                 }
             }
         }

@@ -31,7 +31,7 @@ namespace RBACv3.Controllers
 
         // POST: api/ListEntries
         [HttpPost]
-        public async Task<long> Save(ListEntry value)
+        public async Task<object> Save(ListEntry value)
         {
             value.CreatedBy = User.Identity.GetUserId();
             return await _repo.Save(value);
@@ -39,7 +39,7 @@ namespace RBACv3.Controllers
 
         // PUT: api/ListEntries/5
        [HttpPost]
-        public async Task<long> Update(ListEntry value)
+        public async Task<object> Update(ListEntry value)
         {
             value.ModifiedBy = User.Identity.GetUserId();
             return await _repo.Update(value);
@@ -47,7 +47,7 @@ namespace RBACv3.Controllers
 
         // DELETE: api/ListEntries/5
         [HttpPost]
-        public async Task<bool> Delete(int id)
+        public async Task<object> Delete(int id)
         {
             return await _repo.Delete(id);
         }

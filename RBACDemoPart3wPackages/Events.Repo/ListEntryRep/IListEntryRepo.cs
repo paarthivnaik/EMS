@@ -10,10 +10,10 @@ namespace Events.Repo.ListEntryRep
  public   interface IListEntryRepo
     {
         
-        Task<long> Save(ListEntry obj);
-        Task<long> Update(ListEntry obj);
+        Task<object> Save(ListEntry obj);
+        Task<object> Update(ListEntry obj);
         Task<ListEntry> GetById(long listEntryId);
         object GetAll(int startIndex, int count, string sorting);
-        Task<bool> Delete(long listEntryId);
+        Task<object> Delete(long listEntryId);
     }
 }

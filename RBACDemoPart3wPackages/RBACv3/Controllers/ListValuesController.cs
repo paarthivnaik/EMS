@@ -32,7 +32,7 @@ namespace RBACv3.Controllers
 
 
        [HttpPost]
-        public async Task<long> Save(ListValue value)
+        public async Task<object> Save(ListValue value)
         {
             value.CreatedBy = User.Identity.GetUserId();
             return await _repo.Save(value);
@@ -40,7 +40,7 @@ namespace RBACv3.Controllers
 
 
       [HttpPost]
-        public async Task<long> Update(ListValue value)
+        public async Task<object> Update(ListValue value)
         {
             value.ModifiedBy = User.Identity.GetUserId();
             return await _repo.Update(value);
@@ -48,7 +48,7 @@ namespace RBACv3.Controllers
 
 
        [HttpPost]
-        public async Task<bool> Delete(int id)
+        public async Task<object> Delete(int id)
         {
             return await _repo.Delete(id);
         }

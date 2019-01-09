@@ -10,11 +10,11 @@ namespace Events.Repo.ListValueRep
 {
   public  interface IListValueRepo
     {
-      Task<long> Save(ListValue obj);
-      Task<long> Update(ListValue obj);
+      Task<object> Save(ListValue obj);
+      Task<object> Update(ListValue obj);
      // Task<List<ListValueFlat>> GetByListEntryName(string listEntryName);
       object GetById(long listentryId);
       Task<object> GetAll();
-      Task<bool> Delete(long listValueId);
+      Task<object> Delete(long listValueId);
     }
 }
