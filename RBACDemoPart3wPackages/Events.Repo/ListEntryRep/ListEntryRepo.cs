@@ -63,10 +63,11 @@ namespace Events.Repo.ListEntryRep
                     if (!_context.ListEntrys.Any(m => m.ListEntryName == obj.ListEntryName && m.ListEntryID != obj.ListEntryID && m.Status == true))
                     {
                         obj.ModifiedOn = DateTime.Now;
+                        _context.Entry(obj).State = EntityState.Modified;
                         _context.Entry(obj).Property(x => x.CreatedOn).IsModified = false;
                         _context.Entry(obj).Property(x => x.CreatedBy).IsModified = false;
                         _context.Entry(obj).Property(x => x.Status).IsModified = false;
-                        _context.Entry(obj).State = EntityState.Modified;
+                        
                         await _context.SaveChangesAsync();
                         var jsonobj = new { Result = "OK", Record = obj };
                         return jsonobj;
@@ -140,27 +141,28 @@ namespace Events.Repo.ListEntryRep
             }
         }
 
-        public async Task<object> Delete(long listEntryId)
+        public async Task<object> Delete(long ListEntryID)
         {
             using (_context = new ListEntryContext())
             {
                 try
                 {
 
-                    var delListEntries = new Events.Entities.Models.ListEntry()
+                    var obj = new Events.Entities.Models.ListEntry()
                         {
-                            
-                            ListEntryID = listEntryId,
+
+                            ListEntryID = ListEntryID,
                             Status = false,
                             ListEntryName = String.Empty,
-                           EntryType="System",
-                            CreatedBy=1,
-                            CreatedOn=DateTime.Now
-                    
+                            EntryType = "System",
+                            CreatedBy = 1,
+                            CreatedOn = DateTime.Now
+
 
                         };
-                    _context.ListEntrys.Attach(delListEntries);
-                    _context.Entry(delListEntries).Property(x => x.Status).IsModified = true;
+                    //obj.Status = false;
+                    _context.ListEntrys.Attach(obj);
+                    _context.Entry(obj).Property(x => x.Status).IsModified = true;
                     await _context.SaveChangesAsync();
 
                     return (new { Result = "OK" });

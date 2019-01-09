@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 <h2>Index</h2>
@@ -60,7 +61,8 @@
                                             actions: {
                                                 listAction: '/api/ListValues/GetById?id='
                                                         + OrderData.record['ListEntryID'],
-                                                deleteAction: '/api/ListValues/Delete',
+                                                deleteAction: '/api/ListValues/Delete?id='
+                                                        + OrderData.record['ListEntryID'],
                                                 updateAction: '/api/ListValues/Update',
                                                 createAction: '/api/ListValues/Save'
                                             },

@@ -14,6 +14,6 @@ namespace Events.Repo.ListEntryRep
         Task<object> Update(ListEntry obj);
         Task<ListEntry> GetById(long listEntryId);
         object GetAll(int startIndex, int count, string sorting);
-        Task<object> Delete(long listEntryId);
+        Task<object> Delete(long ListEntryID);
     }
 }

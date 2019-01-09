@@ -10,3 +10,15 @@ E:\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\EntityFramework.SqlServe
 E:\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\obj\Debug\Events.Repo.csprojResolveAssemblyReference.cache
 E:\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\obj\Debug\Events.Repo.dll
 E:\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\obj\Debug\Events.Repo.pdb
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\Events.Repo.dll.config
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\Events.Repo.dll
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\Events.Repo.pdb
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\EntityFramework.dll
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\EntityFramework.SqlServer.dll
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\Events.Entities.dll
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\Events.Entities.pdb
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\EntityFramework.xml
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\bin\Debug\EntityFramework.SqlServer.xml
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\obj\Debug\Events.Repo.csprojResolveAssemblyReference.cache
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\obj\Debug\Events.Repo.dll
+D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Repo\obj\Debug\Events.Repo.pdb

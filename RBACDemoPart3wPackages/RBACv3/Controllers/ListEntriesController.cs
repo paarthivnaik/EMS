@@ -47,9 +47,9 @@ namespace RBACv3.Controllers
 
         // DELETE: api/ListEntries/5
         [HttpPost]
-        public async Task<object> Delete(int id)
+       public async Task<object> Delete(ListEntry obj)
         {
-            return await _repo.Delete(id);
+            return await _repo.Delete(obj.ListEntryID);
         }
     }
 }
