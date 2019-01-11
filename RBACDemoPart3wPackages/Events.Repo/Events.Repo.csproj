@@ -58,6 +58,9 @@
     <Compile Include="ListValueRep\IListValueRepo.cs" />
     <Compile Include="ListValueRep\ListValueContext.cs" />
     <Compile Include="ListValueRep\ListValueRepo.cs" />
+    <Compile Include="OfficeExpenses\IOfficeExpensesRepo.cs" />
+    <Compile Include="OfficeExpenses\OfficeExpensesContext.cs" />
+    <Compile Include="OfficeExpenses\OfficeExpensesRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
