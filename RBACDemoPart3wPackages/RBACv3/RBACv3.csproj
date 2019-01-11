@@ -193,6 +193,8 @@
     <Compile Include="Controllers\ListEntryListValuesController.cs" />
     <Compile Include="Controllers\ListValuesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OfficeExpController.cs" />
+    <Compile Include="Controllers\OfficeExpDataController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1678,6 +1680,9 @@
     <Content Include="Scripts\jtable\themes\jqueryui\jtable_jqueryui.less" />
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.less" />
     <Content Include="Views\ListEntryListValues\Index.cshtml" />
+    <Content Include="Views\OfficeExp\Index.cshtml" />
+    <Content Include="Views\OfficeExp\_Create.cshtml" />
+    <Content Include="Views\OfficeExp\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
