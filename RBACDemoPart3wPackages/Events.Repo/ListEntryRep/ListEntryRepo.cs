@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Events.Repo.ListEntryRep
 {
-  public  class ListEntryRepo:IListEntryRepo
+    public class ListEntryRepo : IListEntryRepo
     {
-      private ListEntryContext _context;
+        private ListEntryContext _context;
         public async Task<object> Save(ListEntry obj)
         {
-            using(_context=new ListEntryContext())
+            using (_context = new ListEntryContext())
             {
                 try
                 {
@@ -67,11 +67,11 @@ namespace Events.Repo.ListEntryRep
                         _context.Entry(obj).Property(x => x.CreatedOn).IsModified = false;
                         _context.Entry(obj).Property(x => x.CreatedBy).IsModified = false;
                         _context.Entry(obj).Property(x => x.Status).IsModified = false;
-                        
+
                         await _context.SaveChangesAsync();
                         var jsonobj = new { Result = "OK", Record = obj };
                         return jsonobj;
-                        
+
                     }
                     else
                     {
@@ -125,13 +125,13 @@ namespace Events.Repo.ListEntryRep
             {
                 using (_context = new ListEntryContext())
                 {
-                    var resObj =  _context.ListEntrys.Where(x => x.Status == true);
+                    var resObj = _context.ListEntrys.Where(x => x.Status == true);
                     var query = resObj.OrderBy(p => p.ListEntryName); //Default!
                     var finalobj = count > 0
                        ? query.Skip(startIndex).Take(count).ToList() //Paging
                        : query.ToList(); //No paging
                     var jsonData = new { Result = "OK", Records = finalobj, TotalRecordCount = query.Count() };
-                  return  jsonData;
+                    return jsonData;
                 }
             }
             catch (Exception exception)

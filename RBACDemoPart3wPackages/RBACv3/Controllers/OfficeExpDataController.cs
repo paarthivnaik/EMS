@@ -28,9 +28,9 @@ namespace RBACv3.Controllers
             return result;
         }
         [HttpGet]
-        public async Task<Expens> GetById(long eventInfoId)
+        public async Task<Expens> GetById(long expenseId)
         {
-            var result = await _expensesRepo.GetById(eventInfoId);
+            var result = await _expensesRepo.GetById(expenseId);
             return result;
         }
         [HttpGet]
@@ -38,6 +38,17 @@ namespace RBACv3.Controllers
         {
             var result = await _expensesRepo.GetAll();
             return result;
+        }
+
+        [HttpPost]
+        public async Task<bool> Delete(int expenseId)
+        {
+            return await _expensesRepo.Delete(expenseId);
+        }
+        [HttpPost]
+        public async Task<object> GetReport(DateTime fromdate,DateTime todate)
+        {
+            return await _expensesRepo.GetReport(fromdate,todate);
         }
         
     }

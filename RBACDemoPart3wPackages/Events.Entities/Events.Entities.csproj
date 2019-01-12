@@ -49,13 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\EventInfo.cs" />
+    <Compile Include="Models\EventItem.cs" />
     <Compile Include="Models\Expens.cs" />
+    <Compile Include="Models\Flat\EventItemsFlat.cs" />
     <Compile Include="Models\Flat\ListValueFlat.cs" />
     <Compile Include="Models\ListEntriesCustom.cs" />
     <Compile Include="Models\ListEntry.cs" />
     <Compile Include="Models\ListValue.cs" />
     <Compile Include="Models\ListValuesCustom.cs" />
     <Compile Include="Models\Mapping\EventInfoMap.cs" />
+    <Compile Include="Models\Mapping\EventItemMap.cs" />
     <Compile Include="Models\Mapping\ExpensMap.cs" />
     <Compile Include="Models\Mapping\ListEntriesCustomMap.cs" />
     <Compile Include="Models\Mapping\ListEntryMap.cs" />

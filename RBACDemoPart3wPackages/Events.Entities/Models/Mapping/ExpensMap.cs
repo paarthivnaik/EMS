@@ -36,6 +36,7 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.ParticularValue).HasColumnName("ParticularValue");
             this.Property(t => t.BillRefNo).HasColumnName("BillRefNo");
             this.Property(t => t.Ammount).HasColumnName("Ammount");
+            this.Property(t => t.ExpenseDate).HasColumnName("ExpenseDate");
             this.Property(t => t.SubmissionDate).HasColumnName("SubmissionDate");
             this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");

@@ -16,6 +16,7 @@ namespace Events.Entities.Models
         public string ParticularValue { get; set; }
         public string BillRefNo { get; set; }
         public decimal Ammount { get; set; }
+        public System.DateTime ExpenseDate { get; set; }
         public System.DateTime SubmissionDate { get; set; }
         public string Description { get; set; }
         public long CreatedBy { get; set; }

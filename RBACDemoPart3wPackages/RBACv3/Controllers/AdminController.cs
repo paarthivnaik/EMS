@@ -385,7 +385,6 @@ namespace RBACDemo.Controllers
                     && t.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
                     && !t.IsAbstract
                     && typeof(IController).IsAssignableFrom(t));
-
             var _controllerMethods = _controllerTypes.ToDictionary(controllerType => controllerType,
                     controllerType => controllerType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
                     .Where(m => typeof(ActionResult).IsAssignableFrom(m.ReturnType)));

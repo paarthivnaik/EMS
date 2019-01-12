@@ -258,3 +258,6 @@ D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\RBACv3\bin\Microsoft.Owin.Security.Mic
 D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.csprojResolveAssemblyReference.cache
 D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.dll
 D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.pdb
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.Migrations.InitialCreate.resources
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.csproj.GenerateResource.Cache
+E:\EMS\EMS\RBACDemoPart3wPackages\RBACv3\obj\Debug\RBACv3.Migrations.IsInternal.resources

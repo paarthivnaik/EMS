@@ -1,7 +1,7 @@
 ﻿
 
 
-$(document).ready(function () {    
+$(document).ready(function () {
 
     $(".modal").attr("data-backdrop", "static");
     var apiBaseUrl = 'http://localhost:64075/api/';
@@ -55,7 +55,7 @@ function post(role, route, mode) {
         //    'ORSUS': getCookie('ORSUS')
         //},
         type: "POST",
-        data: obj,
+        data: JSON.stringify(obj),
         dataType: "json",
         contentType: "application/json",
         async: false,
@@ -67,13 +67,18 @@ function post(role, route, mode) {
             }
             if (res > 0) {
                 if (mode === 'Insert') {
-                    //  InsertedSuccessfullyAlert();    // Insert Alert
-                    
                     ToastSuccess('Your Information Saved Successfully.')
                 }
                 else if (mode === 'Update') {
-                    // UpdatedSuccessfullyAlert(); // Update Alert
                     ToastSuccess('Your Information Updated Successfully.')
+                }
+                else if (mode === 'UpdateNew') {
+                    ToastSuccess('Your Information Updated Successfully.');
+                    ResetPage(role);
+                }
+                else if (mode === 'InsertNew') {
+                    ToastSuccess('Your Information Saved Successfully.')
+                    ResetPage(role);
                 }
             }
             else if (res === -1) {
@@ -140,7 +145,7 @@ function postPopup(role, cfrole, route, tableId, cfContextName) {
         obj[$(this).data('attr')] = $(this).val();
     });
 
-  
+
     //obj['RecordOwner'] = getCookie('UserId');
     //obj['CreatedBy'] = getCookie('UserId');
     //obj['ModifiedBy'] = getCookie('UserId');
@@ -420,10 +425,7 @@ function postToGlobal(role, route, ableId, mode) {
 function bind(route, sec) {
     var hresult = "";
     $.ajax({
-        url: apiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
+        url: route,
         type: 'GET',
         async: false,
         success: function (result) {
@@ -439,7 +441,7 @@ function bind(route, sec) {
                     }
                 }
             }
-            
+
             var param = '[data-role=' + sec + '] [data-attr]';
             $(param).each(function () {
                 var t = $(this).data('attr');
@@ -499,8 +501,7 @@ function bind(route, sec) {
                         if (propval != null && propval != undefined) {
                             $(this).val(propval.toString().trim());
                         }
-                        else if (propval == null)
-                        {
+                        else if (propval == null) {
                             $(this).val('0');
                         }
                     }
@@ -584,7 +585,7 @@ function bind(route, sec) {
                     }
                 }
             }
-            
+
 
 
 
@@ -599,7 +600,7 @@ function bind(route, sec) {
 
 
 function bindChildControl(Route) {
-  
+
     if (Route !== undefined) {
 
         var rout = Route;
@@ -745,10 +746,7 @@ function GetJsonFromApi(route) {
     var result = '';
     $.ajax({
         url: apiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        type: "GET",
+        type: "POST",
         data: {},
         dataType: "json",
         async: false,
@@ -810,11 +808,11 @@ function PostJsonToApiStringify(route, dataToPost) {
         success: function (data) {
             resultID = data;
             var res = data;
-            
+
             if (resultID.hasOwnProperty("m_Item1")) {
                 res = resultID.m_Item1;
             }
-            
+
             if (res > 0) {
                 // InsertedSuccessfullyAlert()
                 result = 1;
@@ -891,7 +889,7 @@ function PostJsonToApiStringifyAsset(route, dataToPost, redirectURL) {
 
 
 
-        
+
     });
     return resultID;
 }
@@ -921,7 +919,7 @@ function InsertedSuccessfullyAndCloseAlert() {
  function (isConfirm) {
      if (isConfirm) {
          $('.showSweetAlert').hide();
-        $('#modal-container').modal('hide');
+         $('#modal-container').modal('hide');
          $('.sweet-overlay').hide();
      } else {
      }
@@ -1283,89 +1281,6 @@ function BindCountryStates(country, state) {
     });
 }
 
-
-function postGlobal(role, cfrole, route, tableId, cfContextName) {
-    var arr = [];
-    var i = 0;
-    if ($('#cfsection').length == 1) {
-        var recordId = GetQueryStringValues(location.href, 'keyId');
-        $("[data-role='" + cfrole + "'] [data-customfieldid]").each(function () {
-            arr[i] = { "TenantId": getCookie('TenantId'), 'KeyCFID': $(this).data('keyid'), "CustomFieldId": $(this).data('customfieldid'), "FieldName": $(this).data('fieldname'), "FieldValue": $(this).val() };
-            arr[i][tableId] = parseInt(recordId);
-            i = i + 1;
-        });
-    }
-    var obj = new Object();
-    $("[data-role='" + role + "'] [data-attr]").each(function () {
-        obj[$(this).data('attr')] = $(this).val();
-        if ($(this).prop("tagName") === 'SELECT' && $(this)[0].hasAttribute("data-listentry")) {
-            var selVal = $("#" + this.id + " option:selected").val() === '0' ? null : $("#" + this.id + " option:selected").val();
-            var selText = $("#" + this.id + " option:selected").html() === '---Select---' ? null : $("#" + this.id + " option:selected").html();
-            obj[$(this).data('attr')] = selVal;
-            obj[$(this).data('attr') + 'Value'] = selText;
-        }
-        else if ($(this).prop("tagName") === 'DIV') {
-            obj[$(this).data('attr')] = $(this).next().find('.note-editable').html();
-        }
-        else if ($(this)[0].hasAttribute("data-flags")) {
-            var res = $(this).val().split(':');
-            obj[$(this).data('attr')] = res[0].trim();
-            obj[$(this).data('flags')] = res[1].trim();
-        }
-
-        else if ($(this).is(':checkbox') || $(this).is(':radio')) {
-            obj[$(this).data('attr')] = $(this).prop('checked');
-        }
-
-    });
-
-    /* Read Mandatory section */
-
-    $("[data-role='mandatory-sec'] [data-attr]").each(function () {
-        obj[$(this).data('attr')] = $(this).val();
-    });
-
-    obj['TenantId'] = getCookie('TenantId');
-
-    obj['RecordOwner'] = getCookie('UserId');
-    obj['CreatedBy'] = getCookie('UserId');
-    obj['ModifiedBy'] = getCookie('UserId');
-
-    obj[cfContextName] = arr;
-
-
-    var resultID = 0;
-    $.ajax({
-        url: globalApiBaseUrl + route,
-        type: "POST",
-        data: obj,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        async: true,
-        success: function (data) {
-            resultID = data;
-            var res = data;
-            if (resultID.hasOwnProperty("m_Item1")) {
-                res = resultID.m_Item1;
-            }
-            if (res > 0) {
-                InsertedSuccessfullyAlert();
-            }
-            else if (res === -1) {
-                ErrorAlert('Record already exists.');
-            }
-            else {
-                ErrorAlert('Please Contact Administrator.');
-            }
-        },
-        error: function () {
-            ErrorAlert('Please Contact Administrator.');
-            resultID = 0;
-        }
-    });
-    return resultID;
-}
 
 /**
 * Simple Post
@@ -2008,7 +1923,7 @@ function (isConfirm) {
 function ValidateDateTwo(start, end) {
     var dateOne = new Date(start);
     var dateTwo = new Date(end);
-    if (dateOne >= dateTwo) {
+    if (dateOne > dateTwo) {
         return false;
     } else {
         return true;
@@ -2345,7 +2260,7 @@ function bindFromHr(route) {
 }
 
 function countryflgOnId(CountryCode) {
-  
+
     $('#' + CountryCode)
         .intlTelInput({
             initialCountry: "us",
@@ -2385,8 +2300,8 @@ function BindSlotNumbers(ele, assetId) {
         },
         data: "{}",
         async: false,
-         dataType: "json",
-       
+        dataType: "json",
+
         success: function (data) {
             var optionhtml = '<option value="1">---Select---</option>';
             $.each(data,
@@ -2409,7 +2324,7 @@ function isNumberKeyDecimal(evt, id) {
     debugger;
     var charCode = (evt.which) ? evt.which : event.keyCode;
     var inputValue = $("#" + id).val()
-   
+
     if (evt.keyCode === 46 && inputValue.split('.').length === 2) {
         return false;
     }
@@ -2458,8 +2373,9 @@ function closeCustom(currentEle) {
 
 function ResetPage(role, GridID) {
     $('[data-role="' + role + '"] [data-attr]').each(function () {
-        if ($(this).is('input:text') || $(this).is('textarea'))
+        if ($(this).is('input:text') || $(this).is('textarea') || $(this).is('input:hidden'))
             $(this).val('');
+
         if ($(this).is('select'))
             $(this).val('0');
         if ($(this).prop("tagName") === 'DIV') {
@@ -2667,28 +2583,6 @@ function isNumberKey(evt) {
     return true;
 }
 
-function GetJsonFromOrgApi(route) {
-    var result = '';
-    $.ajax({
-        url: orgApiBaseUrl + route,
-        headers: {
-            'ORSUS': getCookie('ORSUS')
-        },
-        type: "GET",
-        data: {},
-        dataType: "json",
-        async: false,
-        success: function (data, textStatus, xhr) {
-            result = data;
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            ErrorAlert('You are not authorized to perform this action.');
-        }
-    });
-    return result;
-}
-
-
 
 function UpdatedSuccessfullyRerouteAlert(route, mode) {
 
@@ -2829,7 +2723,14 @@ function ToastError(msg) {
     });
 
 }
-
+function ToastWarning(msg)
+{
+    iziToast.warning({
+        title: 'Caution',
+        position: 'topRight',
+        message: msg,
+    });
+}
 function ToastNotAuthorized() {
     iziToast.warning({
         title: 'Warning!',

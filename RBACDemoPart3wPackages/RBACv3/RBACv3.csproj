@@ -177,6 +177,7 @@
   <ItemGroup>
     <Compile Include="Action Filters\RBACAttribute.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\MultiDelete.cs" />
     <Compile Include="Common\RBAC_ExtendedMethods.cs" />
     <Compile Include="Common\RBAC_IdentityExtendedMethods.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EventItemsDataController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\EventsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -199,6 +201,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901031412343_InitialCreate.cs" />
+    <Compile Include="Migrations\201901031412343_InitialCreate.Designer.cs">
+      <DependentUpon>201901031412343_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901121316069_IsInternal.cs" />
+    <Compile Include="Migrations\201901121316069_IsInternal.Designer.cs">
+      <DependentUpon>201901121316069_IsInternal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EventsModel.cs" />
     <Compile Include="Models\RBACInitializer.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1570,6 +1581,8 @@
     <Content Include="Scripts\Tables\Data-menu.js" />
     <Content Include="Scripts\Tables\Data.js" />
     <Content Include="Scripts\Tables\Simple-menu.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\util.js" />
     <Content Include="Scripts\Widgets\Widgets-menu.js" />
     <Content Include="Scripts\_references.js" />
@@ -1681,8 +1694,10 @@
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.less" />
     <Content Include="Views\ListEntryListValues\Index.cshtml" />
     <Content Include="Views\OfficeExp\Index.cshtml" />
-    <Content Include="Views\OfficeExp\_Create.cshtml" />
     <Content Include="Views\OfficeExp\New.cshtml" />
+    <Content Include="Views\OfficeExp\Edit.cshtml" />
+    <Content Include="Views\OfficeExp\Details.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1705,6 +1720,14 @@
       <Project>{5c9394c2-abb4-4637-add0-7a266824e0f1}</Project>
       <Name>Events.Repo</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201901031412343_InitialCreate.resx">
+      <DependentUpon>201901031412343_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121316069_IsInternal.resx">
+      <DependentUpon>201901121316069_IsInternal.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

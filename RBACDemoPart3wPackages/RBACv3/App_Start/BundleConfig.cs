@@ -436,7 +436,16 @@ namespace RBACv3
             // plugins | morris
             bundles.Add(new ScriptBundle("~/AdminLTE/plugins/morris/js").Include(
                                          "~/AdminLTE/plugins/morris/js/morris.min.js"));
+            // plugins | Toast
+            bundles.Add(new ScriptBundle("~/AdminLTE/plugins/Toast/js").Include(
+                                         "~/AdminLTE/plugins/iziToast/iziToast.min.js"));
 
+            bundles.Add(new StyleBundle("~/AdminLTE/plugins/Toast/css").Include(
+                                     "~/AdminLTE/plugins/iziToast/iziToast.min.css"));
+
+            // plugins | Util
+            bundles.Add(new ScriptBundle("~/Util/js").Include(
+                                         "~/Scripts/util.js"));
         }
 
 

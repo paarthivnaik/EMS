@@ -12,8 +12,9 @@
     @Styles.Render("~/AdminLTE/bootstrap/css")
     @Styles.Render("~/AdminLTE/dist/css")
     @Styles.Render("~/AdminLTE/dist/css/skins")
- 
-    
+    @Styles.Render("~/AdminLTE/plugins/Toast/css")
+    @Styles.Render("~/AdminLTE/plugins/datatables/css")
+    <script src="~/Scripts/underscore.min.js"></script>
     <script src="~/Scripts/CustomValidation.js"></script>
     <link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 </head>
@@ -57,7 +58,9 @@
     @Scripts.Render("~/AdminLTE/plugins/fastclick/js")
     @Scripts.Render("~/Scripts/Shared/_Layout")
     @Scripts.Render("~/AdminLTE/dist/js")
-  
+    @Scripts.Render("~/AdminLTE/plugins/Toast/js")
+    @Scripts.Render("~/Util/js")
+    @Scripts.Render("~/AdminLTE/plugins/datatables/js")
     @RenderSection("scripts", required: false)
     <!-- Popup Code -->
     <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">

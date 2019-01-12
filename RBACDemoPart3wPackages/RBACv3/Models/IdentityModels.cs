@@ -46,11 +46,13 @@ namespace RBACv3.Models
         public string Firstname { get; set; }
 
         public string Lastname { get; set; }
+        public bool IsInternal { get; set; }
 
         public ApplicationUser()
         {
             LastModified = DateTime.Now;
             Inactive = false;
+            IsInternal = true;
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, int> manager)

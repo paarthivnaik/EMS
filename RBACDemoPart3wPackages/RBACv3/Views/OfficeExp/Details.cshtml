@@ -1,0 +1,216 @@
+﻿@{
+    ViewBag.Title = "Events Reports";
+}
+
+<br/>
+<div class="col-md-12">
+    <div class="box box-primary">
+
+        <div class="box-header with-border">
+            <h3 class="box-title"><strong>Expenses Reports</strong> </h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="row" data-role="eventReport-sec">
+                <div class="form-group col-lg-5">
+                    <strong class="m-b-xs">*Start Date</strong>
+                    <div class="input-group m-b">
+                        <i class="fa fa-calendar input-group-addon"></i>
+                        <input type="text" placeholder="Start Date" class="form-control datepicker" data-attr="StartDate" id="StartDate" name="StartDate" data-valt="required">
+                    </div>
+                </div>
+                <div class="form-group col-lg-5">
+                    <strong class="m-b-xs">*End Date</strong>
+                    <div class="input-group m-b">
+                        <i class="fa fa-calendar input-group-addon"></i>
+                        <input type="text" placeholder="End Date" class="form-control datepicker" data-attr="EndDate" id="EndDate" name="EndDate" data-valt="required">
+                    </div>
+                </div>
+                <div class="form-group col-lg-2">
+                    <div class="input-group m-b" style="padding-top: 8px;">
+                        <div class="input-group m-b">
+
+                            <button type="button" class="btn bg-purple btn-flat margin" id="getReport"><i class="fa fa-file-o" aria-hidden="true"></i> Get Bills</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.box-body -->
+    </div>
+
+    <!--Repot Table-->
+    <div id="ItemCostHistory">
+    </div>
+       
+    <!-- Report Table End -->
+    
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
+            $('#getReport').click(function () {
+                var fromdate = $('#StartDate').val();
+                var todate = $('#EndDate').val();
+                if (displayvalidation('eventReport-sec') && ValidateDates(fromdate, todate)) {
+                   
+                    // var reportData = GetJsonFromApi('/OfficeExpData/GetReport?fromdate=' + fromdate + '&todate=' + todate);
+                    itemCostHistory(fromdate, todate);
+                }
+            });
+
+            
+        });
+
+       
+
+        var Itemtempdata = [];
+
+        var TotalCost = 0.0;
+        var tempSum = 0.0;
+        var StartDate = null;
+        var EndDate = null;
+        function itemCostHistory(fromdate, todate) {
+
+            _.templateSettings.variable = "ml";
+            var Itemtemplate1 = _.template($("#CostItemtempt").html());
+            var expData = GetJsonFromApi('/OfficeExpData/GetReport?fromdate=' + fromdate + '&todate=' + todate);
+            debugger;
+            for (var i = 0; i < expData.length; i++) {
+                temp = new Object();
+                temp.SNO = i + 1;
+                temp.ItemInfoID = expData[i].ItemInfoID;
+                temp.ExpenseRefID = expData[i].ExpenseRefID;
+                temp.ParticularValue = expData[i].ParticularValue;
+
+                temp.BillRefNo = expData[i].BillRefNo;
+                temp.Ammount = expData[i].Ammount;
+                temp.ExpenseDate = expData[i].ExpenseDate;
+                temp.SubmissionDate = expData[i].SubmissionDate;
+               
+                temp.Description = expData[i].Description;
+                temp.CreateDate = expData[i].CreateDate;
+
+                if (temp.SubmissionDate != null) {
+                    var d = new Date(temp.SubmissionDate.split('T')[0]);
+                    var date = d.getDate() <= 9 ? ('0' + d.getDate()) : d.getDate();
+                    var month = d.getMonth() < 9 ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1);
+                    var year = d.getFullYear();
+                    temp.SubmissionDate = date + "/" + month + "/" + year;
+                }
+                tempSum = parseFloat(tempSum) + parseFloat(temp.Ammount);
+                //temp.ToatlCost = tempSum;
+                Itemtempdata[i] = temp;
+
+            }
+            TotalCost = tempSum;
+            StartDate = fromdate;
+            EndDate = todate;
+
+
+            $("#ItemCostHistory").after(Itemtemplate1(Itemtempdata));
+
+
+
+
+        };
+        function ValidateDates() {
+
+            var isValid = true;
+            var EffectiveStartDate = $('#StartDate').val();
+            var EffectiveEndDate = $('#EndDate').val();
+            if (!ValidateDateTwo(EffectiveStartDate, EffectiveEndDate)) {
+                isValid = false;
+                ToastWarning("End Date should be greater than StatDate");
+            }
+            //if (!ValidateDateTwo(EffectiveEndDate, EffectiveStartDate)) {
+            //    isValid = false;
+            //    ErrorAlert("Item Effective End Date should be greater than Effective Start Date Date");
+            //}
+            return isValid;
+        }
+    </script>
+
+
+<script type="text/template" id="CostItemtempt">
+
+
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Expenses Statement from : <%- StartDate %> - To : <%- EndDate %></h3>
+
+            <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default" id="pdf"><i class="fa fa-file-pdf-o"></i> PDF</button>
+                    </div>
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-file-excel-o"></i> Excel</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <div class="" style="margin-top:0px !important;">
+                <table id="tblAverageRating" class=" example table table-striped table-bordered table-hover dataTable no-footer" width="100%" role="grid" style="width: 100%;">
+                    <thead>
+                        <tr role="row" style="background-color: #6d747e54 !important;color:#2f2c2c;">
+                            <th style="text-align:center">S.No </th>
+                            <th style="text-align:center">ExpenseRefID </th>
+                            <th style="text-align:center">Particular</th>
+                            <th style="text-align:center">Bill No</th>
+                            <th style="text-align:center">Submission Date</th>
+                            <th style="text-align:center">Cost </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% _.each( ml, function(listCostHist){%>
+                        <tr>
+                            <td style="text-align:center"><%- listCostHist.SNO %></td>
+                            <td style="text-align:center"><%- listCostHist.ExpenseRefID %></td>
+                            <td style="text-align:center"><%- listCostHist.ParticularValue %></td>
+                            <td style="text-align:center"><%- listCostHist.BillRefNo %></td>
+                            <th style="text-align:center"><%- listCostHist.SubmissionDate %></th>
+                            <td style="text-align:center"><%- listCostHist.Ammount %></td>
+
+                        </tr>
+
+                        <% }); %>
+
+                        <tr style="background-color: #7e6d6d03 !important;color:#2f2c2c;">
+                            <th colspan="4" style="text-align: right">Total Cost:</th>
+                            <th colspan="1">$ <%- TotalCost %></th>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    
+
+
+</script>
+
+}
+

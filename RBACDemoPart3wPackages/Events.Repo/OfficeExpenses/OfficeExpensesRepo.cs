@@ -112,6 +112,80 @@ namespace Events.Repo.OfficeExpenses
                 using (_context = new OfficeExpensesContext())
                 {
                     var resObj = await _context.Expenses.Where(x => x.Status == true).ToListAsync();
+                    
+                    return resObj;
+                }
+            }
+            catch (Exception Ex)
+            {
+
+                return null;
+            }
+        }
+
+
+        public async Task<bool> Delete(long expensesId)
+        {
+            using (_context = new OfficeExpensesContext())
+            {
+                try
+                {
+
+                    var obj = new Events.Entities.Models.Expens()
+                    {
+
+                        ExpenseID = expensesId,
+                        Status = false,
+                        ExpenseRefID = String.Empty,
+                        Ammount = 0,
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        Particular=0,
+                        ParticularValue="EMS",
+                        SubmissionDate=DateTime.Now,
+
+
+
+                    };
+                    //obj.Status = false;
+                    _context.Expenses.Attach(obj);
+                    _context.Entry(obj).Property(x => x.Status).IsModified = true;
+                    await _context.SaveChangesAsync();
+
+                    return true;
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+
+                    foreach (var eve in dbEx.EntityValidationErrors)
+                    {
+                        Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    return false;
+                }
+                catch (Exception Ex)
+                {
+
+                    return false;
+                }
+            }
+        }
+
+
+        public async Task<object> GetReport(DateTime fromdate, DateTime todate)
+        {
+            try
+            {
+                using (_context = new OfficeExpensesContext())
+                {
+                    var resObj = await _context.Expenses.Where(x => x.Status == true && x.ExpenseDate >= fromdate && x.ExpenseDate <= todate).ToListAsync();
+
                     return resObj;
                 }
             }

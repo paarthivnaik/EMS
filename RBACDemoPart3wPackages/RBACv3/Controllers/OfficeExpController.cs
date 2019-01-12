@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RBACv3.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,7 @@ namespace RBACv3.Controllers
         }
 
         // GET: OfficeExp/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
             return View();
         }
@@ -26,63 +27,31 @@ namespace RBACv3.Controllers
             return View();
         }
 
-        // POST: OfficeExp/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        
         // GET: OfficeExp/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int keyId)
         {
+           // @ViewBag.ExpenseId = id;
             return View();
         }
 
-        // POST: OfficeExp/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: OfficeExp/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
         // POST: OfficeExp/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public object Delete(int keyId)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                var obj = new MultiDelete();
+                var res = obj.Delete("/api/OfficeExpData/Delete?incidentInfoID=" + keyId);
+                return true;
             }
             catch
             {
-                return View();
+                return false;
             }
         }
     }

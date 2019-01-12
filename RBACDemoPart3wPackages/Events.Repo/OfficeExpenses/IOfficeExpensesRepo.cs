@@ -13,5 +13,7 @@ namespace Events.Repo.OfficeExpenses
         Task<long> Update(Expens obj);
         Task<Expens> GetById(long expensesId);
         Task<List<Expens>> GetAll();
+        Task<bool> Delete(long expensesId);
+        Task<object> GetReport(DateTime fromdate,DateTime todate);
     }
 }
