@@ -187,6 +187,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EmployeeDataController.cs" />
     <Compile Include="Controllers\EventItemsDataController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\EventsDataController.cs" />
@@ -197,7 +199,10 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OfficeExpController.cs" />
     <Compile Include="Controllers\OfficeExpDataController.cs" />
+    <Compile Include="Controllers\SalariesController.cs" />
+    <Compile Include="Controllers\SalariesDataController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
+    <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1698,6 +1703,16 @@
     <Content Include="Views\OfficeExp\Edit.cshtml" />
     <Content Include="Views\OfficeExp\Details.cshtml" />
     <Content Include="Scripts\underscore.min.map" />
+    <Content Include="Views\Employee\Manage.cshtml" />
+    <Content Include="Views\Employee\New.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Vendors\Manage.cshtml" />
+    <Content Include="Views\Vendors\New.cshtml" />
+    <Content Include="Views\Vendors\Edit.cshtml" />
+    <Content Include="Views\Salaries\Manage.cshtml" />
+    <Content Include="Views\Salaries\New.cshtml" />
+    <Content Include="Views\Salaries\Edit.cshtml" />
+    <Content Include="Views\Salaries\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

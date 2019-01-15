@@ -63,9 +63,20 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li id="left-sidebar-menu-forms-general"><a href="@Url.Action("General", "Forms")"><i class="fa fa-circle-o"></i> General Elements</a></li>
+                <li id="left-sidebar-menu-forms-general"><a href="@Url.Action("Index", "ListEntryListValues")"><i class="fa fa-circle-o"></i> LELV</a></li>
                 <li id="left-sidebar-menu-forms-advanced"><a href="@Url.Action("Advanced", "Forms")"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
                 <li id="left-sidebar-menu-forms-editors"><a href="@Url.Action("Editors", "Forms")"><i class="fa fa-circle-o"></i> Editors</a></li>
+            </ul>
+        </li>
+        <li id="left-sidebar-menu-tables" class="treeview">
+            <a href="#">
+                <i class="fa fa-users"></i> <span>Employees & Vendors</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li id="left-sidebar-menu-tables-simple"><a href="@Url.Action("Manage", "Employee")"><i class="fa fa-user-plus"></i>Employees</a></li>
+                <li id="left-sidebar-menu-tables-data"><a href="@Url.Action("Manage", "Vendors")"><i class="fa fa-user-plus "></i>Vendors</a></li>
+                <li id="left-sidebar-menu-tables-data"><a href="@Url.Action("Manage", "Salaries")"><i class="fa fa-money"></i>PayRoll</a></li>
             </ul>
         </li>
         <li id="left-sidebar-menu-tables" class="treeview">
