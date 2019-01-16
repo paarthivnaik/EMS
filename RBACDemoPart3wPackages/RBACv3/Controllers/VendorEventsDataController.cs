@@ -33,6 +33,12 @@ namespace RBACv3.Controllers
             var result = await _vendorRepo.GetById(vendorId);
             return result;
         }
+        [HttpGet]
+        public async Task<object> GetDataByEvent(long vendorEventId)
+        {
+            var result = await _vendorRepo.GetByEventId(vendorEventId);
+            return result;
+        }
 
         [HttpGet]
         public async Task<List<VendorEvent>> GetAll()

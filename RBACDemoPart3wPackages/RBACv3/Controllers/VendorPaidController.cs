@@ -13,5 +13,10 @@ namespace RBACv3.Controllers
         {
             return View();
         }
+
+        public ActionResult Edit(long? vendorId)
+        {
+            return PartialView("_Edit");
+        }
     }
 }

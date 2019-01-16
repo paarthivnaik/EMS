@@ -1,13 +1,13 @@
 ﻿
 @{
-    ViewBag.Title = "New";
+    ViewBag.Title = "Event Pays";
 }
 
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title"><strong>Vendor Events</strong> </h3>
+                <h3 class="box-title"><strong>Event Pay's</strong> </h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus"></i>
@@ -21,29 +21,33 @@
 
                     <div class="col-lg-12">
                         <div class="row">
+                            <div data-role="Basicdata-sec">
+                                <div class="form-group col-lg-4">
+                                    <strong class="m-b-xs">*Event Code</strong>
 
-                            <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">*Event Code</strong>
-
-                                <div class="input-group m-b">
-                                    <i class="fa fa-info input-group-addon"></i>
-                                    <input type="text" id="ProgramDate" class="form-control" placeholder="Organization Name" name="ProgramDate" data-attr="ProgramDate" data-valt="required" maxlength="200">
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-info input-group-addon"></i>
+                                        <input type="text" id="EventInfoIDValue" class="form-control" placeholder="Event Code" name="EventInfoIDValue" data-attr="EventInfoIDValue" data-valt="required" maxlength="200" readonly>
+                                    </div>
                                 </div>
+                                <input type="hidden" data-attr="VendorEventID" id="mainId"/>
+                                <input type="hidden" data-attr="VendorID" id="VendorID" />
                             </div>
+                          
 
                             <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">*Programe Date</strong>
+                                <strong class="m-b-xs">*Paid Date</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" id="ProgramDate" class="form-control datepicker" placeholder="Organization Name" name="ProgramDate" data-attr="ProgramDate" data-valt="required" maxlength="200">
+                                    <input type="text" id="PaidDate" class="form-control datepicker" placeholder="Paid Date" name="PaidDate" data-attr="PaidDate" data-valt="required">
 
                                 </div>
                             </div>
                             <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">*Program Ammount</strong>
+                                <strong class="m-b-xs">*Ammount Pable</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-money input-group-addon"></i>
-                                    <input type="text" placeholder="Ammmount" class="form-control" data-attr="Ammmount" id="Ammmount" name="Ammmount" data-valt="required">
+                                    <input type="text" placeholder="Ammount Paid" class="form-control" data-attr="AmmountPaid" id="AmmountPaid" name="AmmountPaid" data-valt="required">
                                 </div>
                             </div>
 
@@ -53,8 +57,8 @@
 
                     </div>
 
-                    <input type="hidden" data-attr="EventVendorID" id="eventVendorId" />
-                    <input type="hidden" data-attr="VendorEventID" id="VendorEventID" />
+                   
+                    <input type="hidden" data-attr="VendorAmmountPaidID" id="KeyId" />
                     <input type="hidden" data-attr="CreatedBy" />
                     <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
                     <input type="hidden" data-attr="ModifiedBy" />
@@ -66,15 +70,106 @@
                 <!-- /.row -->
             </div>
             <div class="box-footer clearfix text-center">
-                <button id="saveVendorEvent" class="btn btn-sm btn-info btn-flat">Save</button>
-                <a href="/Vendors/Edit?" class="btn btn-sm btn-default btn-flat" id="veventBack">Back</a>Vendors/Edit?keyId=1
+                <button id="btnAmmount" class="btn btn-sm btn-info btn-flat">Save</button>
+                <button onclick="newDoc()" class="btn btn-sm btn-default btn-flat" id="btnBack">Back</button>
             </div>
         </div>
     </div>
 
 </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="box  box-primary">
+
+
+            <div class="box-header with-border">
+                <h3 class="box-title"><strong>Events Associated with This Vendor</strong> </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <div class="box-body">
+                <table id="employeeTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Event Code</th>
+                            <th>Program Date</th>
+                            <th>Ammmount</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+@section scripts{
 <script>
     $(document).ready(function () {
-
+        $('.datepicker').datepicker({
+            autoclose: true,
+            dateFormat: 'dd-mm-yy'
+        });
+        var entId = GetQueryStringValues(window.location.href, 'keyId');
+        bind("/api/VendorEventsData/GetDataByEvent?vendorEventId=" + entId, 'Basicdata-sec');
+        associatedEvents(entId);
     });
+    $('#btnAmmount').click(function () {
+        if (displayvalidation('VendorEventcreate-sec')) {
+            if ($('#KeyId').val() > 0) {
+                mode = 'Update';
+            }
+            else {
+                mode = 'Insert';
+            }
+            var resObj = post("VendorEventcreate-sec", 'VendorPaidData/Save', mode);
+            debugger;
+            if (resObj > 0) {
+                $('#KeyId').val(resObj);
+                associatedEvents(entId);
+
+            }
+
+        }
+    });
+
+    function newDoc() {
+        window.location.assign("/Vendors/Edit?keyId=" + $('#VendorID').val())
+    }
+    function associatedEvents(vendorid) {
+        var dataTable = $("#employeeTable").DataTable({
+            "scrollX": true,
+            "ajax": {
+                "url": "/api/VendorPaidData/GetById?VendorEventID=" + vendorid,
+                "type": "GET",
+                "datatype": "json",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "VendorAmmountPaidID" },
+                 { "data": "PaidDate" },
+                { "data": "AmmountPaid" },
+
+                {
+                    "data": "VendorAmmountPaidID", "render": function (data) {
+                        return "<a id='click_me' class='btn btn-primary btn-sm modal-link' href='/VendorPaid/Edit?vendorId=1' data-toggle='modal' data-backdrop='static'><i class='fa fa-pencil'></i></a><a class='btn btn-primary btn-sm'  data-toggle='modal'  data-backdrop='static' title='Edit this record' href=/VendorPaid/Edit?vendorId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
+                    },
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "150px"
+                }
+
+            ],
+            "language": {
+
+                "emptyTable": "No data found, Please click on <b>Add New</b> Button"
+            }
+        });
+    }
 </script>
+    }

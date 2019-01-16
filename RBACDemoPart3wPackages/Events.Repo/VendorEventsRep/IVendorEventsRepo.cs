@@ -12,7 +12,7 @@ namespace Events.Repo.VendorEventsRep
       Task<long> Save(VendorEvent obj);
       Task<long> Update(VendorEvent obj);
       Task<object> GetById(long vendorId);
-       // Task<object> GetByEmpId(long employeeId);
+        Task<object> GetByEventId(long eventId);
         Task<List<VendorEvent>> GetAll();
         Task<bool> Delete(long salaryPaidId);
         Task<object> GetReport(DateTime fromdate, DateTime todate);

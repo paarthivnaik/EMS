@@ -177,5 +177,34 @@ namespace Events.Repo.VendorEventsRep
                 return null;
             }
         }
+
+
+        public async Task<object> GetByEventId(long eventId)
+        {
+
+            try
+            {
+                using (_context = new VendorsContext())
+                {
+                    //var resObj = await _context.VendorEvents.Where(x => x.VendorEventID == eventId && x.Status == true).FirstOrDefaultAsync();
+                    var resObj = await (from a in _context.VendorEvents
+                                  join b in _context.Vendors on a.VendorID equals b.VendorID
+                                  where a.VendorEventID == eventId && a.Status == true
+                                  select new
+                                  {
+                                      a.VendorEventID,
+                                      a.VendorID,
+                                      a.EventInfoIDValue,
+                                      a.EventInfoID
+                                  }).FirstOrDefaultAsync();
+                    return resObj;
+                }
+            }
+            catch (Exception Ex)
+            {
+
+                return null;
+            }
+        }
     }
 }
