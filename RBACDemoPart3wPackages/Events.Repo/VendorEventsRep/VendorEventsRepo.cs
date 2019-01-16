@@ -85,13 +85,13 @@ namespace Events.Repo.VendorEventsRep
                 return 0;
             }
         }
-        public async Task<object> GetById(long vendorEventId)
+        public async Task<object> GetById(long vendorId)
         {
             try
             {
                 using (_context = new VendorsContext())
                 {
-                    var resObj = await _context.VendorEvents.Where(x => x.VendorEventID == vendorEventId && x.Status == true).FirstOrDefaultAsync();
+                    var resObj = await _context.VendorEvents.Where(x => x.VendorID == vendorId && x.Status == true).ToListAsync();
                     return resObj;
                 }
             }

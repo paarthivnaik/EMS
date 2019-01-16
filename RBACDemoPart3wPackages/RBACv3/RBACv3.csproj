@@ -203,6 +203,8 @@
     <Compile Include="Controllers\SalariesDataController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
     <Compile Include="Controllers\VendorDataController.cs" />
+    <Compile Include="Controllers\VendorEventsDataController.cs" />
+    <Compile Include="Controllers\VendorPaidController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1714,6 +1716,7 @@
     <Content Include="Views\Salaries\New.cshtml" />
     <Content Include="Views\Salaries\Edit.cshtml" />
     <Content Include="Views\Salaries\Details.cshtml" />
+    <Content Include="Views\VendorPaid\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
