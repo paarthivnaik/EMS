@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Events.Entities.Models;
+using Events.Repo.VendorsRep;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
@@ -7,12 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Events.Repo.VendorsRep
+namespace Events.Repo.VendorEventsRep
 {
-   public class VendorRepo:IVendorRepo
+    public class VendorEventsRepo : IVendorEventsRepo
     {
-       private VendorsContext _context;
-        public async Task<string[]> Save(Entities.Models.Vendor obj)
+        private VendorsContext _context;
+        public async Task<long> Save(VendorEvent obj)
         {
             try
             {
@@ -20,12 +22,10 @@ namespace Events.Repo.VendorsRep
                 {
                     obj.CreatedOn = DateTime.Now;
                     obj.Status = true;
-                    _context.Entry(obj).State = obj.VendorID == 0 ? EntityState.Added : EntityState.Modified;
+                    _context.Entry(obj).State = obj.VendorEventID == 0 ? EntityState.Added : EntityState.Modified;
                     await _context.SaveChangesAsync();
-                    string[] res = new string[2];
-                    res[0] = obj.VendorID.ToString();
-                    res[1] = obj.VendorCode;
-                    return res;
+
+                    return obj.VendorEventID;
                 }
             }
             catch (DbEntityValidationException dbEx)
@@ -39,15 +39,14 @@ namespace Events.Repo.VendorsRep
                                                 validationError.ErrorMessage);
                     }
                 }
-                return null;
+                return 0;
             }
             catch (Exception Ex)
             {
-                return null;
+                return 0;
             }
         }
-
-        public async  Task<string[]> Update(Entities.Models.Vendor obj)
+        public async Task<long> Update(VendorEvent obj)
         {
             try
             {
@@ -56,13 +55,13 @@ namespace Events.Repo.VendorsRep
                     obj.ModifiedOn = DateTime.Now;
                     _context.Entry(obj).Property(x => x.CreatedOn).IsModified = false;
                     _context.Entry(obj).Property(x => x.CreatedBy).IsModified = false;
+                    _context.Entry(obj).Property(x => x.EventInfoID).IsModified = false;
+                    _context.Entry(obj).Property(x => x.EventInfoIDValue).IsModified = false;
                     _context.Entry(obj).Property(x => x.Status).IsModified = false;
                     _context.Entry(obj).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
-                    string[] res = new string[2];
-                    res[0] = obj.VendorID.ToString();
-                    res[1] = obj.VendorCode;
-                    return res;
+
+                    return obj.VendorEventID;
 
                 }
             }
@@ -78,22 +77,21 @@ namespace Events.Repo.VendorsRep
                                                 validationError.ErrorMessage);
                     }
                 }
-                return null;
+                return 0;
             }
-            catch (Exception exception)
+            catch (Exception Ex)
             {
 
-                return null;
+                return 0;
             }
         }
-
-        public async Task<object> GetById(long vendorId)
+        public async Task<object> GetById(long vendorEventId)
         {
             try
             {
                 using (_context = new VendorsContext())
                 {
-                    var resObj = await _context.Vendors.Where(x => x.VendorID == vendorId && x.Status == true).FirstOrDefaultAsync();
+                    var resObj = await _context.VendorEvents.Where(x => x.VendorEventID == vendorEventId && x.Status == true).FirstOrDefaultAsync();
                     return resObj;
                 }
             }
@@ -103,42 +101,72 @@ namespace Events.Repo.VendorsRep
                 return null;
             }
         }
-
-        public Task<object> GetByEmpId(long vendorId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<Entities.Models.Vendor>> GetAll()
+        public async Task<List<VendorEvent>> GetAll()
         {
             try
             {
                 using (_context = new VendorsContext())
                 {
-                    var resObj = await _context.Vendors.Where(x => x.Status == true).ToListAsync();
+                    var resObj = await _context.VendorEvents.Where(x => x.Status == true).ToListAsync();
                     return resObj;
                 }
             }
-            catch (Exception exception)
+            catch (Exception Ex)
             {
 
                 return null;
             }
         }
-
-        public Task<bool> Delete(long vendorId)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public async Task<object> GetReport(string vendorCode)
+        public async Task<bool> Delete(long vendorEventId)
         {
             try
             {
                 using (_context = new VendorsContext())
                 {
-                    var resObj = await _context.Vendors.Where(x => x.Status == true && x.VendorCode == vendorCode).ToListAsync();
+                    var delSalEntries = new Events.Entities.Models.VendorEvent()
+                    {
+
+                        VendorEventID = vendorEventId,
+                        Status = false,
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now
+                    };
+                    _context.VendorEvents.Attach(delSalEntries);
+                    _context.Entry(delSalEntries).Property(x => x.Status).IsModified = true;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception Ex)
+            {
+
+                return false;
+            }
+        }
+        public async Task<object> GetReport(DateTime fromdate, DateTime todate)
+        {
+            try
+            {
+                using (_context = new VendorsContext())
+                {
+                    var resObj = await _context.VendorEvents.Where(x => x.Status == true && x.ProgramDate >= fromdate && x.ProgramDate <= todate).ToListAsync();
+
+                    return resObj;
+                }
+            }
+            catch (Exception Ex)
+            {
+
+                return null;
+            }
+        }
+        public async Task<object> GetReport(string EventCode)
+        {
+            try
+            {
+                using (_context = new VendorsContext())
+                {
+                    var resObj = await _context.VendorEvents.Where(x => x.Status == true && x.EventInfoIDValue == EventCode).ToListAsync();
 
                     return resObj;
                 }

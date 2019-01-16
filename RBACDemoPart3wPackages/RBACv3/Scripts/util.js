@@ -2139,11 +2139,6 @@ function removeURLParameter(route, keyId) {
 
 }
 
-
-
-
-
-
 function RestrictAmountFieldWithFloat(SelectorId) {
 
     $(SelectorId).on("input keypress keydown keyup", function (e) {
@@ -2739,3 +2734,31 @@ function ToastNotAuthorized() {
     });
 }
 
+function BindEvents(Eventdata) {
+    $.ajax({
+        type: "Get",
+        contentType: "application/json; charset=utf-8",
+        url: "/api/EventsData/GetAll",
+        data: "{}",
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            var optionhtml = '<option value="0">---Select---</option>';
+            $.each(data,
+                function (key, value) {
+                    optionhtml += '<option value="' + data[key].EventInfoID + '">' + data[key].EventRefID + '</option>';
+                });
+            $("#" + Eventdata).empty();
+            $("#" + Eventdata).append(optionhtml);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            if (errorThrown == 'Unauthorized') {
+                NotAuthorized();
+            }
+            else {
+                ErrorAlert(' Please contact administrator.');
+            }
+            resultID = 0;
+        }
+    });
+}

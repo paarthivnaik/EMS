@@ -13,11 +13,11 @@ namespace Events.Entities.Models
         public long EventInfoID { get; set; }
         public decimal Ammmount { get; set; }
         public System.DateTime ProgramDate { get; set; }
-        public System.DateTime ConfirmationDate { get; set; }
         public bool Status { get; set; }
         public long CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<long> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public string EventInfoIDValue { get; set; }
     }
 }

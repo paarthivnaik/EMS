@@ -70,6 +70,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalaryRep\ISalaryRepo.cs" />
     <Compile Include="SalaryRep\SalaryRepo.cs" />
+    <Compile Include="VendorEventsRep\IVendorEventsRepo.cs" />
+    <Compile Include="VendorEventsRep\VendorEventsRepo.cs" />
     <Compile Include="VendorsRep\IVendorRepo.cs" />
     <Compile Include="VendorsRep\VendorRepo.cs" />
     <Compile Include="VendorsRep\VendorsContext.cs" />

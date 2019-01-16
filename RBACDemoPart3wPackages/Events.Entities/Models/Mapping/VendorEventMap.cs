@@ -22,12 +22,12 @@ namespace Events.Entities.Models.Mapping
           this.Property(t => t.EventInfoID).HasColumnName("EventInfoID");
           this.Property(t => t.Ammmount).HasColumnName("Ammmount");
           this.Property(t => t.ProgramDate).HasColumnName("ProgramDate");
-          this.Property(t => t.ConfirmationDate).HasColumnName("ConfirmationDate");
           this.Property(t => t.Status).HasColumnName("Status");
           this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
           this.Property(t => t.CreatedOn).HasColumnName("CreatedOn");
           this.Property(t => t.ModifiedBy).HasColumnName("ModifiedBy");
           this.Property(t => t.ModifiedOn).HasColumnName("ModifiedOn");
+          this.Property(t => t.EventInfoIDValue).HasColumnName("EventInfoIDValue");
 
 
       }

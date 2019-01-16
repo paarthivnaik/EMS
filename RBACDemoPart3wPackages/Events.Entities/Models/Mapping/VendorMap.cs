@@ -38,6 +38,10 @@ namespace Events.Entities.Models.Mapping
 
             this.Property(t => t.ProofValue)
                 .HasMaxLength(100);
+            this.Property(t => t.Organization)
+              .HasMaxLength(200);
+            this.Property(t => t.UniqueID)
+             .HasMaxLength(25);
 
             // Table & Column Mappings
             this.ToTable("Vendor");
@@ -49,13 +53,15 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.MobileNo).HasColumnName("MobileNo");
             this.Property(t => t.AlternateMobileNo).HasColumnName("AlternateMobileNo");
             this.Property(t => t.Address).HasColumnName("Address");
-            this.Property(t => t.ProofID).HasColumnName("ProofID");
+            this.Property(t => t.Proof).HasColumnName("Proof");
             this.Property(t => t.ProofValue).HasColumnName("ProofValue");
             this.Property(t => t.Status).HasColumnName("Status");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.CreatedOn).HasColumnName("CreatedOn");
             this.Property(t => t.ModifiedBy).HasColumnName("ModifiedBy");
             this.Property(t => t.ModifiedOn).HasColumnName("ModifiedOn");
+            this.Property(t => t.Organization).HasColumnName("Organization");
+            this.Property(t => t.UniqueID).HasColumnName("UniqueID");
         }
     }
 }

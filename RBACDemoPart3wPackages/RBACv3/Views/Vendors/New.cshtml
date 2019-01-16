@@ -1,7 +1,198 @@
-﻿
-@{
-    ViewBag.Title = "New";
+﻿@{
+    ViewBag.Title = "Vendors";
 }
 
-<h2>New</h2>
+<br />
+<!-- /.row -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title"><strong>Vendor Registration</strong> </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="row" data-role="Vendorcreate-sec">
+
+                    <div class="col-lg-12">
+                        <div class="row">
+
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">Vendor Code</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-hashtag input-group-addon"></i>
+                                    <input type="text" id="VendorCode" class="form-control" placeholder="Vendor Code" name="Vendor Code" data-attr="VendorCode" readonly>
+
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Organization Name</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-user input-group-addon"></i>
+                                    <input type="text" id="Organization" class="form-control" placeholder="Organization Name" name="Organization" data-attr="Organization" data-valt="required" maxlength="200">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Address</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-sort-alpha-asc input-group-addon"></i>
+                                    <input type="text" id="Address" class="form-control" placeholder="Address" name="Address" data-attr="Address" data-valt="required" maxlength="400">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*First Name</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-user input-group-addon"></i>
+                                    <input type="text" id="FirstName" class="form-control" placeholder="First Name" name="FirstName" data-attr="FirstName" data-valt="required" maxlength="100">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">Middle Name</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-sort-alpha-asc input-group-addon"></i>
+                                    <input type="text" id="LastName" class="form-control" placeholder="Middle Name" name="LastName" data-attr="LastName" maxlength="100">
+
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*SurName</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-sort-alpha-asc input-group-addon"></i>
+                                    <input type="text" id="SurName" class="form-control" placeholder="Sur Name" name="SurName" data-attr="SurName" data-valt="required" maxlength="100">
+
+                                </div>
+                            </div>
+                            
+                           
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Mobile Number</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-mobile input-group-addon"></i>
+                                    <input type="text" placeholder="Mobile Number" class="form-control" data-attr="MobileNo" id="MobileNo" name="MobileNo" data-valt="required" maxlength="15">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">Alternate Mobile</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-mobile input-group-addon"></i>
+                                    <input type="text" placeholder="Alternate Mobile" class="form-control" data-attr="AlternateMobileNo" id="AlternateMobileNo" name="AlternateMobileNo" maxlength="15">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Identtification Type</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-info input-group-addon"></i>
+                                    <select class="form-control Proof" id="Proof" name="Proof" data-attr="Proof" data-listentry="" data-valt="required">
+                                        <option value="0">-- Select --</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Adhar/Voter/PAN/Other Number</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-key input-group-addon"></i>
+                                    <input type="text" placeholder="Adhar/Voter/PAN/Other Number" id="UniqueID" class="form-control" data-attr="UniqueID" data-valt="required">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <section data-role="mandatory-sec">
+                        <input type="hidden" data-attr="VendorID" id="KeyId" />
+                        <input type="hidden" data-attr="CreatedBy" />
+                        <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
+                        <input type="hidden" data-attr="ModifiedBy" />
+                        <input type="hidden" data-attr="ModifiedOn" />
+                        <input type="hidden" data-attr="Status" />
+
+                    </section>
+                </div>
+                <!-- /.row -->
+            </div>
+            <div class="box-footer clearfix text-center">
+                <button id="saveVendor" class="btn btn-sm btn-info btn-flat">Save</button>
+                <a href="/Vendors/Manage" class="btn btn-sm btn-default btn-flat">Back</a>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+
+</div>
+<!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            BindLELV('Proof');
+            //Date picker
+            $('.datepicker').datepicker({
+                autoclose: true,
+                dateFormat: 'dd-mm-yy'
+            });
+        })
+        $('#saveVendor').click(function () {
+            if (displayvalidation('Vendorcreate-sec')) {
+                if ($('#KeyId').val() > 0) {
+                    mode = 'Update';
+                }
+                else {
+                    mode = 'Insert';
+                }
+                var resObj = post("Vendorcreate-sec", 'VendorData/Save', mode);
+                debugger;
+                if (resObj[0] > 0) {
+                    $('#KeyId').val(resObj[0]);
+                    $('#VendorCode').val(resObj[1]);
+                }
+
+            }
+        });
+        $('#saveandNew').click(function () {
+            if (displayvalidation('Vendorcreate-sec')) {
+                if ($('#KeyId').val() > 0) {
+
+                    mode = 'UpdateNew';
+                }
+                else {
+                    mode = 'InsertNew';
+                }
+                var resObj = post("Vendorcreate-sec", 'VendorData/Save', mode);
+                if (resObj[0] > 0) {
+                    $('#KeyId').val(resObj[0]);
+                    $('#VendorCode').val(resObj[1]);
+                }
+            }
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
