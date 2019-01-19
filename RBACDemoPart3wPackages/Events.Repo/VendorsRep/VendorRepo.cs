@@ -126,9 +126,47 @@ namespace Events.Repo.VendorsRep
             }
         }
 
-        public Task<bool> Delete(long vendorId)
+        public  async Task<bool> Delete(long vendorId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (_context = new VendorsContext())
+                {
+                    var delEmpEntries = new Events.Entities.Models.Vendor()
+                    {
+
+                          VendorID = vendorId,
+                        Status = false,
+                        FirstName = String.Empty,
+                        ProofValue = "System",
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        SurName = string.Empty
+                    };
+                    _context.Vendors.Attach(delEmpEntries);
+                    _context.Entry(delEmpEntries).Property(x => x.Status).IsModified = true;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+                return false;
+            }
+            catch (Exception exception)
+            {
+
+                return false;
+            }
         }
 
 

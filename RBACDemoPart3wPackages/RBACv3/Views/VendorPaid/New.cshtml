@@ -83,7 +83,7 @@
 
 
             <div class="box-header with-border">
-                <h3 class="box-title"><strong>Events Associated with This Vendor</strong> </h3>
+                <h3 class="box-title"><strong>Paid To Vendor</strong> </h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus"></i>
@@ -95,7 +95,7 @@
                 <table id="employeeTable" class="table table-bordered table-hover display nowrap" style="width:100%">
                     <thead>
                         <tr>
-                            <th>Event Code</th>
+                           
                             <th>Program Date</th>
                             <th>Ammmount</th>
                             <th></th>
@@ -131,7 +131,7 @@
             debugger;
             if (resObj > 0) {
                 $('#KeyId').val(resObj);
-                associatedEvents(entId);
+                $('#employeeTable').DataTable().ajax.reload();
 
             }
 
@@ -151,13 +151,12 @@
                 "dataSrc": ""
             },
             "columns": [
-                { "data": "VendorAmmountPaidID" },
                  { "data": "PaidDate" },
                 { "data": "AmmountPaid" },
 
                 {
                     "data": "VendorAmmountPaidID", "render": function (data) {
-                        return "<a id='click_me' class='btn btn-primary btn-sm modal-link' href='/VendorPaid/Edit?vendorId=1' data-toggle='modal' data-backdrop='static'><i class='fa fa-pencil'></i></a><a class='btn btn-primary btn-sm'  data-toggle='modal'  data-backdrop='static' title='Edit this record' href=/VendorPaid/Edit?vendorId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
+                        return "<a id='click_me' class='btn btn-primary btn-sm modal-link' href='/VendorPaid/Edit?vendorAmmountPaidId="+data+ "'data-toggle='modal' data-backdrop='static'><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
                     },
                     "orderable": false,
                     "searchable": false,

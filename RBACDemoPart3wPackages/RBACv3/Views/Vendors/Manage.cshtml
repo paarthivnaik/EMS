@@ -9,7 +9,7 @@
         <h3 class="box-title">Vendor Management</h3>
     </div>
     <div class="box-body">
-        <table id="employeeTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+        <table id="vendorTable" class="table table-bordered table-hover display nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Vendor Code</th>
@@ -32,7 +32,7 @@
     <script>
             var Popup, dataTable;
             $(document).ready(function () {
-                dataTable = $("#employeeTable").DataTable({
+                dataTable = $("#vendorTable").DataTable({
                     "scrollX": true,
                     "ajax": {
                         "url": "/api/VendorData//GetAll",
@@ -64,69 +64,48 @@
                 });
             });
 
-            function PopupForm(url) {
-                var formDiv = $('<div/>');
-                $.get(url)
-                .done(function (response) {
-                    formDiv.html(response);
-
-                    Popup = formDiv.dialog({
-                        autoOpen: true,
-                        resizable: false,
-                        title: 'Fill Employee Details',
-                        height: 500,
-                        width: 700,
-                        close: function () {
-                            Popup.dialog('destroy').remove();
-                        }
-
-                    });
-                });
-            }
-
-            function SubmitForm(form) {
-                $.validator.unobtrusive.parse(form);
-                if ($(form).valid()) {
-                    $.ajax({
-                        type: "POST",
-                        url: form.action,
-                        data: $(form).serialize(),
-                        success: function (data) {
-                            if (data.success) {
-                                Popup.dialog('close');
-                                dataTable.ajax.reload();
-
-                                $.notify(data.message, {
-                                    globalPosition: "top center",
-                                    className: "success"
-                                })
-
-                            }
-                        }
-                    });
-                }
-                return false;
-            }
-
             function Delete(id) {
-                if (confirm('Are You Sure to Delete this Employee Record ?')) {
-                    $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("Delete","Employee")/' + id,
-                        success: function (data) {
-                            if (data.success) {
+
+                //////////////////////
+                iziToast.warning({
+                    title: 'Delete Warning!',
+                    message: 'Are you sure you want to Delete?',
+                    timeout: false,
+                    overlay: true,
+                    color: 'yellow',
+                    position: 'center',
+                    buttons: [
+                        ['<button>Yes</button>', function (instance, toast) {
+                            debugger;
+
+                            result = GetJsonFromApi("/VendorData/Delete?VendorId=" + id);
+
+
+                            if (result) {
+                                ToastSuccess('Deleted Sucessfully.');
                                 dataTable.ajax.reload();
-
-                                $.notify(data.message, {
-                                    globalPosition: "top center",
-                                    className: "success"
-                                })
-
                             }
-                        }
+                            else {
+                                ToastError("Error ocuured While doing operation")
+                            }
 
-                    });
-                }
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+
+                        }, true],
+                        ['<button>No</button>', function (instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+                        }]
+                    ],
+
+                });
             }
     </script>
 }

@@ -54,11 +54,12 @@ namespace Events.Repo.VendorEventAmmountPaid
                 using (_context = new VendorsContext())
                 {
                     obj.ModifiedOn = DateTime.Now;
+                 
+                    _context.Entry(obj).State = EntityState.Modified;
                     _context.Entry(obj).Property(x => x.CreatedOn).IsModified = false;
                     _context.Entry(obj).Property(x => x.CreatedBy).IsModified = false;
                     _context.Entry(obj).Property(x => x.VendorEventID).IsModified = false;
                     _context.Entry(obj).Property(x => x.Status).IsModified = false;
-                    _context.Entry(obj).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
 
                     return obj.VendorAmmountPaidID;
@@ -111,6 +112,42 @@ namespace Events.Repo.VendorEventAmmountPaid
                 using (_context = new VendorsContext())
                 {
                     var resObj = await _context.VendorAmmountPaids.Where(x => x.Status == true).ToListAsync();
+                    return resObj;
+                }
+            }
+            catch (Exception Ex)
+            {
+
+                return null;
+            }
+        }
+
+
+        public async Task<object> GetByIdEdit(long VendorAmmountPaidID)
+        {
+            try
+            {
+                using (_context = new VendorsContext())
+                {
+                    var resObj = await (from a in _context.VendorAmmountPaids
+                                        join b in _context.VendorEvents on a.VendorEventID equals b.VendorEventID
+                                        join c in _context.Vendors on b.VendorID equals c.VendorID
+                                        where a.VendorAmmountPaidID == VendorAmmountPaidID && a.Status == true
+                                        select new
+                                        {
+                                            a.VendorAmmountPaidID,
+                                            a.VendorEventID,
+                                            a.PaidDate,
+                                            a.AmmountPaid,
+                                            a.CreatedBy,
+                                            a.CreatedOn,
+                                            a.ModifiedBy,
+                                            a.ModifiedOn,
+                                            a.Status,
+                                            b.VendorID,
+                                            b.EventInfoIDValue,
+                                            b.EventInfoID
+                                        }).FirstOrDefaultAsync();
                     return resObj;
                 }
             }

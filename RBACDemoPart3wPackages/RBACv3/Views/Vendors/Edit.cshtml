@@ -223,7 +223,7 @@
                 </div>
             </div>
             <div class="box-body">
-                <table id="employeeTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+                <table id="associatedEventsTable" class="table table-bordered table-hover display nowrap" style="width:100%">
                     <thead>
                         <tr>
                             <th>Event Code</th>
@@ -246,6 +246,7 @@
 <!-- /.row -->
 @section scripts{
     <script>
+        var  dataTable;
         $(document).ready(function () {
             BindLELV('Proof');
             //Date picker
@@ -283,7 +284,9 @@
                 var resObj = post("VendorEventcreate-sec", 'VendorEventsData/Save', 'Insert');
                 if (resObj > 0) {
                     $('#VendorEventID').val(resObj);
-                    associatedEvents($('#KeyId').val())
+                    //associatedEvents($('#KeyId').val())
+                    dataTable.ajax.url("/api/VendorEventsData/GetById?vendorId=" + $('#KeyId').val()).load();
+                   // dataTable.ajax.reload();
                 }
             }
         });
@@ -292,7 +295,7 @@
 
         function associatedEvents(vendorid)
         {
-          var  dataTable = $("#employeeTable").DataTable({
+             dataTable = $("#associatedEventsTable").DataTable({
                 "scrollX": true,
                 "ajax": {
                     "url": "/api/VendorEventsData/GetById?vendorId=" + vendorid,
@@ -307,7 +310,7 @@
 
                     {
                         "data": "VendorEventID", "render": function (data) {
-                            return "<a class='btn btn-primary btn-sm' title='Edit this record' href=/VendorPaid/New?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
+                            return "<a id='click_me' class='btn btn-primary btn-sm modal-link' href='/Vendors/VendorAssociatedEventEdit?vendorEventId=" + data + "'data-toggle='modal' data-backdrop='static'><i class='fa fa-pencil'></i></a><a class='btn btn-primary btn-sm'style='margin-left:5px' title='Edit this record' href=/VendorPaid/New?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
                         },
                         "orderable": false,
                         "searchable": false,
@@ -319,6 +322,49 @@
 
                     "emptyTable": "No data found, Please click on <b>Add New</b> Button"
                 }
+            });
+        }
+        function Delete(id) {
+
+            //////////////////////
+            iziToast.warning({
+                title: 'Delete Warning!',
+                message: 'Are you sure you want to Delete?',
+                timeout: false,
+                overlay: true,
+                color: 'yellow',
+                position: 'center',
+                buttons: [
+                    ['<button>Yes</button>', function (instance, toast) {
+                        debugger;
+
+                        result = GetJsonFromApi("/VendorEventsData/Delete?vendorEventId=" + id);
+
+
+                        if (result) {
+                            ToastSuccess('Deleted Sucessfully.');
+                            dataTable.ajax.reload();
+                        }
+                        else {
+                            ToastError("Error ocuured While doing operation")
+                        }
+
+                        instance.hide({
+                            transitionOut: 'fadeOutDown',
+
+                        }, toast, 'buttonName');
+
+
+                    }, true],
+                    ['<button>No</button>', function (instance, toast) {
+                        instance.hide({
+                            transitionOut: 'fadeOutDown',
+
+                        }, toast, 'buttonName');
+
+                    }]
+                ],
+
             });
         }
     </script>

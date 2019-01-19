@@ -56,5 +56,11 @@ namespace RBACv3.Controllers
         {
             return await _vendorRepo.GetReport(vCode);
         }
+
+        [HttpPost]
+        public async Task<bool> Delete(int VendorId)
+        {
+            return await _vendorRepo.Delete(VendorId);
+        }
     }
 }

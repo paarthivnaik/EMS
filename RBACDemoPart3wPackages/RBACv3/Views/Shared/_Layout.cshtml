@@ -53,7 +53,7 @@
     </div>
     <!-- Popup Code -->
     <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-md">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
             </div>
         </div>
@@ -77,6 +77,10 @@
           e.preventDefault();
           $(this).attr('data-target', '#modal-container');
           $(this).attr('data-toggle', 'modal');
+      });
+
+      $('#modal-container').on('hidden.bs.modal', function () {
+          $(this).removeData('bs.modal');
       });
   </script>
 </body>

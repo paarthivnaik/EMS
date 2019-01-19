@@ -24,5 +24,6 @@ namespace RBACv3.Controllers
             var result = await _repo.GetById(eventInfoId);
             return result;
         }
+        
     }
 }

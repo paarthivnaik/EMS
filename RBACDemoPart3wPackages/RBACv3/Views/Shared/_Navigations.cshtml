@@ -70,13 +70,23 @@
         </li>
         <li id="left-sidebar-menu-tables" class="treeview">
             <a href="#">
-                <i class="fa fa-users"></i> <span>Employees & Vendors</span>
+                <i class="fa fa-users"></i> <span>Employees</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li id="left-sidebar-menu-tables-simple"><a href="@Url.Action("Manage", "Employee")"><i class="fa fa-user-plus"></i>Employees</a></li>
-                <li id="left-sidebar-menu-tables-data"><a href="@Url.Action("Manage", "Vendors")"><i class="fa fa-user-plus "></i>Vendors</a></li>
                 <li id="left-sidebar-menu-tables-data"><a href="@Url.Action("Manage", "Salaries")"><i class="fa fa-money"></i>PayRoll</a></li>
+            </ul>
+        </li>
+        <li id="left-sidebar-menu-tables" class="treeview">
+            <a href="#">
+                <i class="fa fa-users"></i> <span>Vendors</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li id="left-sidebar-menu-tables-simple"><a href="@Url.Action("Manage", "Vendors")"><i class="fa fa-user-plus"></i>vendor</a></li>
+                <li id="left-sidebar-menu-tables-data"><a href="@Url.Action("Manage", "Vendors")"><i class="fa fa-user-plus "></i>VendorEvents</a></li>
+                <li id="left-sidebar-menu-tables-data"><a href="@Url.Action("Manage", "Salaries")"><i class="fa fa-money"></i>Payments</a></li>
             </ul>
         </li>
         <li id="left-sidebar-menu-tables" class="treeview">

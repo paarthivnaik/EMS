@@ -25,5 +25,10 @@ namespace RBACv3.Controllers
         {
             return View();
         }
+        public ActionResult VendorAssociatedEventEdit(long? vendorEventId)
+        {
+            ViewBag.vendorEventId = vendorEventId;
+            return PartialView("_VendorAssociatedEventEdit");
+        }
     }
 }

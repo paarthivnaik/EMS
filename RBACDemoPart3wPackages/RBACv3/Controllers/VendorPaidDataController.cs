@@ -33,5 +33,11 @@ namespace RBACv3.Controllers
             var result = await _vendorRepo.GetById(VendorEventID);
             return result;
         }
+        [HttpGet]
+        public async Task<object> GetByIdEdit(long VendorAmmountPaidID)
+        {
+            var result = await _vendorRepo.GetByIdEdit(VendorAmmountPaidID);
+            return result;
+        }
     }
 }

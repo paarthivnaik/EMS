@@ -46,5 +46,12 @@ namespace RBACv3.Controllers
             var result = await _empRepo.GetByEmpId(employeeId);
             return result;
         }
+
+
+        [HttpPost]
+        public async Task<bool> Delete(int employeeId)
+        {
+            return await _empRepo.Delete(employeeId);
+        }
     }
 }

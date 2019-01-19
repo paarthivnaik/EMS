@@ -195,7 +195,15 @@ namespace Events.Repo.VendorEventsRep
                                       a.VendorEventID,
                                       a.VendorID,
                                       a.EventInfoIDValue,
-                                      a.EventInfoID
+                                      a.EventInfoID,
+                                      a.ProgramDate,
+                                      a.Ammmount,
+                                      a.CreatedBy,
+                                      a.CreatedOn,
+                                      a.ModifiedBy,
+                                      a.ModifiedOn,
+                                      a.Status
+                                      
                                   }).FirstOrDefaultAsync();
                     return resObj;
                 }
