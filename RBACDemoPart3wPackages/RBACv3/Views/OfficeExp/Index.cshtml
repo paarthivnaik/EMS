@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Office Expenses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<br/>
+<a class="btn btn-success" style="margin-bottom:10px" href="/OfficeExp/New"><i class="fa fa-plus"></i> Add New</a>
+<a class="btn btn-success" style="margin-bottom:10px" href="/OfficeExp/New"><i class="fa fa-plus"></i>Reports</a>
+<br/>
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Manage Expenses</h3>
+    </div>
+    <div class="box-body">
+        <table id="employeeTable" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Expense RefID</th>
+                    <th>Particular</th>
+                    <th>BillRef No</th>
+                    <th>Ammount</th>
+                    <th>SubmissionDate</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts{
+
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () {
+            dataTable =  $("#employeeTable").DataTable({
+                "ajax": {
+                    "url": "/api/OfficeExpData/GetAll",
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""                   
+                },
+                "columns": [
+                    { "data": "ExpenseRefID" },
+                    { "data": "ParticularValue" },
+                    { "data": "BillRefNo" },
+                    { "data": "Ammount" },
+                    { "data": "SubmissionDate", 'type': 'date-dd-mmm-yyyy', },
+                    {"data": "ExpenseID", "render": function (data) {
+                        return "<a class='btn btn-default btn-sm' href='@Url.Action("Edit", "OfficeExp")?keyId=" + data + "'><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a>";
+                    },
+                        "orderable": false,
+                        "searchable":false,
+                        "width":"150px"
+                    }
+
+                ],
+                "language": {
+
+                    "emptyTable" : "No data found, Please click on <b>Add New</b> Button"
+                }
+            });
+        });
+
+     
+
+      
+
+        function Delete(id) {
+          
+            //////////////////////
+                iziToast.warning({
+                    title: 'Delete Warning!',
+                    message: 'Are you sure you want to Delete?',
+                    timeout: false,
+                    overlay: true,
+                    color: 'yellow',
+                    position: 'center',
+                    buttons: [
+                        ['<button>Yes</button>', function (instance, toast) {
+                            debugger;
+                           
+                            result = GetJsonFromApi("/OfficeExpData/Delete?expenseId=" + id);
+                            
+                            
+                            if (result) {
+                                ToastSuccess('Deleted Sucessfully.');
+                                dataTable.ajax.reload();
+                            }
+                            else {
+                                ToastError("Error ocuured While doing operation")
+                            }
+
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+
+                        }, true],
+                        ['<button>No</button>', function (instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+                        }]
+                    ],
+
+                });
+        }
+    </script>
+}
+

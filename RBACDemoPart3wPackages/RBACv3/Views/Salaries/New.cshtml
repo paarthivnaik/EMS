@@ -1,0 +1,278 @@
+﻿@{
+    ViewBag.Title = "Create an Expense";
+}
+
+<!-- /.row -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title"><strong>Expenses</strong> </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form id="expenseForm">
+                    <div class="row" data-role="createExp-sec">
+
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div data-role="basicData-sec">
+                                    <input type="hidden" data-attr="EmployeeID" />
+                                    <div class="form-group col-lg-6">
+                                        <strong class="m-b-xs">Employee Code</strong>
+                                        <div class="input-group m-b">
+                                            <i class="fa fa-hashtag input-group-addon"></i>
+                                            <input type="text" id="EmployeeCode" class="form-control" placeholder="Employee Code" name="Employee Code" data-attr="EmployeeCode" readonly>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <strong class="m-b-xs">Employee Name</strong>
+                                        <div class="input-group m-b">
+                                            <i class="fa fa-user input-group-addon"></i>
+                                            <input type="text" id="FirstName" class="form-control" placeholder="Employee Name" name="FirstName" data-attr="FirstName" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">*Paid Month</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-calendar input-group-addon"></i>
+                                        <input type="text" id="PaidMonth" class="form-control datepicker" placeholder="Month of Paid" name="PaidMonth" data-attr="PaidMonth" data-valt="required">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">*Salary Ammount</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-money input-group-addon"></i>
+                                        <input type="text" placeholder="Salary Ammount" class="form-control" data-attr="Salary" id="Salary" name="Salary" data-valt="required" onkeypress="return isNumberKeyDecimal(event, 'Salary')">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">Incentives</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-money input-group-addon"></i>
+                                        <input type="text" placeholder="Incentives Ammount" class="form-control" data-attr="Incentives" id="Incentives" name="Incentives" data-valt="required" onkeypress="return isNumberKeyDecimal(event, 'Incentives')">
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">Bonous</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-money input-group-addon"></i>
+                                        <input type="text" placeholder="Bonous Ammount" class="form-control" data-attr="Bonous" id="Bonous" name="Bonous" data-valt="required" onkeypress="return isNumberKeyDecimal(event, 'Bonous')">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-12">
+                                    <strong class="m-b-xs">Description</strong>
+
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-pencil input-group-addon"></i>
+                                        <input type="text" placeholder="Description" class="form-control" data-attr="Description" id="Description" name="Description">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <section data-role="mandatory-sec">
+                            <input type="hidden" data-attr="SalaryPaidID" id="KeyId" value="0" />
+
+                            <input type="hidden" data-attr="CreatedBy" value="0" />
+                            <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
+                            <input type="hidden" data-attr="ModifiedBy" />
+                            <input type="hidden" data-attr="ModifiedOn" />
+                            <input type="hidden" data-attr="Status" value="true" />
+
+                        </section>
+                    </div>
+                    <!-- /.row -->
+                </form>
+            </div>
+            <div class="box-footer clearfix text-center">
+                <button id="saveEvent" class="btn btn-sm btn-info btn-flat"><strong><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</strong></button>
+                <a href="/Salaries/Manage" class="btn btn-sm btn-warning btn-flat"><strong><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</strong></a>
+            </div>
+        </div>
+        <!-- /.box -->
+        <div id="ItemCostHistory">
+        </div>
+    </div>
+
+</div>
+<!-- /.row -->
+@section Scripts{
+    <script src="~/Scripts/util.js"></script>
+    <script>
+        $(document).ready(function () {
+            BindLELV('Particulars');
+            debugger;
+            var empId = GetQueryStringValues(window.location.href, 'keyId');
+            bind("/api/EmployeeData/GetByEmpId?employeeId=" + empId, 'basicData-sec');
+            itemCostHistory(empId);
+            //Date picker
+            var mode = '';
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
+            onPaste('Ammount');
+            $('#saveEvent').click(function () {
+                if (displayvalidation('createExp-sec')) {
+                    if ($('#KeyId').val() > 0) {
+                        mode = 'Update';
+                    }
+                    else {
+                        mode = 'Insert';
+                    }
+                    var resObj = post("createExp-sec", 'SalariesData/Save', mode);
+                    if (resObj > 0) {
+
+                        $('#KeyId').val(resObj);
+                        itemCostHistory(empId);
+
+                    }
+
+                }
+            });
+            $('#saveandNew').click(function () {
+                if (displayvalidation('createExp-sec')) {
+                    if ($('#KeyId').val() > 0) {
+
+                        mode = 'UpdateNew';
+                    }
+                    else {
+                        mode = 'InsertNew';
+                    }
+                    var resObj = post("createExp-sec", 'SalariesData/Save', mode);
+                    if (resObj > 0) {
+                        /* Single line Reset function executes on click of Reset Button */
+                        $('#KeyId').val(resObj);
+
+                    }
+                }
+            });
+        })
+        var Itemtempdata = [];
+
+        // var Total = 0.0;
+        var tempSum = 0.0;
+        var StartDate = null;
+        var EndDate = null;
+        function itemCostHistory(empId) {
+
+            _.templateSettings.variable = "ml";
+            var Itemtemplate1 = _.template($("#CostItemtempt").html());
+            var expData = GetJsonFromApi('/SalariesData/GetByEmpId?employeeId=' + empId);
+            debugger;
+            for (var i = 0; i < expData.length; i++) {
+                temp = new Object();
+                temp.SNO = i + 1;
+                temp.SalaryPaidID = expData[i].SalaryPaidID;
+                temp.EmployeeCode = expData[i].EmployeeCode;
+                temp.PaidMonth = expData[i].PaidMonth;
+                temp.Salary = expData[i].Salary;
+                temp.Incentives = expData[i].Incentives;
+                temp.Bonous = expData[i].Bonous;
+                temp.Description = expData[i].Description;
+                temp.CreateDate = expData[i].CreateDate;
+
+                if (temp.PaidMonth != null) {
+                    var d = new Date(temp.PaidMonth.split('T')[0]);
+                    var date = d.getDate() <= 9 ? ('0' + d.getDate()) : d.getDate();
+                    var month = d.getMonth() < 9 ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1);
+                    var year = d.getFullYear();
+                    temp.PaidMonth = date + "/" + month + "/" + year;
+                }
+                tempSum = parseFloat(temp.Incentives) + parseFloat(temp.Salary) + parseFloat(temp.Bonous);
+                temp.Total = tempSum;
+                Itemtempdata[i] = temp;
+
+            }
+            $("#ItemCostHistory").html(Itemtemplate1(Itemtempdata));
+
+
+
+
+        };
+    </script>
+
+
+    <script type="text/template" id="CostItemtempt">
+
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Salary Recap</h3>
+
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default" id="pdf"><i class="fa fa-file-pdf-o"></i> PDF</button>
+                        </div>
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-file-excel-o"></i> Excel</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <div class="" style="margin-top:0px !important;">
+                    <table id="tblAverageRating" class=" example table table-striped table-bordered table-hover dataTable no-footer" width="100%" role="grid" style="width: 100%;">
+                        <thead>
+                            <tr role="row" style="background-color: #6d747e54 !important;color:#2f2c2c;">
+                                <th style="text-align:center">S.No </th>
+                                <th style="text-align:center">EmployeeCode </th>
+                                <th style="text-align:center">Month</th>
+                                <th style="text-align:center">Salary</th>
+                                <th style="text-align:center">Incentives</th>
+                                <th style="text-align:center">Bonous </th>
+                                <th style="text-align:center">Total </th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% _.each( ml, function(listCostHist){%>
+                            <tr>
+                                <td style="text-align:center"><%- listCostHist.SNO %></td>
+                                <td style="text-align:center"><%- listCostHist.EmployeeCode %></td>
+                                <td style="text-align:center"><%- listCostHist.PaidMonth %></td>
+                                <td style="text-align:center"><%- listCostHist.Salary %></td>
+                                <td style="text-align:center"><%- listCostHist.Incentives %></td>
+                                <td style="text-align:center"><%- listCostHist.Bonous %></td>
+                                <td style="text-align:center"><b><%- listCostHist.Total %></b></td>
+
+                            </tr>
+
+                            <% }); %>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+
+
+
+    </script>
+}
+

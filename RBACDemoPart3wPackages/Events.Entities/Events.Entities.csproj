@@ -48,18 +48,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\EmployeeLeave.cs" />
     <Compile Include="Models\EventInfo.cs" />
+    <Compile Include="Models\EventItem.cs" />
+    <Compile Include="Models\Expens.cs" />
+    <Compile Include="Models\Flat\EventItemsFlat.cs" />
     <Compile Include="Models\Flat\ListValueFlat.cs" />
     <Compile Include="Models\ListEntriesCustom.cs" />
     <Compile Include="Models\ListEntry.cs" />
     <Compile Include="Models\ListValue.cs" />
     <Compile Include="Models\ListValuesCustom.cs" />
+    <Compile Include="Models\Mapping\EmployeeLeaveMap.cs" />
+    <Compile Include="Models\Mapping\EmployeeMap.cs" />
     <Compile Include="Models\Mapping\EventInfoMap.cs" />
+    <Compile Include="Models\Mapping\EventItemMap.cs" />
+    <Compile Include="Models\Mapping\ExpensMap.cs" />
     <Compile Include="Models\Mapping\ListEntriesCustomMap.cs" />
     <Compile Include="Models\Mapping\ListEntryMap.cs" />
     <Compile Include="Models\Mapping\ListValueMap.cs" />
     <Compile Include="Models\Mapping\ListValuesCustomMap.cs" />
+    <Compile Include="Models\Mapping\SalaryPaidMap.cs" />
+    <Compile Include="Models\Mapping\VendorAmmountPaidMap.cs" />
+    <Compile Include="Models\Mapping\VendorEventMap.cs" />
+    <Compile Include="Models\Mapping\VendorMap.cs" />
     <Compile Include="Models\RBACV1Context.cs" />
+    <Compile Include="Models\SalaryPaid.cs" />
+    <Compile Include="Models\Vendor.cs" />
+    <Compile Include="Models\VendorAmmountPaid.cs" />
+    <Compile Include="Models\VendorEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

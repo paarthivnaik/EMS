@@ -6,14 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>WebApplication</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-
+   
     @Styles.Render("~/AdminLTE/plugins/font-awesome/css")
     @Styles.Render("~/AdminLTE/plugins/ionicons/css")
     @Styles.Render("~/AdminLTE/bootstrap/css")
+    @Styles.Render("~/AdminLTE/plugins/datatables/css")
+    @Styles.Render("~/AdminLTE/plugins/datepicker/css")
     @Styles.Render("~/AdminLTE/dist/css")
     @Styles.Render("~/AdminLTE/dist/css/skins")
- 
-    
+    @Styles.Render("~/AdminLTE/plugins/Toast/css")
+    @Styles.Render("~/AdminLTE/plugins/datatables/css")
+    <script src="~/Scripts/underscore.min.js"></script>
     <script src="~/Scripts/CustomValidation.js"></script>
     <link href="~/Content/ui/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />
 </head>
@@ -48,16 +51,33 @@
         @Html.Partial("_Footer")
         @Html.Partial("_RightSideTools")
     </div>
-  
+    <!-- Popup Code -->
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
     @Scripts.Render("~/AdminLTE/plugins/jquery/js")
     @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js")
+    @Scripts.Render("~/AdminLTE/plugins/datepicker/js")
     @RenderSection("menu", required: false)
     @Scripts.Render("~/AdminLTE/bootstrap/js")
+    @Scripts.Render("~/AdminLTE/plugins/datatables/js")
     @Scripts.Render("~/AdminLTE/plugins/slimscroll/js") 
     @Scripts.Render("~/AdminLTE/plugins/fastclick/js")
     @Scripts.Render("~/Scripts/Shared/_Layout")
     @Scripts.Render("~/AdminLTE/dist/js")
-  
+    @Scripts.Render("~/AdminLTE/plugins/Toast/js")
+    @Scripts.Render("~/Util/js")
+    @Scripts.Render("~/AdminLTE/plugins/datatables/js")
     @RenderSection("scripts", required: false)
+  <script>
+      $('body').on('click', '.modal-link', function (e) {
+          e.preventDefault();
+          $(this).attr('data-target', '#modal-container');
+          $(this).attr('data-toggle', 'modal');
+      });
+  </script>
 </body>
 </html>

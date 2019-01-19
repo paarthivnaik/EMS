@@ -49,6 +49,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseContext.cs" />
+    <Compile Include="EmployeeRep\EmployeeContext.cs" />
+    <Compile Include="EmployeeRep\EmployeeRepo.cs" />
+    <Compile Include="EmployeeRep\IEmployeeRepo.cs" />
+    <Compile Include="EventItemsRep\EventItemRepo.cs" />
+    <Compile Include="EventItemsRep\EventItemsContext.cs" />
+    <Compile Include="EventItemsRep\IEventItemRepo.cs" />
     <Compile Include="EventsRepo\EventsContext.cs" />
     <Compile Include="EventsRepo\EventsRepo.cs" />
     <Compile Include="EventsRepo\IEventsRepo.cs" />
@@ -58,7 +64,19 @@
     <Compile Include="ListValueRep\IListValueRepo.cs" />
     <Compile Include="ListValueRep\ListValueContext.cs" />
     <Compile Include="ListValueRep\ListValueRepo.cs" />
+    <Compile Include="OfficeExpenses\IOfficeExpensesRepo.cs" />
+    <Compile Include="OfficeExpenses\OfficeExpensesContext.cs" />
+    <Compile Include="OfficeExpenses\OfficeExpensesRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalaryRep\ISalaryRepo.cs" />
+    <Compile Include="SalaryRep\SalaryRepo.cs" />
+    <Compile Include="VendorEventAmmountPaid\IVendorEventAmmountPaidRepo.cs" />
+    <Compile Include="VendorEventAmmountPaid\VendorEventAmmountPaidRepo.cs" />
+    <Compile Include="VendorEventsRep\IVendorEventsRepo.cs" />
+    <Compile Include="VendorEventsRep\VendorEventsRepo.cs" />
+    <Compile Include="VendorsRep\IVendorRepo.cs" />
+    <Compile Include="VendorsRep\VendorRepo.cs" />
+    <Compile Include="VendorsRep\VendorsContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

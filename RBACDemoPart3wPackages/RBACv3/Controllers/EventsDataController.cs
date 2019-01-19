@@ -35,7 +35,7 @@ namespace RBACv3.Controllers
              var result = await _eventRepo.GetById(eventInfoId);
              return result;
          }
-         [Route("api/Events")]
+        
          [HttpGet]
          public async Task<List<EventInfo>> GetAll()
          {

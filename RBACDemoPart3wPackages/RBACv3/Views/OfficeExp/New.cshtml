@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Create an Expense";
+}
+
+<!-- /.row -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title"><strong>Expenses</strong> </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form id="expenseForm">
+                    <div class="row" data-role="createExp-sec">
+
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">*Particular</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-delicious input-group-addon"></i>
+                                        <select class="form-control Particulars" id="Particular" name="Particular" data-attr="Particular" data-listentry="" data-valt="required">
+                                            <option value="0">-- Select --</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">*Bill No</strong>
+
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-list-ol input-group-addon"></i>
+                                        <input type="text" placeholder="Bill Reference No" class="form-control" data-attr="BillRefNo" id="BillRefNo" name="BillRefNo" data-valt="required">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">*Bill Ammount</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-money input-group-addon"></i>
+                                        <input type="text" placeholder="Bill Ammount" class="form-control" data-attr="Ammount" id="Ammount" name="Ammount" data-valt="required" onkeypress="return isNumberKeyDecimal(event, 'Ammount')">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">*Expense Month</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-calendar input-group-addon"></i>
+                                        <input type="text" id="ExpenseDate" class="form-control datepicker" placeholder="Expense to the month" name="ExpenseDate" data-attr="ExpenseDate" data-valt="required">
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">*Bill Submited Date</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-calendar input-group-addon"></i>
+                                        <input type="text" id="SubmissionDate" class="form-control datepicker" placeholder="Bill Submition Date" name="SubmissionDate" data-attr="SubmissionDate" data-valt="required">
+
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <strong class="m-b-xs">Description</strong>
+
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-pencil input-group-addon"></i>
+                                        <input type="text" placeholder="Description" class="form-control" data-attr="Description" id="Description" name="Description">
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <section data-role="mandatory-sec">
+                            <input type="hidden" data-attr="ExpenseID" id="KeyId" value="0" />
+                            <input type="hidden" data-attr="ExpenseRefID" />
+                            <input type="hidden" data-attr="CreatedBy" value="0" />
+                            <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
+                            <input type="hidden" data-attr="ModifiedBy" />
+                            <input type="hidden" data-attr="ModifiedOn" />
+                            <input type="hidden" data-attr="Status" value="true" />
+
+                        </section>
+                    </div>
+                    <!-- /.row -->
+                </form>
+            </div>
+            <div class="box-footer clearfix text-center">
+                <button id="saveEvent" class="btn btn-sm btn-info btn-flat"><strong><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</strong></button>
+                <button id="saveandNew" class="btn btn-sm btn-info btn-flat"><strong><i class="fa fa-floppy-o" aria-hidden="true"></i> Save&New</strong></button>
+                <a href="/OfficeExp/Index" class="btn btn-sm btn-warning btn-flat"><strong><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</strong></a>
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+
+</div>
+<!-- /.row -->
+@section Scripts{
+    <script src="~/Scripts/util.js"></script>
+    <script>
+        $(document).ready(function () {
+            BindLELV('Particulars');
+            //Date picker
+            var mode='';
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
+            onPaste('Ammount');
+            $('#saveEvent').click(function () {
+                if (displayvalidation('createExp-sec')) {
+                    if ($('#KeyId').val() > 0) {
+                        mode = 'Update';
+                    }
+                    else {
+                        mode = 'Insert';
+                    }
+                    var resObj = post("createExp-sec", 'OfficeExpData/Save', mode);
+                    if(resObj>0)
+                    {
+                        $('#KeyId').val(resObj);
+                    }
+                    
+                }
+            });
+            $('#saveandNew').click(function () {
+                if (displayvalidation('createExp-sec')) {
+                    if ($('#KeyId').val() > 0) {
+
+                        mode = 'UpdateNew';
+                    }
+                    else {
+                        mode = 'InsertNew';
+                    }
+                    var resObj = post("createExp-sec", 'OfficeExpData/Save', mode);
+                    if(resObj>0)
+                    {
+                        /* Single line Reset function executes on click of Reset Button */
+                        $('#KeyId').val(resObj);
+                       
+                    }
+                }
+            });
+        })
+
+    </script>
+}
+
