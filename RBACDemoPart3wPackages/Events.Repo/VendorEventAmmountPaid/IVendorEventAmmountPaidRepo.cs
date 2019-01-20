@@ -14,5 +14,6 @@ namespace Events.Repo.VendorEventAmmountPaid
         Task<object> GetById(long vendorEventID);
         Task<object> GetByIdEdit(long VendorAmmountPaidID);
         Task<List<VendorAmmountPaid>> GetAll();
+        Task<bool> Delete(long vendorAmmountPaidId);
     }
 }

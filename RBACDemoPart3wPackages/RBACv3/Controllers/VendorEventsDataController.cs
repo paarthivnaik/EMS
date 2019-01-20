@@ -41,7 +41,7 @@ namespace RBACv3.Controllers
         }
 
         [HttpGet]
-        public async Task<List<VendorEvent>> GetAll()
+        public async Task<object> GetAll()
         {
             var result = await _vendorRepo.GetAll();
             return result;

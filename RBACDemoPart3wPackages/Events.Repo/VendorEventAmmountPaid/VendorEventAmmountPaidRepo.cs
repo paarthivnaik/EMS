@@ -157,5 +157,50 @@ namespace Events.Repo.VendorEventAmmountPaid
                 return null;
             }
         }
+
+
+        public async Task<bool> Delete(long vendorAmmountPaidId)
+        {
+            try
+            {
+                using (_context = new VendorsContext())
+                {
+                    var deleventEntries = new Events.Entities.Models.VendorAmmountPaid()
+                    {
+
+                        VendorAmmountPaidID = vendorAmmountPaidId,
+                        Status = false,
+                        VendorEventID = 1,
+                         PaidDate = DateTime.Now,
+                         AmmountPaid=200,
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        
+                    };
+                    _context.VendorAmmountPaids.Attach(deleventEntries);
+                    _context.Entry(deleventEntries).Property(x => x.Status).IsModified = true;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+                return false;
+            }
+            catch (Exception exception)
+            {
+
+                return false;
+            }
+        }
     }
 }

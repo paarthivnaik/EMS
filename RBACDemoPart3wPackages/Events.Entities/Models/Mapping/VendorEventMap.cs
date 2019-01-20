@@ -28,6 +28,7 @@ namespace Events.Entities.Models.Mapping
           this.Property(t => t.ModifiedBy).HasColumnName("ModifiedBy");
           this.Property(t => t.ModifiedOn).HasColumnName("ModifiedOn");
           this.Property(t => t.EventInfoIDValue).HasColumnName("EventInfoIDValue");
+          this.Property(t => t.IsSettled).HasColumnName("IsSettled");
 
 
       }

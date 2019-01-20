@@ -39,5 +39,11 @@ namespace RBACv3.Controllers
             var result = await _vendorRepo.GetByIdEdit(VendorAmmountPaidID);
             return result;
         }
+
+        [HttpPost]
+        public async Task<bool> Delete(int vendorAmmountPaidId)
+        {
+            return await _vendorRepo.Delete(vendorAmmountPaidId);
+        }
     }
 }

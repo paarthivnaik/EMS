@@ -44,7 +44,14 @@
                         { "data": "EmployeeCode" },
                         { "data": "FirstName" },
                         { "data": "MobileNumber" },
-                        { "data": "DOJ" },
+                        {
+                            "data": "DOJ", render: function (data, type, row) {
+                                if (type === "sort" || type === "type") {
+                                    return data;
+                                }
+                                return moment(data).format("DD-MM-YYYY");
+                            }
+                        },
                         { "data": "PackageAmmount" },
                         {
                             "data": "EmployeeID", "render": function (data) {

@@ -7,8 +7,9 @@
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title"><strong>Event Pay's</strong> </h3>
+                <h3 class="box-title"><strong>Event Pay's</strong></h3>
                 <div class="box-tools pull-right">
+                  
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus"></i>
                     </button>
@@ -22,7 +23,7 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <div data-role="Basicdata-sec">
-                                <div class="form-group col-lg-4">
+                                <div class="form-group col-lg-3">
                                     <strong class="m-b-xs">*Event Code</strong>
 
                                     <div class="input-group m-b">
@@ -30,12 +31,20 @@
                                         <input type="text" id="EventInfoIDValue" class="form-control" placeholder="Event Code" name="EventInfoIDValue" data-attr="EventInfoIDValue" data-valt="required" maxlength="200" readonly>
                                     </div>
                                 </div>
+                                <div class="form-group col-lg-3">
+                                    <strong class="m-b-xs">*Vendor Code</strong>
+
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-info input-group-addon"></i>
+                                        <input type="text" id="VendorCode" class="form-control" placeholder="Vendor Code" name="VendorCode" data-attr="VendorCode" data-valt="required" maxlength="200" readonly>
+                                    </div>
+                                </div>
                                 <input type="hidden" data-attr="VendorEventID" id="mainId"/>
-                                <input type="hidden" data-attr="VendorID" id="VendorID" />
+                                <input type="hidden" data-attr="Ammmount" id="Totalammount" />
                             </div>
                           
 
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-3">
                                 <strong class="m-b-xs">*Paid Date</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
@@ -43,7 +52,7 @@
 
                                 </div>
                             </div>
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-3">
                                 <strong class="m-b-xs">*Ammount Pable</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-money input-group-addon"></i>
@@ -70,8 +79,8 @@
                 <!-- /.row -->
             </div>
             <div class="box-footer clearfix text-center">
-                <button id="btnAmmount" class="btn btn-sm btn-info btn-flat">Save</button>
-                <button onclick="newDoc()" class="btn btn-sm btn-default btn-flat" id="btnBack">Back</button>
+                <a id="btnAmmount" class="btn btn-sm btn-info btn-flat">Save</a>
+                <a class="btn btn-sm btn-default btn-flat" id="btnBack" href="/VendorEvents/Manage">Back</a>
             </div>
         </div>
     </div>
@@ -92,10 +101,10 @@
                 </div>
             </div>
             <div class="box-body">
-                <table id="employeeTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+                <table id="ammountPaidTable" class="table table-bordered table-hover display nowrap" style="width:100%">
                     <thead>
                         <tr>
-                           
+                            <th>Bill No</th>
                             <th>Program Date</th>
                             <th>Ammmount</th>
                             <th></th>
@@ -110,7 +119,9 @@
 </div>
 @section scripts{
 <script>
+    var dataTable;
     $(document).ready(function () {
+      
         $('.datepicker').datepicker({
             autoclose: true,
             dateFormat: 'dd-mm-yy'
@@ -131,18 +142,15 @@
             debugger;
             if (resObj > 0) {
                 $('#KeyId').val(resObj);
-                $('#employeeTable').DataTable().ajax.reload();
-
+               // associatedEvents($('#KeyId').val())
+                dataTable.ajax.url("/api/VendorPaidData/GetById?VendorEventID=" + $('#mainId').val()).load();
             }
 
         }
     });
 
-    function newDoc() {
-        window.location.assign("/Vendors/Edit?keyId=" + $('#VendorID').val())
-    }
     function associatedEvents(vendorid) {
-        var dataTable = $("#employeeTable").DataTable({
+         dataTable = $("#ammountPaidTable").DataTable({
             "scrollX": true,
             "ajax": {
                 "url": "/api/VendorPaidData/GetById?VendorEventID=" + vendorid,
@@ -151,7 +159,15 @@
                 "dataSrc": ""
             },
             "columns": [
-                 { "data": "PaidDate" },
+                 { "data": "BillNo" },
+                 {
+                     "data": "PaidDate", render: function (data, type, row) {
+                         if (type === "sort" || type === "type") {
+                             return data;
+                         }
+                         return moment(data).format("DD-MM-YYYY");
+                     }
+                 },
                 { "data": "AmmountPaid" },
 
                 {
@@ -166,8 +182,51 @@
             ],
             "language": {
 
-                "emptyTable": "No data found, Please click on <b>Add New</b> Button"
+                "emptyTable": "No data found."
             }
+        });
+    }
+    function Delete(id) {
+
+        //////////////////////
+        iziToast.warning({
+            title: 'Delete Warning!',
+            message: 'Are you sure you want to Delete?',
+            timeout: false,
+            overlay: true,
+            color: 'yellow',
+            position: 'center',
+            buttons: [
+                ['<button>Yes</button>', function (instance, toast) {
+                    debugger;
+
+                    result = GetJsonFromApi("/VendorPaidData/Delete?vendorAmmountPaidId=" + id);
+
+
+                    if (result) {
+                        ToastSuccess('Deleted Sucessfully.');
+                        dataTable.ajax.reload();
+                    }
+                    else {
+                        ToastError("Error ocuured While doing operation")
+                    }
+
+                    instance.hide({
+                        transitionOut: 'fadeOutDown',
+
+                    }, toast, 'buttonName');
+
+
+                }, true],
+                ['<button>No</button>', function (instance, toast) {
+                    instance.hide({
+                        transitionOut: 'fadeOutDown',
+
+                    }, toast, 'buttonName');
+
+                }]
+            ],
+
         });
     }
 </script>

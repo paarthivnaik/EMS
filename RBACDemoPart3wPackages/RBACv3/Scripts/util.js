@@ -62,10 +62,11 @@ function post(role, route, mode) {
         success: function (data) {
             resultID = data;
             var res = data;
+            debugger;
             if (resultID.hasOwnProperty("m_Item1")) {
                 res = resultID.m_Item1;
             }
-            if (res > 0) {
+            if (res[0] > 0) {
                 if (mode === 'Insert') {
                     ToastSuccess('Your Information Saved Successfully.')
                 }
@@ -2750,6 +2751,35 @@ function BindEvents(Eventdata) {
                 });
             $("#" + Eventdata).empty();
             $("#" + Eventdata).append(optionhtml);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            if (errorThrown == 'Unauthorized') {
+                NotAuthorized();
+            }
+            else {
+                ErrorAlert(' Please contact administrator.');
+            }
+            resultID = 0;
+        }
+    });
+}
+
+function BindVendors(Vendordata) {
+    $.ajax({
+        type: "Get",
+        contentType: "application/json; charset=utf-8",
+        url: "/api/VendorData/GetAll",
+        data: "{}",
+        async: false,
+        dataType: "json",
+        success: function (data) {
+            var optionhtml = '<option value="0">---Select---</option>';
+            $.each(data,
+                function (key, value) {
+                    optionhtml += '<option value="' + data[key].VendorID + '">' + data[key].VendorCode + '</option>';
+                });
+            $("#" + Vendordata).empty();
+            $("#" + Vendordata).append(optionhtml);
         },
         error: function (xhr, textStatus, errorThrown) {
             if (errorThrown == 'Unauthorized') {

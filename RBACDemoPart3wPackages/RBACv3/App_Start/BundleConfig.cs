@@ -291,10 +291,21 @@ namespace RBACv3
             // plugins | datatables
             bundles.Add(new ScriptBundle("~/AdminLTE/plugins/datatables/js").Include(
                                          "~/AdminLTE/plugins/datatables/js/jquery.dataTables.min.js",
-                                         "~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js"));
+                                         //"~/AdminLTE/plugins/datatables/js/dataTables.bootstrap.min.js",
+                                          "~/AdminLTE/plugins/datatables/pdfmake.min.js",
+                                          "~/AdminLTE/plugins/datatables/dataTables.buttons.min.js",
+                                           "~/AdminLTE/plugins/datatables/buttons.flash.min.js",
+                                            "~/AdminLTE/plugins/datatables/vfs_fonts.js",
+                                            "~/AdminLTE/plugins/datatables/buttons.html5.min.js",
+                                              "~/AdminLTE/plugins/datatables/buttons.print.min.js"
+                                         ));
 
             bundles.Add(new StyleBundle("~/AdminLTE/plugins/datatables/css").Include(
-                                        "~/AdminLTE/plugins/datatables/css/dataTables.bootstrap.css"));
+                                        //"~/AdminLTE/plugins/datatables/css/dataTables.bootstrap.css",
+                                         "~/AdminLTE/plugins/datatables/css/jquery.dataTables.min.css",
+                                         "~/AdminLTE/plugins/datatables/buttons.dataTables.min.css"
+
+                                        ));
 
             // plugins | datepicker
             bundles.Add(new ScriptBundle("~/AdminLTE/plugins/datepicker/js").Include(

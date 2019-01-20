@@ -88,7 +88,7 @@
             if (resObj > 0) {
                 $('#SubKeyId').val(resObj);
                 //$("#employeeTable").ajax.reload();
-                $('#employeeTable').DataTable().ajax.reload();
+                dataTable.ajax.url("/api/VendorPaidData/GetById?VendorEventID=" + $('#mainId').val()).load();
             }
 
         }

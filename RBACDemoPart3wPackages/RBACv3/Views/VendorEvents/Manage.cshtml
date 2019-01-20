@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Evndor Events Associate";
+}
+
+@*<a class="btn btn-success" style="margin-bottom:10px" href='@Url.Action("New","VendorEvents")'><i class="fa fa-money"></i>Add Vendor to Event</a>*@
+<a id='click_me' class='btn btn-success modal-link' href='/VendorEvents/New' data-toggle='modal' data-backdrop='static'><i class='fa fa-plus'></i>Add Vendor to Event</a>
+<br/>
+<br />
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Vendor Associate Events</h3>
+    </div>
+    <div class="box-body">
+        <table id="VendorEventsTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Vendor Code</th>
+                    <th>Event Cide</th>
+                    <th>Vendor Name</th>
+                    <th>Mobile No</th>
+                    <th>Programe Date</th>
+                    <th> Ammount</th>
+                    <th>Ammount Paid</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+@section scripts{
+
+
+    <script>
+            var Popup, dataTable;
+            $(document).ready(function () {
+                dataTable = $("#VendorEventsTable").DataTable({
+                    "scrollX": true,
+                    "ajax": {
+                        "url": "/api/VendorEventsData/GetAll",
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ""
+                    },
+                    "columns": [
+                        { "data": "VendorCode" },
+                        { "data": "EventInfoIDValue" },
+                        { "data": "FirstName" },
+                        { "data": "MobileNo" },
+                        { "data": "ProgramDate",render: function (data, type, row) {
+                            if (type === "sort" || type === "type") {
+                                return data;
+                            }
+                            return moment(data).format("DD-MM-YYYY");
+                        } },
+                        { "data": "Ammmount" },
+                        { "data": "TotalPaidAmmount" },
+                        {
+                            "data": "VendorEventID", "render": function (data) {
+                                return "<a id='click_me' class='btn btn-primary btn-sm modal-link' href='/VendorEvents/Edit?KeyId=" + data + "'data-toggle='modal' data-backdrop='static'><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a><a class='btn btn-primary btn-sm' title='Pay Ammount to Vendor'style='margin-left:5px' href=/VendorPaid/New?keyId=" + data + "><i class='fa fa-paypal'></i><strong> Pay</strong></a>";
+                            },
+                            "orderable": false,
+                            "searchable": false,
+                            "width": "150px"
+                        }
+
+                    ],
+                    "language": {
+
+                        "emptyTable": "No data found, Please click on <b>Add New</b> Button"
+                    }
+                });
+            });
+
+            function Delete(id) {
+
+                //////////////////////
+                iziToast.warning({
+                    title: 'Delete Warning!',
+                    message: 'Are you sure you want to Delete?',
+                    timeout: false,
+                    overlay: true,
+                    color: 'yellow',
+                    position: 'center',
+                    buttons: [
+                        ['<button>Yes</button>', function (instance, toast) {
+                            debugger;
+
+                            result = GetJsonFromApi("/VendorEventsData/Delete?vendorEventId=" + id);
+
+
+                            if (result) {
+                                ToastSuccess('Deleted Sucessfully.');
+                                dataTable.ajax.reload();
+                            }
+                            else {
+                                ToastError("Error ocuured While doing operation")
+                            }
+
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+
+                        }, true],
+                        ['<button>No</button>', function (instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+                        }]
+                    ],
+
+                });
+            }
+    </script>
+}
+
+
+
+
