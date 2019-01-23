@@ -44,7 +44,14 @@
                         { "data": "EmployeeCode" },
                         { "data": "FirstName" },
                         { "data": "MobileNumber" },
-                        { "data": "DOJ" },
+                        {
+                            "data": "DOJ", render: function (data, type, row) {
+                                if (type === "sort" || type === "type") {
+                                    return data;
+                                }
+                                return moment(data).format("DD-MM-YYYY");
+                            }
+                        },
                         { "data": "PackageAmmount" },
                         {
                             "data": "EmployeeID", "render": function (data) {
@@ -63,69 +70,48 @@
                 });
             });
 
-            function PopupForm(url) {
-                var formDiv = $('<div/>');
-                $.get(url)
-                .done(function (response) {
-                    formDiv.html(response);
-
-                    Popup = formDiv.dialog({
-                        autoOpen: true,
-                        resizable: false,
-                        title: 'Fill Employee Details',
-                        height: 500,
-                        width: 700,
-                        close: function () {
-                            Popup.dialog('destroy').remove();
-                        }
-
-                    });
-                });
-            }
-
-            function SubmitForm(form) {
-                $.validator.unobtrusive.parse(form);
-                if ($(form).valid()) {
-                    $.ajax({
-                        type: "POST",
-                        url: form.action,
-                        data: $(form).serialize(),
-                        success: function (data) {
-                            if (data.success) {
-                                Popup.dialog('close');
-                                dataTable.ajax.reload();
-
-                                $.notify(data.message, {
-                                    globalPosition: "top center",
-                                    className: "success"
-                                })
-
-                            }
-                        }
-                    });
-                }
-                return false;
-            }
-
             function Delete(id) {
-                if (confirm('Are You Sure to Delete this Employee Record ?')) {
-                    $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("Delete","Employee")/' + id,
-                        success: function (data) {
-                            if (data.success) {
+
+                //////////////////////
+                iziToast.warning({
+                    title: 'Delete Warning!',
+                    message: 'Are you sure you want to Delete?',
+                    timeout: false,
+                    overlay: true,
+                    color: 'yellow',
+                    position: 'center',
+                    buttons: [
+                        ['<button>Yes</button>', function (instance, toast) {
+                            debugger;
+
+                            result = GetJsonFromApi("/EmployeeData/Delete?employeeId=" + id);
+
+
+                            if (result) {
+                                ToastSuccess('Deleted Sucessfully.');
                                 dataTable.ajax.reload();
-
-                                $.notify(data.message, {
-                                    globalPosition: "top center",
-                                    className: "success"
-                                })
-
                             }
-                        }
+                            else {
+                                ToastError("Error ocuured While doing operation")
+                            }
 
-                    });
-                }
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+
+                        }, true],
+                        ['<button>No</button>', function (instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+                        }]
+                    ],
+
+                });
             }
     </script>
 }

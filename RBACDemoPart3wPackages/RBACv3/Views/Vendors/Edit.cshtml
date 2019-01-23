@@ -134,118 +134,12 @@
         <!-- /.box -->
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title"><strong>Vendor Events</strong> </h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
-
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="row" data-role="VendorEventcreate-sec">
-
-                    <div class="col-lg-12">
-                        <div class="row">
-
-                            <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">*Event Code</strong>
-
-                                <div class="input-group m-b">
-                                    <i class="fa fa-info input-group-addon"></i>
-                                    <select class="form-control" id="EventCode" name="EventCode" data-attr="EventInfoID" data-listentry="" data-valt="required">
-                                        <option value="0">-- Select --</option>
-
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">*Programe Date</strong>
-                                <div class="input-group m-b">
-                                    <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" id="ProgramDate" class="form-control datepicker" placeholder="Organization Name" name="ProgramDate" data-attr="ProgramDate" data-valt="required" maxlength="200">
-
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">*Program Ammount</strong>
-                                <div class="input-group m-b">
-                                    <i class="fa fa-money input-group-addon"></i>
-                                    <input type="text" placeholder="Ammmount" class="form-control" data-attr="Ammmount" id="Ammmount" name="Ammmount" data-valt="required">
-                                </div>
-                            </div>
-
-
-
-                        </div>
-
-                    </div>
-
-                    <input type="hidden" data-attr="EventVendorID" id="eventVendorId" />
-                    <input type="hidden" data-attr="VendorEventID" id="VendorEventID" />
-                    <input type="hidden" data-attr="CreatedBy" />
-                    <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
-                    <input type="hidden" data-attr="ModifiedBy" />
-                    <input type="hidden" data-attr="ModifiedOn" />
-                    <input type="hidden" data-attr="Status" />
-
-
-                </div>
-                <!-- /.row -->
-            </div>
-            <div class="box-footer clearfix text-center">
-                <button id="saveVendorEvent" class="btn btn-sm btn-info btn-flat">Save</button>
-                <a href="/Vendors/Manage" class="btn btn-sm btn-default btn-flat">Back</a>
-            </div>
-        </div>
-    </div>
-   
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="box  box-primary">
-
-
-            <div class="box-header with-border">
-                <h3 class="box-title"><strong>Events Associated with This Vendor</strong> </h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
-
-                </div>
-            </div>
-            <div class="box-body">
-                <table id="employeeTable" class="table table-bordered table-hover display nowrap" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Event Code</th>
-                            <th>Program Date</th>
-                            <th>Ammmount</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-        
-
-</div>
-
-    <!-- /.col -->
 
 
 <!-- /.row -->
 @section scripts{
     <script>
+        var  dataTable;
         $(document).ready(function () {
             BindLELV('Proof');
             //Date picker
@@ -257,7 +151,6 @@
             var venId = GetQueryStringValues(window.location.href, 'keyId');
             bind("/api/VendorData/GetById?vendorId=" + venId, 'Vendorcreate-sec');
             BindEvents('EventCode');
-            associatedEvents(venId);
         })
         $('#saveVendor').click(function () {
             if (displayvalidation('Vendorcreate-sec')) {
@@ -283,44 +176,13 @@
                 var resObj = post("VendorEventcreate-sec", 'VendorEventsData/Save', 'Insert');
                 if (resObj > 0) {
                     $('#VendorEventID').val(resObj);
-                    associatedEvents($('#KeyId').val())
+                  
+                    dataTable.ajax.url("/api/VendorEventsData/GetById?vendorId=" + $('#KeyId').val()).load();
+                 
                 }
             }
         });
 
-
-
-        function associatedEvents(vendorid)
-        {
-          var  dataTable = $("#employeeTable").DataTable({
-                "scrollX": true,
-                "ajax": {
-                    "url": "/api/VendorEventsData/GetById?vendorId=" + vendorid,
-                    "type": "GET",
-                    "datatype": "json",
-                    "dataSrc": ""
-                },
-                "columns": [
-                    { "data": "EventInfoIDValue" },
-                     { "data": "ProgramDate" },
-                    { "data": "Ammmount" },
-
-                    {
-                        "data": "VendorEventID", "render": function (data) {
-                            return "<a class='btn btn-primary btn-sm' title='Edit this record' href=/VendorPaid/New?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
-                        },
-                        "orderable": false,
-                        "searchable": false,
-                        "width": "150px"
-                    }
-
-                ],
-                "language": {
-
-                    "emptyTable": "No data found, Please click on <b>Add New</b> Button"
-                }
-            });
-        }
     </script>
 }
 

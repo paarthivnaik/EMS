@@ -14,8 +14,9 @@ namespace RBACv3.Controllers
             return View();
         }
 
-        public ActionResult Edit(long? vendorId)
+        public ActionResult Edit(long? vendorAmmountPaidId)
         {
+            ViewBag.vendorAmmountPaidId = vendorAmmountPaidId;
             return PartialView("_Edit");
         }
     }

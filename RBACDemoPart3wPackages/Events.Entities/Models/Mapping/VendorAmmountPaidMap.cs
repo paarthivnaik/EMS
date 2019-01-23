@@ -13,7 +13,9 @@ namespace Events.Entities.Models.Mapping
         {
             // Primary Key
             this.HasKey(t => t.VendorAmmountPaidID);
-
+            // Properties
+            this.Property(t => t.BillNo)
+                .HasMaxLength(10);
             // Properties
             // Table & Column Mappings
             this.ToTable("VendorAmmountPaid");
@@ -26,7 +28,7 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.CreatedOn).HasColumnName("CreatedOn");
             this.Property(t => t.ModifiedBy).HasColumnName("ModifiedBy");
             this.Property(t => t.ModifiedOn).HasColumnName("ModifiedOn");
-
+            this.Property(t => t.BillNo).HasColumnName("BillNo");
            
 
         }

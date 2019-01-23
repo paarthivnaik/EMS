@@ -1,23 +1,26 @@
 ﻿@{
-    ViewBag.Title = "Vendors";
+    ViewBag.Title = "Evndor Events Associate";
 }
 
+@*<a class="btn btn-success" style="margin-bottom:10px" href='@Url.Action("New","VendorEvents")'><i class="fa fa-money"></i>Add Vendor to Event</a>*@
+<a id='click_me' class='btn btn-success modal-link' href='/VendorEvents/New' data-toggle='modal' data-backdrop='static'><i class='fa fa-plus'></i>Add Vendor to Event</a>
+<br/>
 <br />
-<a class="btn btn-success" style="margin-bottom:10px" href='@Url.Action("New","Vendors")'><i class="fa fa-plus"></i> Add New</a>
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Vendor Management</h3>
+        <h3 class="box-title">Vendor Associate Events</h3>
     </div>
     <div class="box-body">
-        <table id="vendorTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+        <table id="VendorEventsTable" class="table table-bordered table-hover display nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Vendor Code</th>
-                    <th>Organization</th>
-                    <th>First Name</th>
-                    <th>MobileNo</th>
-                    <th>Alternate MobileNo</th>
-                   
+                    <th>Event Cide</th>
+                    <th>Vendor Name</th>
+                    <th>Mobile No</th>
+                    <th>Programe Date</th>
+                    <th> Ammount</th>
+                    <th>Ammount Paid</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,24 +35,30 @@
     <script>
             var Popup, dataTable;
             $(document).ready(function () {
-                dataTable = $("#vendorTable").DataTable({
+                dataTable = $("#VendorEventsTable").DataTable({
                     "scrollX": true,
                     "ajax": {
-                        "url": "/api/VendorData//GetAll",
+                        "url": "/api/VendorEventsData/GetAll",
                         "type": "GET",
                         "datatype": "json",
                         "dataSrc": ""
                     },
                     "columns": [
                         { "data": "VendorCode" },
-                         { "data": "Organization" },
+                        { "data": "EventInfoIDValue" },
                         { "data": "FirstName" },
                         { "data": "MobileNo" },
-                        { "data": "AlternateMobileNo" },
-                      
+                        { "data": "ProgramDate",render: function (data, type, row) {
+                            if (type === "sort" || type === "type") {
+                                return data;
+                            }
+                            return moment(data).format("DD-MM-YYYY");
+                        } },
+                        { "data": "Ammmount" },
+                        { "data": "TotalPaidAmmount" },
                         {
-                            "data": "VendorID", "render": function (data) {
-                                return "<a class='btn btn-primary btn-sm' title='Edit this record' href=/Vendors/Edit?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
+                            "data": "VendorEventID", "render": function (data) {
+                                return "<a id='click_me' class='btn btn-primary btn-sm modal-link' href='/VendorEvents/Edit?KeyId=" + data + "'data-toggle='modal' data-backdrop='static'><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a><a class='btn btn-primary btn-sm' title='Pay Ammount to Vendor'style='margin-left:5px' href=/VendorPaid/New?keyId=" + data + "><i class='fa fa-paypal'></i><strong> Pay</strong></a>";
                             },
                             "orderable": false,
                             "searchable": false,
@@ -78,7 +87,7 @@
                         ['<button>Yes</button>', function (instance, toast) {
                             debugger;
 
-                            result = GetJsonFromApi("/VendorData/Delete?VendorId=" + id);
+                            result = GetJsonFromApi("/VendorEventsData/Delete?vendorEventId=" + id);
 
 
                             if (result) {

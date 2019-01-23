@@ -6,30 +6,29 @@
 </div>
 
 <div class="modal-body">
-    <div class="gridcont">
-        <div class="row" data-role="VendorEventcreate-sec">
+  
+        <div class="row" data-role="VendorEventAmmountPaidEdit-sec">
 
             <div class="col-lg-12">
                 <div class="row">
-                    <div data-role="Basicdata-sec">
                         <div class="form-group col-lg-4">
                             <strong class="m-b-xs">*Event Code</strong>
 
                             <div class="input-group m-b">
                                 <i class="fa fa-info input-group-addon"></i>
-                                <input type="text" id="EventInfoIDValue" class="form-control" placeholder="Event Code" name="EventInfoIDValue" data-attr="EventInfoIDValue" data-valt="required" maxlength="200" readonly>
+                                <input type="text" id="EventInfoIDValue1" class="form-control" placeholder="Event Code" name="EventInfoIDValue" data-attr="EventInfoIDValue" data-valt="required" maxlength="200" readonly>
                             </div>
                         </div>
                         <input type="hidden" data-attr="VendorEventID" id="mainId" />
                         <input type="hidden" data-attr="VendorID" id="VendorID" />
-                    </div>
+                 
 
 
                     <div class="form-group col-lg-4">
                         <strong class="m-b-xs">*Paid Date</strong>
                         <div class="input-group m-b">
                             <i class="fa fa-calendar input-group-addon"></i>
-                            <input type="text" id="PaidDate" class="form-control datepicker" placeholder="Paid Date" name="PaidDate" data-attr="PaidDate" data-valt="required">
+                            <input type="text" id="PaidDate1" class="form-control datepicker" placeholder="Paid Date" name="PaidDate" data-attr="PaidDate" data-valt="required">
 
                         </div>
                     </div>
@@ -37,7 +36,7 @@
                         <strong class="m-b-xs">*Ammount Pable</strong>
                         <div class="input-group m-b">
                             <i class="fa fa-money input-group-addon"></i>
-                            <input type="text" placeholder="Ammount Paid" class="form-control" data-attr="AmmountPaid" id="AmmountPaid" name="AmmountPaid" data-valt="required">
+                            <input type="text" placeholder="Ammount Paid" class="form-control" data-attr="AmmountPaid" id="AmmountPaid1" name="AmmountPaid" data-valt="required">
                         </div>
                     </div>
 
@@ -46,9 +45,7 @@
                 </div>
 
             </div>
-
-
-            <input type="hidden" data-attr="VendorAmmountPaidID" id="KeyId" />
+            <input type="hidden" data-attr="VendorAmmountPaidID" id="SubKeyId" />
             <input type="hidden" data-attr="CreatedBy" />
             <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
             <input type="hidden" data-attr="ModifiedBy" />
@@ -58,7 +55,6 @@
 
         </div>
 
-    </div>
 
 
 </div>
@@ -67,5 +63,34 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button"  id="UpdateVendorAmmountPaid"class="btn btn-primary">Save changes</button>
     </div>
+<script>
+    var vendorEventPaidId = '@ViewBag.vendorAmmountPaidId';
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            autoclose: true,
+            dateFormat: 'dd-mm-yy'
+        });
+        bind("/api/VendorPaidData/GetByIdEdit?VendorAmmountPaidID=" + vendorEventPaidId, 'VendorEventAmmountPaidEdit-sec');
+
+    });
+    $('#UpdateVendorAmmountPaid').click(function () {
+        if (displayvalidation('VendorEventAmmountPaidEdit-sec')) {
+            if ($('#SubKeyId').val() > 0) {
+                mode = 'Update';
+            }
+            else {
+                mode = 'Insert';
+            }
+            var resObj = post("VendorEventAmmountPaidEdit-sec", 'VendorPaidData/Update', mode);
+            debugger;
+            if (resObj > 0) {
+                $('#SubKeyId').val(resObj);
+                //$("#employeeTable").ajax.reload();
+                dataTable.ajax.url("/api/VendorPaidData/GetById?VendorEventID=" + $('#mainId').val()).load();
+            }
+
+        }
+    });
+</script>

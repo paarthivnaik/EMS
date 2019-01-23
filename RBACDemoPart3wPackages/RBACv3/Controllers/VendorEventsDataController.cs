@@ -41,7 +41,7 @@ namespace RBACv3.Controllers
         }
 
         [HttpGet]
-        public async Task<List<VendorEvent>> GetAll()
+        public async Task<object> GetAll()
         {
             var result = await _vendorRepo.GetAll();
             return result;
@@ -57,6 +57,11 @@ namespace RBACv3.Controllers
         {
             return await _vendorRepo.GetReport(VendorCode);
 
+        }
+        [HttpPost]
+        public async Task<bool> Delete(int vendorEventId)
+        {
+            return await _vendorRepo.Delete(vendorEventId);
         }
     }
 }

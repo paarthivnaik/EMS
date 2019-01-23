@@ -139,13 +139,27 @@ namespace Events.Repo.EmployeeRep
                         FirstName = String.Empty,
                         ProofValue = "System",
                         CreatedBy = 1,
-                        CreatedOn = DateTime.Now
+                        CreatedOn = DateTime.Now,
+                        SurName=string.Empty
                     };
                     _context.Employees.Attach(delEmpEntries);
                     _context.Entry(delEmpEntries).Property(x => x.Status).IsModified = true;
                     await _context.SaveChangesAsync();
                     return true;
                 }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+                return false;
             }
             catch (Exception exception)
             {
