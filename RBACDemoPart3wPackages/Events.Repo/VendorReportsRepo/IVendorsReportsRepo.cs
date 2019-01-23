@@ -10,6 +10,7 @@ namespace Events.Repo.VendorReportsRepo
     {
        Task<object> GetRepByDate(DateTime fromdate, DateTime todate);
        Task<object> GetRepByVCode(string VendorCode);
+       Task<object> GetRepByECode(string EventCode);
        Task<object> GetRepByEVCode(string VendorCode,string EventCode);
     }
 }

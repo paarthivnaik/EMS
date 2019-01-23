@@ -17,5 +17,20 @@ namespace RBACv3.Controllers
         {
             return await _ReportRepo.GetRepByDate(fromdate, todate);
         }
+        [HttpPost]
+        public async Task<object> GetRepByVCode(string VendorCode)
+        {
+            return await _ReportRepo.GetRepByVCode(VendorCode);
+        }
+        [HttpPost]
+        public async Task<object> GetRepByECode(string EventCode)
+        {
+            return await _ReportRepo.GetRepByECode(EventCode);
+        }
+        [HttpPost]
+        public async Task<object> GetRepByEVCode(string VendorCode,string EventCode)
+        {
+            return await _ReportRepo.GetRepByEVCode(VendorCode,EventCode);
+        }
     }
 }
