@@ -1,4 +1,5 @@
-﻿using Events.Entities.Models.Flat;
+﻿using Events.Entities.Models;
+using Events.Entities.Models.Flat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Events.Repo.EventItemsRep
 {
    public interface IEventItemRepo
     {
-       Task<bool> AddItemsToEvent(List<EventItemsFlat> ObjItems);
+       Task<List<EventItem>> AddItemsToEvent(List<EventItem> ObjItems);
        Task<object> GetById(long eventInfoId);
        Task<List<EventItemsFlat>> GetAll();
     }

@@ -1,4 +1,5 @@
-﻿using Events.Entities.Models.Flat;
+﻿using Events.Entities.Models;
+using Events.Entities.Models.Flat;
 using Events.Repo.EventItemsRep;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace RBACv3.Controllers
     {
         IEventItemRepo _repo = new EventItemRepo();
         [HttpPost]
-        public async Task<bool> AddItemsToEvent(List<EventItemsFlat> ObjItems)
+        public async Task<List<EventItem>> AddItemsToEvent(List<EventItem> ObjItems)
         {
             return await _repo.AddItemsToEvent(ObjItems);
         }

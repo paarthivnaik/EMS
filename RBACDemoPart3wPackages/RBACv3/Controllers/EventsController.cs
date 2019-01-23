@@ -43,7 +43,7 @@ namespace RBACv3.Controllers
         }
 
         // GET: Events/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
             return View();
         }

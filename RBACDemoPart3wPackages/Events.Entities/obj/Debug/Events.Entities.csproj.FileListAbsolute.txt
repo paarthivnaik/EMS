@@ -15,6 +15,5 @@ D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\EntityFramew
 D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\EntityFramework.SqlServer.dll
 D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\EntityFramework.xml
 D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\bin\Debug\EntityFramework.SqlServer.xml
-D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\obj\Debug\Events.Entities.csprojResolveAssemblyReference.cache
 D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\obj\Debug\Events.Entities.dll
 D:\SMM_Pro\EMS\EMS\RBACDemoPart3wPackages\Events.Entities\obj\Debug\Events.Entities.pdb

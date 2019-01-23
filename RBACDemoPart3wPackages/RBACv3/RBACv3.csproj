@@ -1719,6 +1719,7 @@
     <Content Include="Views\Salaries\Details.cshtml" />
     <Content Include="Views\VendorPaid\New.cshtml" />
     <Content Include="Views\VendorPaid\_Edit.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1749,6 +1750,9 @@
     <EmbeddedResource Include="Migrations\201901121316069_IsInternal.resx">
       <DependentUpon>201901121316069_IsInternal.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
