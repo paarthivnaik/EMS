@@ -54,11 +54,12 @@ namespace Events.Repo.VendorEventAmmountPaid
                 using (_context = new VendorsContext())
                 {
                     obj.ModifiedOn = DateTime.Now;
+                 
+                    _context.Entry(obj).State = EntityState.Modified;
                     _context.Entry(obj).Property(x => x.CreatedOn).IsModified = false;
                     _context.Entry(obj).Property(x => x.CreatedBy).IsModified = false;
                     _context.Entry(obj).Property(x => x.VendorEventID).IsModified = false;
                     _context.Entry(obj).Property(x => x.Status).IsModified = false;
-                    _context.Entry(obj).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
 
                     return obj.VendorAmmountPaidID;
@@ -118,6 +119,87 @@ namespace Events.Repo.VendorEventAmmountPaid
             {
 
                 return null;
+            }
+        }
+
+
+        public async Task<object> GetByIdEdit(long VendorAmmountPaidID)
+        {
+            try
+            {
+                using (_context = new VendorsContext())
+                {
+                    var resObj = await (from a in _context.VendorAmmountPaids
+                                        join b in _context.VendorEvents on a.VendorEventID equals b.VendorEventID
+                                        join c in _context.Vendors on b.VendorID equals c.VendorID
+                                        where a.VendorAmmountPaidID == VendorAmmountPaidID && a.Status == true
+                                        select new
+                                        {
+                                            a.VendorAmmountPaidID,
+                                            a.VendorEventID,
+                                            a.PaidDate,
+                                            a.AmmountPaid,
+                                            a.CreatedBy,
+                                            a.CreatedOn,
+                                            a.ModifiedBy,
+                                            a.ModifiedOn,
+                                            a.Status,
+                                            b.VendorID,
+                                            b.EventInfoIDValue,
+                                            b.EventInfoID
+                                        }).FirstOrDefaultAsync();
+                    return resObj;
+                }
+            }
+            catch (Exception Ex)
+            {
+
+                return null;
+            }
+        }
+
+
+        public async Task<bool> Delete(long vendorAmmountPaidId)
+        {
+            try
+            {
+                using (_context = new VendorsContext())
+                {
+                    var deleventEntries = new Events.Entities.Models.VendorAmmountPaid()
+                    {
+
+                        VendorAmmountPaidID = vendorAmmountPaidId,
+                        Status = false,
+                        VendorEventID = 1,
+                         PaidDate = DateTime.Now,
+                         AmmountPaid=200,
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        
+                    };
+                    _context.VendorAmmountPaids.Attach(deleventEntries);
+                    _context.Entry(deleventEntries).Property(x => x.Status).IsModified = true;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+                return false;
+            }
+            catch (Exception exception)
+            {
+
+                return false;
             }
         }
     }

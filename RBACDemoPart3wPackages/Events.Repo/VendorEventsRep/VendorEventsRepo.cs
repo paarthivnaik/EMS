@@ -53,12 +53,13 @@ namespace Events.Repo.VendorEventsRep
                 using (_context = new VendorsContext())
                 {
                     obj.ModifiedOn = DateTime.Now;
+                   
+                    _context.Entry(obj).State = EntityState.Modified;
                     _context.Entry(obj).Property(x => x.CreatedOn).IsModified = false;
                     _context.Entry(obj).Property(x => x.CreatedBy).IsModified = false;
                     _context.Entry(obj).Property(x => x.EventInfoID).IsModified = false;
                     _context.Entry(obj).Property(x => x.EventInfoIDValue).IsModified = false;
                     _context.Entry(obj).Property(x => x.Status).IsModified = false;
-                    _context.Entry(obj).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
 
                     return obj.VendorEventID;
@@ -101,13 +102,32 @@ namespace Events.Repo.VendorEventsRep
                 return null;
             }
         }
-        public async Task<List<VendorEvent>> GetAll()
+        public async Task<object> GetAll()
         {
             try
             {
                 using (_context = new VendorsContext())
                 {
-                    var resObj = await _context.VendorEvents.Where(x => x.Status == true).ToListAsync();
+                   // var resObj = await _context.VendorEvents.Where(x => x.Status == true).ToListAsync();
+                    var resObj = await(from a in _context.VendorEvents
+
+                                  join b in _context.Vendors on a.VendorID equals b.VendorID where a.Status==true && a.IsSettled==false
+                                  select new
+                                  {
+                                     VendorID= a.VendorID,
+                                    ProgramDate=  a.ProgramDate,
+                                     VendorEventID= a.VendorEventID,
+                                     EventInfoID=a.EventInfoID,
+                                     EventInfoIDValue= a.EventInfoIDValue,
+                                    VendorCode=  b.VendorCode,
+                                     FirstName= b.FirstName,
+                                     SurName= b.SurName,
+                                     MobileNo= b.MobileNo,
+                                     Ammmount= a.Ammmount,
+                                     Status= a.Status,
+                                     IsSettled= a.IsSettled,
+                                     TotalPaidAmmount =from t in _context.VendorAmmountPaids.Where(x=>x.Status==true && x.VendorEventID==a.VendorEventID) group t by t.VendorEventID into v  select v.Sum(x=>x.AmmountPaid)
+                                  }).ToListAsync();
                     return resObj;
                 }
             }
@@ -195,7 +215,17 @@ namespace Events.Repo.VendorEventsRep
                                       a.VendorEventID,
                                       a.VendorID,
                                       a.EventInfoIDValue,
-                                      a.EventInfoID
+                                      a.EventInfoID,
+                                      a.ProgramDate,
+                                      a.Ammmount,
+                                      a.CreatedBy,
+                                      a.CreatedOn,
+                                      a.ModifiedBy,
+                                      a.ModifiedOn,
+                                      a.Status,
+                                      a.IsSettled,
+                                      b.VendorCode
+                                      
                                   }).FirstOrDefaultAsync();
                     return resObj;
                 }
