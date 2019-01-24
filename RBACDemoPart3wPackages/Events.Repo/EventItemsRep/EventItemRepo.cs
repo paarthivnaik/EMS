@@ -13,44 +13,40 @@ namespace Events.Repo.EventItemsRep
     {
 
       private EventItemsContext _Context;
-        public async Task<bool> AddItemsToEvent(List<EventItemsFlat> ObjItems)
+      public async Task<List<EventItem>> AddItemsToEvent(List<EventItem> ObjItems)
         {
             using (_Context = new EventItemsContext())
             {
 
                 try
                 {
-                    foreach (EventItemsFlat obj in ObjItems)
+                    foreach (EventItem obj in ObjItems)
                     {
-                        EventItem Objfinal = new EventItem()
+                        if(obj.EventItemID>0)
                         {
-                            EventItemID = obj.EventItemID,
-                            EventInfoID = obj.EventInfoID,
-                            CategoryID = obj.CategoryID,
-                            CategoryValue = obj.CategoryValue,
-                            ItemID = obj.ItemID,
-                            ItemValue = obj.ItemValue,
-                            Quantity = obj.Quantity,
-                            Price = obj.Price,
-                            CreatedBy = obj.CreatedBy,
-                            CreatedOn = obj.CreatedOn,
-                            ModifiedBy = obj.ModifiedBy,
-                            ModifiedOn = obj.ModifiedOn,
-                            Status = obj.Status
-
-
-                        };
-                        _Context.Entry(Objfinal).State = EntityState.Added;
+                            obj.CreatedOn = System.DateTime.Now;
+                            obj.ModifiedOn = System.DateTime.Now;
+                            _Context.Entry(obj).State = EntityState.Modified;
+                            _Context.Entry(obj).Property(t => t.CreatedOn).IsModified = false;
+                            _Context.Entry(obj).Property(t => t.CreatedOn).IsModified = false;
+                        }
+                        else
+                        {
+                            obj.CreatedOn = System.DateTime.Now;
+                            obj.ModifiedOn = null;
+                            _Context.Entry(obj).State = EntityState.Added;
+                        }
+                        
                         await _Context.SaveChangesAsync();
 
                     }
 
-                    return true;
+                    return ObjItems;
                 }
                 catch (Exception ex)
                 {
 
-                    return false;
+                    return null;
                 }
 
             }

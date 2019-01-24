@@ -1,9 +1,8 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Register an Event";
 }
 <style>
-    fieldset {        
+    fieldset {
         border: 1px solid #458dbc !important; /*1px solid #ddd !important;*/
         margin: 0;
         xmin-width: 0;
@@ -28,7 +27,7 @@
 </style>
 <link href="~/AdminLTE/plugins/datepicker/css/datepicker3.css" rel="stylesheet" />
 <link href="~/AdminLTE/plugins/iziToast/iziToast.min.css" rel="stylesheet" />
- <!-- /.row -->
+<!-- /.row -->
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
@@ -109,8 +108,8 @@
                                 </div>
 
                             </div>
-                            
-                            <div class="form-group col-lg-4" >
+
+                            <div class="form-group col-lg-4">
                                 <strong class="m-b-xs">Package Name</strong>
 
                                 <div class="input-group m-b">
@@ -123,7 +122,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-4" >
+                            <div class="form-group col-lg-4">
                                 <strong class="m-b-xs">* Package Price</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-money input-group-addon"></i>
@@ -131,7 +130,7 @@
                                 </div>
 
                             </div>
-                            <div class="form-group col-lg-4" >
+                            <div class="form-group col-lg-4">
                                 <strong class="m-b-xs">*Total Cost</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-usd input-group-addon"></i>
@@ -139,7 +138,7 @@
                                 </div>
 
                             </div>
-                            <div class="form-group col-lg-4" >
+                            <div class="form-group col-lg-4">
                                 <strong class="m-b-xs">Advance</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-usd input-group-addon"></i>
@@ -179,12 +178,12 @@
                     <section data-role="mandatory-sec">
                         <input type="hidden" data-attr="EventInfoID" id="KeyId" />
                         <input type="hidden" data-attr="EventRefID" />
-                        <input type="hidden" data-attr="CreatedBy"/>
-                        <input type="hidden" data-attr="CreatedOn"value="@DateTime.Now" />
+                        <input type="hidden" data-attr="CreatedBy" />
+                        <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
                         <input type="hidden" data-attr="ModifiedBy" />
                         <input type="hidden" data-attr="ModifiedOn" />
                         <input type="hidden" data-attr="Status" />
-                       
+
                     </section>
                 </div>
                 <!-- /.row -->
@@ -236,8 +235,8 @@
                                         <select class="form-control" id="Items" name="Items" data-attr="Items" data-listentry="" data-valt="required">
                                             <option value="0">-- Select --</option>
                                             @*<option value="1">Mehandi</option>
-                                            <option value="2">Sangeeth</option>
-                                            <option value="3">Birth Day</option>*@
+                                                <option value="2">Sangeeth</option>
+                                                <option value="3">Birth Day</option>*@
                                         </select>
                                     </div>
                                 </div>
@@ -255,7 +254,7 @@
 
                                     <div class="input-group m-b">
                                         <i class="fa fa-money input-group-addon"></i>
-                                        <input type="text" placeholder="Price" class="form-control"  id="Price" name="Price" onkeyup="SubTotalPrice()">
+                                        <input type="text" placeholder="Price" class="form-control" id="Price" name="Price" onkeyup="SubTotalPrice()">
                                     </div>
                                 </div>
 
@@ -279,7 +278,7 @@
                             </div>
 
                             <hr style="border:1px solid blue" />
-                            
+
                             <div class="" id="appendItem">
 
                             </div>
@@ -307,10 +306,10 @@
                                 </div>
                             </div>
                         </div>
-                        </fieldset>
+                    </fieldset>
 
-                           
-</div>
+                   
+                </div>
                 <!-- /.row -->
             </div>
         </div>
@@ -318,30 +317,43 @@
     </div>
 </div>
 <!-- /.row -->
- 
 @section scripts{
-@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
-<script src="~/AdminLTE/plugins/iziToast/iziToast.min.js"></script>*@
-@*<script src="~/Scripts/util.js"></script>*@
-<script>
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/AdminLTE/plugins/datepicker/js/bootstrap-datepicker.js"></script>
+        <script src="~/AdminLTE/plugins/iziToast/iziToast.min.js"></script>*@
+    @*<script src="~/Scripts/util.js"></script>*@
+    <script>
     var CategoriesID = 1;
     var ItemsID = 1;
-
-   
+    var keyId = 0;
+    var ItemsData = [];
     $(document).ready(function () {
-        BindLELV('EventType,Categories');        
+        BindLELV('EventType,Categories');
         $('.datepicker').datepicker({
             autoclose: true
         });
+        keyId = GetQueryStringValues(window.location.href, 'keyId');
+        if (keyId > 0)
+        {
+            bindRequiredData('EventsData/GetById?eventInfoId=' + keyId, "create-sec")
+            ItemsData = GetJsonFromApi('EventItemsData/GetById?eventInfoId=' + keyId);
+            if (ItemsData.length>0)
+            {
+                for (var i = 0; i < ItemsData.length; i++)
+                    BindItemsList(ItemsData[i]);
+            }
+        }
+            
+
         $('#saveEvent').click(function () {
             if (displayvalidation('create-sec')) {
                 var resObj = post("create-sec", 'EventsData/Save', 'Insert');
                 if (resObj > 0)
                     $('[data-attr="EventInfoID"]').val(resObj);
             }
-        });      
+        });
         
+
     })
     $('#Categories').change(function ()
     {
@@ -361,14 +373,14 @@
                                    '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').text() + '" readonly >' +
                                 '</div>'+
                             '</div>'+
-                            
+
         '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').val() + '" readonly >' +
             '<div class="form-group col-lg-3">' +
                                 '<strong class="m-b-xs">*Items</strong>'+
 
                                 '<div class="input-group m-b">'+
                                     '<i class="fa fa-cubes input-group-addon"></i>' +
-                                    
+
         '<input type="text" placeholder="Categories" class="form-control" data-attr="ItemValue" id="Items_' + ItemsID + '" name="Items"  value="' + $('#Items :selected').text() + '" readonly >' +
           '<input type="hidden" placeholder="Categories" class="form-control" data-attr="ItemID" id="ItemID_' + ItemsID + '" name="Items"  value="' + $('#Items :selected').val() + '" readonly >' +
 
@@ -390,11 +402,11 @@
                                      '<div class="form-group col-lg-1">' +
                                 '<div class="input-group m-b" style="padding-top: 8px;">' +
                                     '<div class="input-group m-b">' +
-                                        
+
                                         '<button type="button" class="btn bg-maroon btn-flat margin" onclick="DeleteItem(' + ItemsID + ')" title="Delete Item" ><i class="fa fa-trash" aria-hidden="true"></i></button>' +
                                     '</div></div></div></div>';
         CategoriesID++;
-        ItemsID++;        
+        ItemsID++;
         $('#appendItem').append(itemHtml);
         TotalPrice()
     }
@@ -406,10 +418,10 @@
 
     function SubTotalPrice()
     {
-        
+
         if($('#Quantity').val() != '' && $('#Price').val() != '')
         {
-           
+
             $('#SubTotalPrice').val(parseInt($('#Quantity').val()) * parseInt($('#Price').val()));
         }
     }
@@ -424,28 +436,28 @@
                 if ($('#Quantity_' + $(this).attr('id').split('_')[1]).val() != '')
                 {
                     var total_Price = parseInt($('#Quantity_' + $(this).attr('id').split('_')[1]).val()) * parseInt($(this).val());
-                    $('#TotalPrice_' + $(this).attr('id').split('_')[1]).val(total_Price);                   
+                    $('#TotalPrice_' + $(this).attr('id').split('_')[1]).val(total_Price);
                     total += total_Price;
                 }
-                
+
             }
-                
-            
-            
+
+
+
         })
         $('#TotalPriceValue').val(total);
     }
     function SaveQuatation()
     {
         var EventInfoID= $('[data-attr="EventInfoID"]').val();
-        var itemsLst = [];        
+        var itemsLst = [];
         var s = 0;
         $('.addeditems').each(function () {
             var obj = new Object();
-            var id = $(this).attr('id');           
+            var id = $(this).attr('id');
             $("#" + id + " [data-attr]").each(function () {
                 obj[$(this).data('attr')] = $(this).val();
-            })            
+            })
             obj['EventInfoID']=EventInfoID;
             obj['Status'] = true;
             itemsLst[s] = obj;
@@ -454,15 +466,63 @@
         debugger;
         var saveitems = PostJsonToApi('EventItemsData/AddItemsToEvent', JSON.stringify(itemsLst));
         s = 0;
-        $('.addeditems').each(function () {            
-            var id = $(this).attr('id');            
+        $('.addeditems').each(function () {
+            var id = $(this).attr('id');
             $("#" + id + " [data-attr='EventItemID']").val(saveitems[s].EventItemID);
             s++;
         })
 
     }
+    function BindItemsList(v) {
+        var itemHtml = '<div class="row addeditems" id="ItemRow_' + ItemsID + '">' +
+        '<input type="hidden" placeholder="EventItemID" class="" data-attr="EventItemID" id="EventItemID_' + ItemsID + '" name="EventItemID" value="' + v.EventItemID + '"   readonly >' +
 
-</script>
+            ' <div class="form-group col-lg-3">' +
+                                '<strong class="m-b-xs">*Category</strong>' +
+                                '<div class="input-group m-b">' +
+                                    '<i class="fa fa-glass input-group-addon"></i>' +
+                                   '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + v.CategoryValue + '" readonly >' +
+                                '</div>' +
+                            '</div>' +
+
+        '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + v.CategoryID + '" readonly >' +
+            '<div class="form-group col-lg-3">' +
+                                '<strong class="m-b-xs">*Items</strong>' +
+
+                                '<div class="input-group m-b">' +
+                                    '<i class="fa fa-cubes input-group-addon"></i>' +
+
+        '<input type="text" placeholder="Categories" class="form-control" data-attr="ItemValue" id="Items_' + ItemsID + '" name="Items"  value="' + v.ItemValue + '" readonly >' +
+          '<input type="hidden" placeholder="Categories" class="form-control" data-attr="ItemID" id="ItemID_' + ItemsID + '" name="Items"  value="' + v.ItemID + '" readonly >' +
+
+                                    '</div></div>' +
+
+                                    '<div class="form-group col-lg-2"><strong class="m-b-xs">*Quantity</strong><div class="input-group m-b"><i class="fa fa-hourglass input-group-addon"></i>' +
+                                    '<input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity_' + ItemsID + '" name="Quantity" onkeyup="TotalPrice()" value="' + v.Quantity + '"  >' +
+                                    '</div></div><div class="form-group col-lg-2"><strong class="m-b-xs">*Price</strong><div class="input-group m-b"><i class="fa fa-money input-group-addon"></i>' +
+                                    '<input type="text" placeholder="Price" class="form-control price" data-attr="Price" id="Price_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" value="' + v.Price + '"   ></div></div>' +
+
+                                    '<div class="form-group col-lg-1">' +
+        '<strong class="m-b-xs">*Total</strong>' +
+
+        '<div class="input-group m-b">' +
+        //'<i class="fa fa-money input-group-addon"></i>' +
+        '<input type="text" placeholder="Price" class="form-control" id="TotalPrice_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" readonly>' +
+        '</div>' +
+        '</div>' +
+                                     '<div class="form-group col-lg-1">' +
+                                '<div class="input-group m-b" style="padding-top: 8px;">' +
+                                    '<div class="input-group m-b">' +
+
+                                        '<button type="button" class="btn bg-maroon btn-flat margin" onclick="DeleteItem(' + ItemsID + ')" title="Delete Item" ><i class="fa fa-trash" aria-hidden="true"></i></button>' +
+                                    '</div></div></div></div>';
+        CategoriesID++;
+        ItemsID++;
+        $('#appendItem').append(itemHtml);
+        TotalPrice()
+    }
+
+    </script>
 
 }
 

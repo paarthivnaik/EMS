@@ -74,8 +74,6 @@
     <Compile Include="VendorEventAmmountPaid\VendorEventAmmountPaidRepo.cs" />
     <Compile Include="VendorEventsRep\IVendorEventsRepo.cs" />
     <Compile Include="VendorEventsRep\VendorEventsRepo.cs" />
-    <Compile Include="VendorReportsRepo\IVendorsReportsRepo.cs" />
-    <Compile Include="VendorReportsRepo\VendorsReportsRepo.cs" />
     <Compile Include="VendorsRep\IVendorRepo.cs" />
     <Compile Include="VendorsRep\VendorRepo.cs" />
     <Compile Include="VendorsRep\VendorsContext.cs" />

@@ -55,8 +55,6 @@
     <Compile Include="Models\Expens.cs" />
     <Compile Include="Models\Flat\EventItemsFlat.cs" />
     <Compile Include="Models\Flat\ListValueFlat.cs" />
-    <Compile Include="Models\Light\EventInfoLight.cs" />
-    <Compile Include="Models\Light\Mapping\EventInfoLightMap.cs" />
     <Compile Include="Models\ListEntriesCustom.cs" />
     <Compile Include="Models\ListEntry.cs" />
     <Compile Include="Models\ListValue.cs" />

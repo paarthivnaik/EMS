@@ -7,7 +7,7 @@ $(document).ready(function () {
     var apiBaseUrl = 'http://localhost:64075/api/';
 });
 
-
+var apiBaseUrl = 'http://localhost:64075/api/';
 /**
   * Post Section data to API
  */
