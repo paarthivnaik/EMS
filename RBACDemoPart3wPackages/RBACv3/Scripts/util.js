@@ -2367,28 +2367,20 @@ function closeCustom(currentEle) {
 }
 
 
-function ResetPage(role, GridID) {
+function ResetPage(role) {
     $('[data-role="' + role + '"] [data-attr]').each(function () {
         if ($(this).is('input:text') || $(this).is('textarea') || $(this).is('input:hidden'))
             $(this).val('');
 
         if ($(this).is('select'))
             $(this).val('0');
-        if ($(this).prop("tagName") === 'DIV') {
-            $(this).next().find('.note-editable').html('');
-        }
+       
         if ($(this).is('input:checkbox'))
             $(this).removeAttr("checked");
 
-        if (GridID != undefined) {
-            var gridIds = GridID.split(',');
-            $(gridIds).each(function (k, v) {
-                $.jgrid.gridUnload('#' + v);
+        
 
-            });
-        }
-
-        $("[data-role='VersionNumber']").val(1);
+       
 
     });
 }

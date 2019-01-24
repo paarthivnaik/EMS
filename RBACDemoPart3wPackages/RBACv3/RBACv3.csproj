@@ -203,9 +203,12 @@
     <Compile Include="Controllers\SalariesDataController.cs" />
     <Compile Include="Controllers\UnauthorisedController.cs" />
     <Compile Include="Controllers\VendorDataController.cs" />
+    <Compile Include="Controllers\VendorEventsController.cs" />
     <Compile Include="Controllers\VendorEventsDataController.cs" />
     <Compile Include="Controllers\VendorPaidController.cs" />
     <Compile Include="Controllers\VendorPaidDataController.cs" />
+    <Compile Include="Controllers\VendorReportsController.cs" />
+    <Compile Include="Controllers\VendorReportsDataController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

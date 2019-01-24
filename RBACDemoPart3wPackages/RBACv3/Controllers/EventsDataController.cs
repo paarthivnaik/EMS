@@ -36,7 +36,7 @@ namespace RBACv3.Controllers
              return result;
          }
         
-         [HttpGet]
+         [HttpPost]
          public async Task<List<EventInfo>> GetAll()
          {
              var result = await _eventRepo.GetAll();
