@@ -2372,15 +2372,11 @@ function ResetPage(role) {
         if ($(this).is('input:text') || $(this).is('textarea') || $(this).is('input:hidden'))
             $(this).val('');
 
-        if ($(this).is('select'))
-            $(this).val('0');
+        //if ($(this).is('select'))
+        //    $(this).val('0');
        
         if ($(this).is('input:checkbox'))
             $(this).removeAttr("checked");
-
-        
-
-       
 
     });
 }

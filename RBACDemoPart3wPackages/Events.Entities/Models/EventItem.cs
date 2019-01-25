@@ -12,8 +12,7 @@ namespace Events.Entities.Models
         public long EventInfoID { get; set; }
         public long CategoryID { get; set; }
         public string CategoryValue { get; set; }
-        public long ItemID { get; set; }
-        public string ItemValue { get; set; }
+        public string ItemName { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public int CreatedBy { get; set; }

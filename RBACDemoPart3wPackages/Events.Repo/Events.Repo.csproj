@@ -55,6 +55,9 @@
     <Compile Include="EventItemsRep\EventItemRepo.cs" />
     <Compile Include="EventItemsRep\EventItemsContext.cs" />
     <Compile Include="EventItemsRep\IEventItemRepo.cs" />
+    <Compile Include="EventItemsTaxDetails\EventItemsTaxContext.cs" />
+    <Compile Include="EventItemsTaxDetails\EventItemsTaxDetailsRepo.cs" />
+    <Compile Include="EventItemsTaxDetails\IEventItemsTaxDetailsRepo.cs" />
     <Compile Include="EventsRepo\EventsContext.cs" />
     <Compile Include="EventsRepo\EventsRepo.cs" />
     <Compile Include="EventsRepo\IEventsRepo.cs" />

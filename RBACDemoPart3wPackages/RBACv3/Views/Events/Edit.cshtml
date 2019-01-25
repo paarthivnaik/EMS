@@ -175,16 +175,16 @@
                         </div>
 
                     </div>
-                    <section data-role="mandatory-sec">
-                        <input type="hidden" data-attr="EventInfoID" id="KeyId" />
-                        <input type="hidden" data-attr="EventRefID" />
-                        <input type="hidden" data-attr="CreatedBy" />
-                        <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
-                        <input type="hidden" data-attr="ModifiedBy" />
-                        <input type="hidden" data-attr="ModifiedOn" />
-                        <input type="hidden" data-attr="Status" />
 
-                    </section>
+                    <input type="hidden" data-attr="EventInfoID" id="KeyId" />
+                    <input type="hidden" data-attr="EventRefID" />
+                    <input type="hidden" data-attr="CreatedBy" />
+                    <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
+                    <input type="hidden" data-attr="ModifiedBy" />
+                    <input type="hidden" data-attr="ModifiedOn" />
+                    <input type="hidden" data-attr="Status" />
+
+
                 </div>
                 <!-- /.row -->
             </div>
@@ -249,7 +249,7 @@
 
                                     <div class="input-group m-b">
                                         <i class="fa fa-money input-group-addon"></i>
-                                        <input type="text" placeholder="Price" class="form-control" id="Price" data-attr="Price" name="Price" onkeyup="SubTotalPrice()" data-valt="required">
+                                        <input type="text" placeholder="Price" class="form-control" id="Price"  name="Price" onkeyup="SubTotalPrice()" data-valt="required">
                                     </div>
                                 </div>
 
@@ -291,67 +291,55 @@
                             <div class="form-group col-lg-1">
                                 <strong class="m-b-xs">Actions</strong>
                             </div>
-                                <hr style="border:1px solid blue" />
-
+                            <hr style="border:1px solid blue" />
+                            <div data-role="finalEdit-sec">
                                 <div class="" id="appendItem">
 
                                 </div>
-                                @*<div class="row">
-                                    <div class="form-group col-lg-8">
-                                        <strong class="m-b-xs">Total</strong>
-                                        <div class="input-group m-b">
-                                            <i class="fa fa-money input-group-addon"></i>
-                                            <input type="text" placeholder="Price" class="form-control" data-attr="TotalPrice" id="TotalPrice" name="Price" value="Total Price" readonly>
-                                        </div>
+                                <div class="row clearfix" style="margin-top:20px" data-role="totaltax-sec">
+                                    <div class="pull-right col-md-4">
+                                        <input type="hidden" data-attr="EventItemsTaxDetId" id="EventItemsTaxDetId" />
+                                        <input type="hidden" data-attr="EventInfoID" id="eventInfoId" />
+                                        <table class="table table-bordered table-hover" id="tab_logic_total">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center">Sub Total</th>
+                                                    <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' data-attr="Subtotal" class="form-control" id="sub_total" readonly /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">Tax</th>
+                                                    <td class="text-center">
+                                                        <div class="input-group mb-2 mb-sm-0">
+                                                            <input type="number" class="form-control" id="tax" placeholder="0" data-attr="tax">
+                                                            <div class="input-group-addon">%</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">Tax Amount</th>
+                                                    <td class="text-center"><input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" data-attr="TaxAmount" readonly /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">Grand Total</th>
+                                                    <td class="text-center"><input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" data-attr="GrandTotal" readonly /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class="form-group col-lg-2">
-                                        <strong class="m-b-xs">.</strong>
-                                        <div class="input-group m-b">
-                                            <i class="fa fa-money input-group-addon"></i>
-                                            <input type="text" placeholder="Price" class="form-control" data-attr="TotalPrice" id="TotalPriceValue" name="Price" value="Total Price" readonly>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-lg-2">
-                                        <strong class="m-b-xs">.</strong>
-                                        <div class="input-group m-b">
-                                            <button id="saveQuotation" class="btn btn-sm btn-info btn-flat pull-left" onclick="SaveQuatation()"><i class="fa fa-save"></i> Save Quotation</button>
-                                        </div>
-                                    </div>
-                                </div>*@
-                            <div class="row clearfix" style="margin-top:20px">
-                                <div class="pull-right col-md-4">
-                                    <table class="table table-bordered table-hover" id="tab_logic_total">
-                                        <tbody>
-                                            <tr>
-                                                <th class="text-center">Sub Total</th>
-                                                <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-center">Tax</th>
-                                                <td class="text-center">
-                                                    <div class="input-group mb-2 mb-sm-0">
-                                                        <input type="number" class="form-control" id="tax" placeholder="0">
-                                                        <div class="input-group-addon">%</div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-center">Tax Amount</th>
-                                                <td class="text-center"><input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly /></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-center">Grand Total</th>
-                                                <td class="text-center"><input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" readonly /></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
+
+                            <div class="form-group col-lg-2" id="quotaionDiv" style="display:none">
+                                <strong class="m-b-xs"></strong>
+                                <div class="input-group m-b">
+                                    <button id="saveQuotation" class="btn btn-sm btn-info btn-flat pull-left" onclick="SaveQuatation()"><i class="fa fa-save"></i> Save Quotation</button>
+                                </div>
                             </div>
+
+                        </div>
                     </fieldset>
 
-                   
+
                 </div>
                 <!-- /.row -->
             </div>
@@ -361,74 +349,190 @@
 </div>
 <!-- /.row -->
 @section scripts{
-   
+
     <script>
-    var CategoriesID = 1;
-    var ItemsID = 1;
-    var keyId = 0;
-    var ItemsData = [];
-    $(document).ready(function () {
-        BindLELV('EventType,Categories');
-        $('.datepicker').datepicker({
-            autoclose: true
-        });
-        keyId = GetQueryStringValues(window.location.href, 'keyId');
-        if (keyId > 0)
-        {
-            bindRequiredData('EventsData/GetById?eventInfoId=' + keyId, "create-sec")
-            ItemsData = GetJsonFromApi('EventItemsData/GetById?eventInfoId=' + keyId);
-            if (ItemsData!=null)
-            {
-                for (var i = 0; i < ItemsData.length; i++)
-                    BindItemsList(ItemsData[i]);
+        var CategoriesID = 1;
+        var ItemsID = 1;
+        var keyId = 0;
+        var ItemsData = [];
+        $(document).ready(function () {
+            BindLELV('EventType,Categories');
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
+            keyId = GetQueryStringValues(window.location.href, 'keyId');
+            if (keyId > 0) {
+                bindRequiredData('EventsData/GetById?eventInfoId=' + keyId, "create-sec")
+                ItemsData = GetJsonFromApi('EventItemsData/GetById?eventInfoId=' + keyId);
+                if (ItemsData != null) {
+                    for (var i = 0; i < ItemsData.length; i++)
+                        BindItemsList(ItemsData[i]);
+                }
+                $('#eventInfoId').val($('#KeyId').val());
+            }
+
+
+            $('#saveEvent').click(function () {
+                if (displayvalidation('create-sec')) {
+                    var resObj = post("create-sec", 'EventsData/Save', 'Insert');
+                    if (resObj > 0)
+                        $('[data-attr="EventInfoID"]').val(resObj);
+                }
+            });
+
+
+        })
+        $('#Categories').change(function () {
+            //  $('#Items').addClass($('#Categories :selected').text());
+
+            //BindLELV($('#Categories :selected').text())
+        })
+        function AddItem() {
+            if (displayvalidation('Item-add-sec')) {
+                var itemHtml = '<div class="row addeditems" id="ItemRow_' + ItemsID + '">' +
+                '<input type="hidden" placeholder="EventItemID" class="" data-attr="EventItemID" id="EventItemID_' + ItemsID + '" name="EventItemID"   readonly >' +
+
+                    ' <div class="form-group col-lg-3">' +
+
+                                        '<div class="input-group m-b">' +
+                                            '<i class="fa fa-glass input-group-addon"></i>' +
+                                           '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').text() + '" readonly >' +
+                                        '</div>' +
+                                    '</div>' +
+
+                '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').val() + '" readonly >' +
+                    '<div class="form-group col-lg-3">' +
+
+
+                                        '<div class="input-group m-b">' +
+                                            '<i class="fa fa-cubes input-group-addon"></i>' +
+                  '<input type="text" placeholder="Categories" class="form-control" data-attr="ItemName" id="ItemID_' + ItemsID + '" name="Items"  value="' + $('#itemValue').val() + '" readonly >' +
+
+                                            '</div></div>' +
+
+                                            '<div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-hourglass input-group-addon"></i>' +
+                                            '<input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity_' + ItemsID + '" name="Quantity" onkeyup="TotalPrice()" value="' + $('#Quantity').val() + '"  >' +
+                                            '</div></div><div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-money input-group-addon"></i>' +
+                                            '<input type="text" placeholder="Price" class="form-control price" data-attr="Price" id="Price_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" value="' + $('#Price').val() + '"   ></div></div>' +
+
+                                            '<div class="form-group col-lg-1">' +
+
+
+                '<div class="input-group m-b">' +
+                //'<i class="fa fa-money input-group-addon"></i>' +
+                '<input type="text" placeholder="Price" class="form-control" id="TotalPrice_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" readonly>' +
+                '</div>' +
+                '</div>' +
+                                             '<div class="form-group col-lg-1">' +
+                                        '<div class="input-group m-b">' +
+                                            '<div class="input-group m-b">' +
+
+                                                '<a  class="btn bg-maroon btn-flat" onclick="DeleteItem(' + ItemsID + ')" title="Delete Item" ><i class="fa fa-trash" aria-hidden="true"></i></button>' +
+                                            '</div></div></div></div>';
+                CategoriesID++;
+                ItemsID++;
+                $('#appendItem').append(itemHtml);
+                TotalPrice()
+                ResetPage('Item-add-sec')
+                $('#quotaionDiv').show();
             }
         }
-            
+        function DeleteItem(id) {
+            $('#ItemRow_' + id).remove();
+            TotalPrice();
+            $('#quotaionDiv').hide();
+        }
 
-        $('#saveEvent').click(function () {
-            if (displayvalidation('create-sec')) {
-                var resObj = post("create-sec", 'EventsData/Save', 'Insert');
-                if (resObj > 0)
-                    $('[data-attr="EventInfoID"]').val(resObj);
+        function SubTotalPrice() {
+            debugger;
+            if ($('#Quantity').val() != '' && $('#Price').val() != '') {
+
+                $('#SubTotalPrice').val((parseInt($('#Quantity').val()) * parseInt($('#Price').val())).toFixed(2));
             }
-        });
-        
+        }
 
-    })
-    $('#Categories').change(function ()
-    {
-      //  $('#Items').addClass($('#Categories :selected').text());
+        function TotalPrice() {
+            debugger;
+            var total = 0;
+            $('[data-attr="Price"]').each(function () {
+                if ($(this).val() != '') {
+                    if ($('#Quantity_' + $(this).attr('id').split('_')[1]).val() != '') {
+                        var total_Price = parseInt($('#Quantity_' + $(this).attr('id').split('_')[1]).val()) * parseInt($(this).val());
+                        $('#TotalPrice_' + $(this).attr('id').split('_')[1]).val(total_Price);
+                        total += total_Price;
+                    }
 
-        //BindLELV($('#Categories :selected').text())
-    })
-    function AddItem()
-    {
-        if (displayvalidation('Item-add-sec')) {
+                }
+
+
+
+            })
+            $('#sub_total').val(total.toFixed(2));
+            calc_total();
+
+        }
+        function SaveQuatation() {
+            if (displayvalidation('finalEdit-sec')) {
+                var EventInfoID = $('[data-attr="EventInfoID"]').val();
+                var itemsLst = [];
+                var s = 0;
+                $('.addeditems').each(function () {
+                    var obj = new Object();
+                    var id = $(this).attr('id');
+                    $("#" + id + " [data-attr]").each(function () {
+                        obj[$(this).data('attr')] = $(this).val();
+                    })
+                    obj['EventInfoID'] = EventInfoID;
+                    obj['Status'] = true;
+                    itemsLst[s] = obj;
+                    s++;
+                })
+                debugger;
+                var saveitems = PostJsonToApi('EventItemsData/AddItemsToEvent', JSON.stringify(itemsLst));
+                if (saveitems != null) {
+                    var resObj = post("totaltax-sec", 'EventItemsTaxDetails/Save', '');
+                    if (resObj > 0)
+                        $('[data-attr="EventItemsTaxDetId"]').val(resObj);
+
+                    s = 0;
+                    $('.addeditems').each(function () {
+                        var id = $(this).attr('id');
+                        $("#" + id + " [data-attr='EventItemID']").val(saveitems[s].EventItemID);
+                        s++;
+                    })
+                }
+
+
+            }
+        }
+        function BindItemsList(v) {
             var itemHtml = '<div class="row addeditems" id="ItemRow_' + ItemsID + '">' +
-            '<input type="hidden" placeholder="EventItemID" class="" data-attr="EventItemID" id="EventItemID_' + ItemsID + '" name="EventItemID"   readonly >' +
+            '<input type="hidden" placeholder="EventItemID" class="" data-attr="EventItemID" id="EventItemID_' + ItemsID + '" name="EventItemID" value="' + v.EventItemID + '"   readonly >' +
 
                 ' <div class="form-group col-lg-3">' +
 
                                     '<div class="input-group m-b">' +
                                         '<i class="fa fa-glass input-group-addon"></i>' +
-                                       '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').text() + '" readonly >' +
+                                       '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + v.CategoryValue + '" readonly >' +
                                     '</div>' +
                                 '</div>' +
 
-            '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').val() + '" readonly >' +
+            '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + v.CategoryID + '" readonly >' +
                 '<div class="form-group col-lg-3">' +
 
 
                                     '<div class="input-group m-b">' +
                                         '<i class="fa fa-cubes input-group-addon"></i>' +
-              '<input type="text" placeholder="Categories" class="form-control" data-attr="ItemID" id="ItemID_' + ItemsID + '" name="Items"  value="' + $('#itemValue').val() + '" readonly >' +
+
+            '<input type="text" placeholder="Categories" class="form-control" data-attr="ItemValue" id="Items_' + ItemsID + '" name="Items"  value="' + v.ItemValue + '" readonly >' +
+              '<input type="hidden" placeholder="Categories" class="form-control" data-attr="ItemName" id="ItemID_' + ItemsID + '" name="Items"  value="' + v.ItemID + '" readonly >' +
 
                                         '</div></div>' +
 
                                         '<div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-hourglass input-group-addon"></i>' +
-                                        '<input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity_' + ItemsID + '" name="Quantity" onkeyup="TotalPrice()" value="' + $('#Quantity').val() + '"  >' +
+                                        '<input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity_' + ItemsID + '" name="Quantity" onkeyup="TotalPrice()" value="' + v.Quantity + '"  >' +
                                         '</div></div><div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-money input-group-addon"></i>' +
-                                        '<input type="text" placeholder="Price" class="form-control price" data-attr="Price" id="Price_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" value="' + $('#Price').val() + '"   ></div></div>' +
+                                        '<input type="text" placeholder="Price" class="form-control price" data-attr="Price" id="Price_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" value="' + v.Price + '"   ></div></div>' +
 
                                         '<div class="form-group col-lg-1">' +
 
@@ -439,147 +543,31 @@
             '</div>' +
             '</div>' +
                                          '<div class="form-group col-lg-1">' +
-                                    '<div class="input-group m-b">' +
+
                                         '<div class="input-group m-b">' +
 
                                             '<a  class="btn bg-maroon btn-flat" onclick="DeleteItem(' + ItemsID + ')" title="Delete Item" ><i class="fa fa-trash" aria-hidden="true"></i></button>' +
-                                        '</div></div></div></div>';
+                                        '</div></div></div>';
             CategoriesID++;
             ItemsID++;
             $('#appendItem').append(itemHtml);
             TotalPrice()
-            ResetPage('Item-add-sec')
         }
-    }
-    function DeleteItem(id)
-    {
-        $('#ItemRow_' + id).remove();
-        TotalPrice();
-    }
-
-    function SubTotalPrice()
-    {
-
-        if($('#Quantity').val() != '' && $('#Price').val() != '')
-        {
-
-            $('#SubTotalPrice').val((parseInt($('#Quantity').val()) * parseInt($('#Price').val())).toFixed(2));
+        $('#tax').on('keyup change', function () {
+            calc_total();
+        });
+        function calc_total() {
+            debugger;
+            // var total = 0;
+            //$('.total').each(function () {
+            //    total += parseInt($(this).val());
+            //});
+            var subtotal = parseInt($('#sub_total').val());
+            var tax_sum = subtotal / 100 * $('#tax').val();
+            $('#tax_amount').val(tax_sum.toFixed(2));
+            $('#total_amount').val((tax_sum + subtotal).toFixed(2));
         }
-    }
-
-    function TotalPrice()
-    {
-        debugger;
-        var total = 0;
-        $('[data-attr="Price"]').each(function () {
-            if ($(this).val()!='')
-            {
-                if ($('#Quantity_' + $(this).attr('id').split('_')[1]).val() != '')
-                {
-                    var total_Price = parseInt($('#Quantity_' + $(this).attr('id').split('_')[1]).val()) * parseInt($(this).val());
-                    $('#TotalPrice_' + $(this).attr('id').split('_')[1]).val(total_Price);
-                    total += total_Price;
-                }
-
-            }
-
-
-
-        })
-        $('#sub_total').val(total.toFixed(2));
-        calc_total();
-
-    }
-    function SaveQuatation()
-    {
-        var EventInfoID= $('[data-attr="EventInfoID"]').val();
-        var itemsLst = [];
-        var s = 0;
-        $('.addeditems').each(function () {
-            var obj = new Object();
-            var id = $(this).attr('id');
-            $("#" + id + " [data-attr]").each(function () {
-                obj[$(this).data('attr')] = $(this).val();
-            })
-            obj['EventInfoID']=EventInfoID;
-            obj['Status'] = true;
-            itemsLst[s] = obj;
-            s++;
-        })
-        debugger;
-        var saveitems = PostJsonToApi('EventItemsData/AddItemsToEvent', JSON.stringify(itemsLst));
-        s = 0;
-        $('.addeditems').each(function () {
-            var id = $(this).attr('id');
-            $("#" + id + " [data-attr='EventItemID']").val(saveitems[s].EventItemID);
-            s++;
-        })
-
-    }
-    function BindItemsList(v) {
-        var itemHtml = '<div class="row addeditems" id="ItemRow_' + ItemsID + '">' +
-        '<input type="hidden" placeholder="EventItemID" class="" data-attr="EventItemID" id="EventItemID_' + ItemsID + '" name="EventItemID" value="' + v.EventItemID + '"   readonly >' +
-
-            ' <div class="form-group col-lg-3">' +
-                               
-                                '<div class="input-group m-b">' +
-                                    '<i class="fa fa-glass input-group-addon"></i>' +
-                                   '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + v.CategoryValue + '" readonly >' +
-                                '</div>' +
-                            '</div>' +
-
-        '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + v.CategoryID + '" readonly >' +
-            '<div class="form-group col-lg-3">' +
-                               
-
-                                '<div class="input-group m-b">' +
-                                    '<i class="fa fa-cubes input-group-addon"></i>' +
-
-        '<input type="text" placeholder="Categories" class="form-control" data-attr="ItemValue" id="Items_' + ItemsID + '" name="Items"  value="' + v.ItemValue + '" readonly >' +
-          '<input type="hidden" placeholder="Categories" class="form-control" data-attr="ItemID" id="ItemID_' + ItemsID + '" name="Items"  value="' + v.ItemID + '" readonly >' +
-
-                                    '</div></div>' +
-
-                                    '<div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-hourglass input-group-addon"></i>' +
-                                    '<input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity_' + ItemsID + '" name="Quantity" onkeyup="TotalPrice()" value="' + v.Quantity + '"  >' +
-                                    '</div></div><div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-money input-group-addon"></i>' +
-                                    '<input type="text" placeholder="Price" class="form-control price" data-attr="Price" id="Price_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" value="' + v.Price + '"   ></div></div>' +
-
-                                    '<div class="form-group col-lg-1">' +
-        
-
-        '<div class="input-group m-b">' +
-        //'<i class="fa fa-money input-group-addon"></i>' +
-        '<input type="text" placeholder="Price" class="form-control" id="TotalPrice_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" readonly>' +
-        '</div>' +
-        '</div>' +
-                                     '<div class="form-group col-lg-1">' +
-                               
-                                    '<div class="input-group m-b">' +
-
-                                        '<a  class="btn bg-maroon btn-flat" onclick="DeleteItem(' + ItemsID + ')" title="Delete Item" ><i class="fa fa-trash" aria-hidden="true"></i></button>' +
-                                    '</div></div></div>';
-        CategoriesID++;
-        ItemsID++;
-        $('#appendItem').append(itemHtml);
-        TotalPrice()
-    }
-    $('#tax').on('keyup change', function () {
-        calc_total();
-    });
-    function calc_total() {
-        debugger;
-      // var total = 0;
-        //$('.total').each(function () {
-        //    total += parseInt($(this).val());
-        //});
-        var subtotal = parseInt($('#sub_total').val());
-      var  tax_sum = subtotal / 100 * $('#tax').val();
-        $('#tax_amount').val(tax_sum.toFixed(2));
-        $('#total_amount').val((tax_sum + subtotal).toFixed(2));
-    }
     </script>
-
 }
 
 

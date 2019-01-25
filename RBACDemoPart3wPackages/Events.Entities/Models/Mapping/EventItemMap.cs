@@ -19,7 +19,7 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.CategoryValue)
                 .HasMaxLength(150);
 
-            this.Property(t => t.ItemValue)
+            this.Property(t => t.ItemName)
                 .HasMaxLength(150);
 
             // Table & Column Mappings
@@ -28,8 +28,7 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.EventInfoID).HasColumnName("EventInfoID");
             this.Property(t => t.CategoryID).HasColumnName("CategoryID");
             this.Property(t => t.CategoryValue).HasColumnName("CategoryValue");
-            this.Property(t => t.ItemID).HasColumnName("ItemID");
-            this.Property(t => t.ItemValue).HasColumnName("ItemValue");
+            this.Property(t => t.ItemName).HasColumnName("ItemName");
             this.Property(t => t.Quantity).HasColumnName("Quantity");
             this.Property(t => t.Price).HasColumnName("Price");
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");

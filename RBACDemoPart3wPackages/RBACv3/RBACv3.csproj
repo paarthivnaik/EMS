@@ -190,6 +190,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeDataController.cs" />
     <Compile Include="Controllers\EventItemsDataController.cs" />
+    <Compile Include="Controllers\EventItemsTaxDetailsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\EventsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
