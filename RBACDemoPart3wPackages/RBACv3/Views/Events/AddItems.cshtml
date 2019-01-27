@@ -1,0 +1,586 @@
+﻿
+@{
+    ViewBag.Title = "AddItems";
+}
+<div class="row">
+    <div class="col-md-12" >
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title"><strong>Customer Information</strong> </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="pointer-events:none">
+                <div class="row" data-role="create-sec">
+
+                    <div class="col-lg-12">
+                        <div class="row">
+
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Customer Name</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-sort-alpha-asc input-group-addon"></i>
+                                    <input type="text" id="CustomerName" class="form-control" placeholder="Customer Name" name="CustomerName" data-attr="CustomerName" data-valt="required">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Mobile Number</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-mobile input-group-addon"></i>
+                                    <input type="text" placeholder="Mobile Number" class="form-control" data-attr="MobileNo" id="MobileNo" name="MobileNo" data-valt="required">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">Alternate Mobile</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-mobile input-group-addon"></i>
+                                    <input type="text" placeholder="Alternate Mobile" class="form-control" data-attr="AlternateMobileNo" id="AlternateMobileNo" name="AlternateMobileNo">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Event Type</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-glass input-group-addon"></i>
+                                    <select class="form-control EventType" id="EventType" name="EventType" data-attr="EventType" data-listentry="" data-valt="required">
+                                        <option value="0">-- Select --</option>
+                                        <option value="1">Mehandi</option>
+                                        <option value="2">Sangeeth</option>
+                                        <option value="3">Birth Day</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Event Start Date</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" id="entStartDate" class="form-control datepicker" placeholder="Event Start Date" name="EventStartDate" data-attr="EventStartDate" data-valt="required">
+
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Event End Date</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-calendar input-group-addon"></i>
+                                    <input type="text" id="eventEndDate" class="form-control datepicker" placeholder="Event End Date" name="EventEndDate" data-attr="EventEndDate" data-valt="required">
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">Package Name</strong>
+
+                                <div class="input-group m-b">
+                                    <i class="fa fa-gift input-group-addon"></i>
+                                    <select class="form-control" id="Package" name="Package" data-attr="Package" data-listentry="">
+                                        <option value="0">-- Select --</option>
+                                        <option value="1">Mehandi</option>
+                                        <option value="2">Sangeeth</option>
+                                        <option value="3">Birth Day</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">* Package Price</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-money input-group-addon"></i>
+                                    <input type="text" placeholder="Package Cost" id="PackagePrice" class="form-control" data-attr="PackagePrice">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Total Cost</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-usd input-group-addon"></i>
+                                    <input type="number" placeholder="Total Price" id="TotalPrice" class="form-control" data-attr="TotalPrice" data-valt="required">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">Advance</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-usd input-group-addon"></i>
+                                    <input type="number" placeholder="Advance" id="AdvancePrice" class="form-control" data-attr="AdvancePrice">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Event Manager Name</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-user input-group-addon"></i>
+                                    <input type="text" placeholder="Manager Name" id="Manager" class="form-control" data-attr="Manager" data-valt="required">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <strong class="m-b-xs">*Mobile</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-mobile input-group-addon"></i>
+                                    <input type="number" placeholder="Manager Mobile" id="ManagerMobile" class="form-control" data-attr="ManagerMobile" data-valt="required">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <strong class="m-b-xs">* Venue</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-map-marker input-group-addon"></i>
+                                    <input type="text" placeholder="Venue" id="Venue" class="form-control" data-attr="Venue" data-valt="required">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <input type="hidden" data-attr="EventInfoID" id="KeyId" />
+                    <input type="hidden" data-attr="EventRefID" />
+                    <input type="hidden" data-attr="CreatedBy" />
+                    <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
+                    <input type="hidden" data-attr="ModifiedBy" />
+                    <input type="hidden" data-attr="ModifiedOn" />
+                    <input type="hidden" data-attr="Status" />
+
+
+                </div>
+                <!-- /.row -->
+            </div>
+           
+        </div>
+        <!-- /.box -->
+    </div>
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title"><strong>Event Items</strong> </h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <div class="" data-role="create-item-sec">
+                    
+                        <div class="col-lg-12">
+                            <div class="row" data-role="Item-add-sec">
+
+
+                                <div class="form-group col-lg-3">
+                                    <strong class="m-b-xs">*Category</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-glass input-group-addon"></i>
+                                        <select class="form-control Categories" id="Categories" name="Categories" data-attr="Categories" data-listentry="" data-valt="required">
+                                            <option value="0">-- Select --</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-3">
+                                    <strong class="m-b-xs">*Items</strong>
+
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-cubes input-group-addon"></i>
+                                        <input type="text" placeholder="Item Name" class="form-control" data-attr="itemValue" id="itemValue" name="itemValue" data-valt="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-2">
+                                    <strong class="m-b-xs">*Quantity</strong>
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-hourglass input-group-addon"></i>
+                                        <input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity" name="Quantity" data-valt="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-2">
+                                    <strong class="m-b-xs">*Unit Price</strong>
+
+                                    <div class="input-group m-b">
+                                        <i class="fa fa-money input-group-addon"></i>
+                                        <input type="text" placeholder="Price" class="form-control" id="Price" name="Price" onkeyup="SubTotalPrice()" data-valt="required">
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-1">
+                                    <strong class="m-b-xs">*Total</strong>
+
+                                    <div class="input-group m-b">
+                                        @*<i class="fa fa-money input-group-addon"></i>*@
+                                        <input type="text" placeholder="Price" class="form-control" id="SubTotalPrice" name="Price" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-lg-1">
+                                    <div class="input-group m-b" style="padding-top: 8px;">
+                                        <div class="input-group m-b">
+
+                                            <button type="button" class="btn bg-purple btn-flat margin" onclick="AddItem()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr style="border:1px solid blue" />
+                            <div class="form-group col-lg-3">
+                                <strong class="m-b-xs">Category</strong>
+                            </div>
+                            <div class="form-group col-lg-3">
+                                <strong class="m-b-xs">Item Name</strong>
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <strong class="m-b-xs">Quantity</strong>
+                            </div>
+                            <div class="form-group col-lg-2">
+                                <strong class="m-b-xs">Unit Price</strong>
+                            </div>
+                            <div class="form-group col-lg-1">
+                                <strong class="m-b-xs">Total</strong>
+                            </div>
+                            <div class="form-group col-lg-1">
+                                <strong class="m-b-xs">Actions</strong>
+                            </div>
+                            <hr style="border:1px solid blue" />
+                            <div data-role="finalEdit-sec">
+                                <div class="" id="appendItem">
+
+                                </div>
+                                <div class="row clearfix" style="margin-top:20px" data-role="totaltax-sec">
+                                    <div class="pull-right col-md-4">
+                                        <input type="hidden" data-attr="EventItemsTaxDetId" id="EventItemsTaxDetId" />
+                                        <input type="hidden" data-attr="EventInfoID" id="eventInfoId" />
+                                        <table class="table table-bordered table-hover" id="tab_logic_total">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="text-center">Sub Total</th>
+                                                    <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' data-attr="Subtotal" class="form-control" id="sub_total" readonly /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">Tax</th>
+                                                    <td class="text-center">
+                                                        <div class="input-group mb-2 mb-sm-0">
+                                                            <input type="number" class="form-control" id="tax" placeholder="0" data-attr="tax">
+                                                            <div class="input-group-addon">%</div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">Tax Amount</th>
+                                                    <td class="text-center"><input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" data-attr="TaxAmount" readonly /></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center">Grand Total</th>
+                                                    <td class="text-center"><input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" data-attr="GrandTotal" readonly /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <a type="button" class="btn btn-primary modal-link" style="margin-right: 5px;"  data-toggle='modal' data-backdrop='static' id="generatePdf">
+                                <i class="fa fa-download"></i> Generate PDF
+                            </a>
+                            <div class="form-group col-lg-2 pull-right" id="quotaionDiv" style="display:none">
+                                
+                                <div class="input-group m-b">
+                                    <button id="saveQuotation" class="btn btn-sm btn-info btn-flat pull-left" onclick="SaveQuatation()"><i class="fa fa-save"></i> Save Quotation</button>
+                                    
+                                 </div>
+                               
+                            </div>
+
+                        </div>
+                   
+
+
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+        <!-- /.box -->
+    </div>
+    </div>
+@section scripts{
+
+    <script>
+        var CategoriesID = 1;
+        var ItemsID = 1;
+        var keyId = 0;
+        var ItemsData = [];
+        $(document).ready(function () {
+            BindLELV('Categories');
+           
+            keyId = GetQueryStringValues(window.location.href, 'keyId');
+            if (keyId > 0) {
+                bindRequiredData('EventsData/GetById?eventInfoId=' + keyId, "create-sec")
+                ItemsData = GetJsonFromApi('EventItemsData/GetById?eventInfoId=' + keyId);
+                if (ItemsData != null) {
+                    for (var i = 0; i < ItemsData.length; i++)
+                        BindItemsList(ItemsData[i]);
+
+                }
+                $('#eventInfoId').val($('#KeyId').val());
+                bindRequiredData('EventItemsTaxDetails/GetById?eventInfoId=' + keyId, "totaltax-sec")
+            }
+
+            $('#generatePdf').attr('href', '/Events/EventItemDetails?keyId=' + $('#KeyId').val());
+
+           
+
+
+        })
+       
+        function AddItem() {
+            if (displayvalidation('Item-add-sec')) {
+                var itemHtml = '<div class="row addeditems" id="ItemRow_' + ItemsID + '">' +
+                '<input type="hidden" placeholder="EventItemID" class="" data-attr="EventItemID" id="EventItemID_' + ItemsID + '" name="EventItemID"   readonly >' +
+
+                    ' <div class="form-group col-lg-3">' +
+
+                                        '<div class="input-group m-b">' +
+                                            '<i class="fa fa-glass input-group-addon"></i>' +
+                                           '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').text() + '" readonly >' +
+                                        '</div>' +
+                                    '</div>' +
+
+                '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').val() + '" readonly >' +
+                    '<div class="form-group col-lg-3">' +
+
+
+                                        '<div class="input-group m-b">' +
+                                            '<i class="fa fa-cubes input-group-addon"></i>' +
+                  '<input type="text" placeholder="Categories" class="form-control" data-attr="ItemName" id="ItemID_' + ItemsID + '" name="Items"  value="' + $('#itemValue').val() + '" readonly >' +
+
+                                            '</div></div>' +
+
+                                            '<div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-hourglass input-group-addon"></i>' +
+                                            '<input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity_' + ItemsID + '" name="Quantity" onkeyup="TotalPrice()" value="' + $('#Quantity').val() + '"  >' +
+                                            '</div></div><div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-money input-group-addon"></i>' +
+                                            '<input type="text" placeholder="Price" class="form-control price" data-attr="Price" id="Price_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" value="' + $('#Price').val() + '"   ></div></div>' +
+
+                                            '<div class="form-group col-lg-1">' +
+
+
+                '<div class="input-group m-b">' +
+                //'<i class="fa fa-money input-group-addon"></i>' +
+                '<input type="text" placeholder="Price" class="form-control" id="TotalPrice_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" readonly>' +
+                '</div>' +
+                '</div>' +
+                                             '<div class="form-group col-lg-1">' +
+                                        '<div class="input-group m-b">' +
+                                            '<div class="input-group m-b">' +
+
+                                                '<a  class="btn bg-maroon btn-flat" onclick="DeleteItem(' + ItemsID + ')" title="Delete Item" ><i class="fa fa-trash" aria-hidden="true"></i></button>' +
+                                            '</div></div></div></div>';
+                CategoriesID++;
+                ItemsID++;
+                $('#appendItem').append(itemHtml);
+                TotalPrice()
+                ResetPage('Item-add-sec')
+                $('#quotaionDiv').show();
+            }
+        }
+        //function DeleteItem(id) {
+            
+        //    $('#ItemRow_' + id).remove();
+        //    TotalPrice();
+        //    $('#quotaionDiv').hide();
+        //}
+        function DeleteItem(id) {
+
+            //////////////////////
+            iziToast.warning({
+                title: 'Delete Warning!',
+                message: 'Are you sure you want to Delete?',
+                timeout: false,
+                overlay: true,
+                color: 'yellow',
+                position: 'center',
+                buttons: [
+                    ['<button>Yes</button>', function (instance, toast) {
+                        debugger;
+
+                        result = GetJsonFromApi("/EventItemsData/Delete?eventItemId=" + id);
+
+
+                        if (result) {
+                            ToastSuccess('Deleted Sucessfully.');
+                          
+                            $('#ItemRow_' + id).remove();
+                            TotalPrice();
+                            $('#quotaionDiv').hide();
+                            var resObj = post("totaltax-sec", 'EventItemsTaxDetails/Save', '');
+                            bindRequiredData('EventItemsTaxDetails/GetById?eventInfoId=' + keyId, "totaltax-sec")
+                        }
+                        else {
+                            ToastError("Error ocuured While doing operation")
+                        }
+
+                        instance.hide({
+                            transitionOut: 'fadeOutDown',
+
+                        }, toast, 'buttonName');
+
+
+                    }, true],
+                    ['<button>No</button>', function (instance, toast) {
+                        instance.hide({
+                            transitionOut: 'fadeOutDown',
+
+                        }, toast, 'buttonName');
+
+                    }]
+                ],
+
+            });
+        }
+        function SubTotalPrice() {
+            debugger;
+            if ($('#Quantity').val() != '' && $('#Price').val() != '') {
+
+                $('#SubTotalPrice').val((parseInt($('#Quantity').val()) * parseInt($('#Price').val())).toFixed(2));
+            }
+        }
+
+        function TotalPrice() {
+            debugger;
+            var total = 0;
+            $('[data-attr="Price"]').each(function () {
+                if ($(this).val() != '') {
+                    if ($('#Quantity_' + $(this).attr('id').split('_')[1]).val() != '') {
+                        var total_Price = parseInt($('#Quantity_' + $(this).attr('id').split('_')[1]).val()) * parseInt($(this).val());
+                        $('#TotalPrice_' + $(this).attr('id').split('_')[1]).val(total_Price);
+                        total += total_Price;
+                    }
+
+                }
+
+
+
+            })
+            $('#sub_total').val(total.toFixed(2));
+            calc_total();
+
+        }
+        function SaveQuatation() {
+            if (displayvalidation('finalEdit-sec')) {
+                var EventInfoID = $('[data-attr="EventInfoID"]').val();
+                var itemsLst = [];
+                var s = 0;
+                $('.addeditems').each(function () {
+                    var obj = new Object();
+                    var id = $(this).attr('id');
+                    $("#" + id + " [data-attr]").each(function () {
+                        obj[$(this).data('attr')] = $(this).val();
+                    })
+                    obj['EventInfoID'] = EventInfoID;
+                    obj['Status'] = true;
+                    itemsLst[s] = obj;
+                    s++;
+                })
+                debugger;
+                var saveitems = PostJsonToApi('EventItemsData/AddItemsToEvent', JSON.stringify(itemsLst));
+                if (saveitems != null) {
+                    var resObj = post("totaltax-sec", 'EventItemsTaxDetails/Save', '');
+                    if (resObj > 0)
+                        $('[data-attr="EventItemsTaxDetId"]').val(resObj);
+
+                    s = 0;
+                    $('.addeditems').each(function () {
+                        var id = $(this).attr('id');
+                        $("#" + id + " [data-attr='EventItemID']").val(saveitems[s].EventItemID);
+                        s++;
+                    })
+                    ToastSuccess('Events Saved Sucessfully.')
+                }
+                else {
+                    ToastError('Error Occured During Processing Data.')
+                }
+
+
+            }
+        }
+        function BindItemsList(v) {
+            var itemHtml = '<div class="row addeditems" id="ItemRow_' + v.EventItemID + '">' +
+            '<input type="hidden" placeholder="EventItemID" class="" data-attr="EventItemID" id="EventItemID_' + ItemsID + '" name="EventItemID" value="' + v.EventItemID + '"   readonly >' +
+
+                ' <div class="form-group col-lg-3">' +
+
+                                    '<div class="input-group m-b">' +
+                                        '<i class="fa fa-glass input-group-addon"></i>' +
+                                       '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + v.CategoryValue + '" readonly >' +
+                                    '</div>' +
+                                '</div>' +
+
+            '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + v.CategoryID + '" readonly >' +
+                '<div class="form-group col-lg-3">' +
+
+
+                                    '<div class="input-group m-b">' +
+                                        '<i class="fa fa-cubes input-group-addon"></i>' +
+
+            '<input type="text" placeholder="Item Name" class="form-control" data-attr="ItemName" id="Items_' + ItemsID + '" name="Items"  value="' + v.ItemName + '" readonly >' +
+
+                                        '</div></div>' +
+
+                                        '<div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-hourglass input-group-addon"></i>' +
+                                        '<input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity_' + ItemsID + '" name="Quantity" onkeyup="TotalPrice()" value="' + v.Quantity + '"  >' +
+                                        '</div></div><div class="form-group col-lg-2"><div class="input-group m-b"><i class="fa fa-money input-group-addon"></i>' +
+                                        '<input type="text" placeholder="Price" class="form-control price" data-attr="Price" id="Price_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" value="' + v.Price + '"   ></div></div>' +
+
+                                        '<div class="form-group col-lg-1">' +
+
+
+            '<div class="input-group m-b">' +
+            //'<i class="fa fa-money input-group-addon"></i>' +
+            '<input type="text" placeholder="Price" class="form-control" id="TotalPrice_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" readonly>' +
+            '</div>' +
+            '</div>' +
+                                         '<div class="form-group col-lg-1">' +
+
+                                        '<div class="input-group m-b">' +
+
+                                            '<a  class="btn bg-maroon btn-flat" onclick="DeleteItem(' + v.EventItemID + ')" title="Delete Item" ><i class="fa fa-trash" aria-hidden="true"></i></button>' +
+                                        '</div></div></div>';
+            CategoriesID++;
+            ItemsID++;
+            $('#appendItem').append(itemHtml);
+            TotalPrice();
+            $('#quotaionDiv').show();
+        }
+        $('#tax').on('keyup change', function () {
+            calc_total();
+        });
+        function calc_total() {
+            debugger;
+            // var total = 0;
+            //$('.total').each(function () {
+            //    total += parseInt($(this).val());
+            //});
+            var subtotal = parseInt($('#sub_total').val());
+            var tax_sum = subtotal / 100 * $('#tax').val();
+            $('#tax_amount').val(tax_sum.toFixed(2));
+            $('#total_amount').val((tax_sum + subtotal).toFixed(2));
+        }
+    </script>
+}

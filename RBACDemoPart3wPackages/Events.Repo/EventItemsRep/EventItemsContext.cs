@@ -11,10 +11,14 @@ namespace Events.Repo.EventItemsRep
 {
     public class EventItemsContext : BaseContext<EventItemsContext>
     {
+        public DbSet<EventInfo> EventInfos { get; set; }
         public DbSet<EventItem> EventItems { get; set; }
+        public DbSet<EventItemsTaxDet> EventItemsTaxDets { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new EventInfoMap());
             modelBuilder.Configurations.Add(new EventItemMap());
+            modelBuilder.Configurations.Add(new EventItemsTaxDetMap());
 
         }
     }

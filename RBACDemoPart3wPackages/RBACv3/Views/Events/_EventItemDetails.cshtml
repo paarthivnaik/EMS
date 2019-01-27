@@ -1,0 +1,209 @@
+﻿<div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3 class="modal-title modal-head text-center"> Event Items Details</h3>
+
+</div>
+
+<div class="modal-body">
+    <div id="eventItemsDetails">       
+    </div>
+</div>
+
+<script src="~/Scripts/HTML to PDF/HTML to PDF/js/jspdf.js"></script>
+<script src="~/Scripts/HTML to PDF/HTML to PDF/js/pdfFromHTML.js"></script>
+<script>
+    function FormatDate(propval) {
+        if (propval !== null && propval !== undefined) {
+            var d = new Date(propval);
+            var date = d.getDate() <= 9 ? ('0' + d.getDate()) : d.getDate();
+            var month = d.getMonth() < 9 ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1);
+            var year = d.getFullYear();
+            return month + "/" + date + "/" + year;
+        }
+    }
+</script>
+<script>
+    var infoId = '@ViewBag.eventInfoId';
+    var tempItemData=null;
+    $(document).ready(function () {
+       
+        var template1 = _.template($("#textemplate").html());
+        debugger;
+       var tempData = GetJsonFromApi('/EventItemsData/GetItemDet?eventInfoId=' + infoId);
+       if (tempData != null && tempData != "") {
+          
+               temp = new Object();
+               temp.EventRefID = tempData.EventRefID;
+               temp.CustomerName = tempData.CustomerName;
+               temp.EventTypeValue = tempData.EventTypeValue;
+               temp.MobileNo = tempData.MobileNo;
+               temp.EventStartDate = tempData.EventStartDate;
+               temp.EventEndDate = tempData.EventEndDate;
+               temp.Venue = tempData.Venue;
+               temp.EventItems = tempData.EventItems;
+               temp.EventTax = tempData.EventTax;
+               tempItemData = temp;
+           
+       }
+
+
+
+
+       $("#eventItemsDetails").html(template1(tempItemData));
+     
+        //Print Option 
+      
+       function printDiv() {
+           var printContents = document.getElementById("HTMLtoPDF").innerHTML;
+           var originalContents = document.body.innerHTML;
+           document.body.innerHTML = printContents;
+           window.print();
+           window.focus()
+           
+           window.close();
+           document.body.innerHTML = originalContents;
+           return false;
+       }
+       $('#printDiv').on('click', function () {
+           printDiv();
+       })
+
+    });
+</script>
+<script type="text/template" id="textemplate">
+    <section class="invoice">
+        <div id="HTMLtoPDF">
+            <!-- title row -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="page-header">
+                        <i class="fa fa-globe"></i>Rock Star Events.
+                        <small class="pull-right">Date:@DateTime.Now</small>
+                    </h2>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- info row -->
+            <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                    From
+                    <address>
+                        <strong>Rock Star Events.</strong><br>
+                        Vivaknadha Nager gate no 1 road no19<br>
+                        Plot no77/8 shop no 2 vivaknadha Nager gate no 1 Usha mullapudi road kukatpally<br>
+                        Hyderabad, Telangana 500072
+                        <br />
+
+                        Phone:(040) 4020 8555<br>
+                        Email: rockstarevents777@gmail.com
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    To
+                    <%debugger%>
+                    <% if (tempItemData!=null) {%>
+
+                    <address>
+                        <strong> <%- tempItemData.CustomerName %></strong><br>
+                        Phone: <%- tempItemData.MobileNo %><br>
+                        Event : <%- tempItemData.EventTypeValue %><br>
+                        Venue :  <%- tempItemData.Venue %><br>
+                        Event Strat Date: <%=FormatDate(tempItemData.EventStartDate) %><br>
+                        Event End Date: <%=FormatDate(tempItemData.EventEndDate) %><br>
+                    </address>
+
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    <b>Event Code : <%- tempItemData.EventRefID %></b><br>
+                    <br>
+                    <b>Ammount :</b>30000<br>
+                </div>
+                <!-- /.col -->
+                <% } %>
+            </div>
+            <!-- /.row -->
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-xs-12 table-responsive">
+                    <table class="table table-striped" style="border:2px solid;">
+                        <thead style="background-color:darkgrey">
+                            <tr>
+                                <th>Category</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (tempItemData.EventItems!=null && tempItemData.EventItems.length>0  ) {%>
+                            <% _.each( tempItemData.EventItems, function(datatask){ %>
+                            <tr>
+                                <td> <%-datatask.CategoryValue%> </td>
+                                <td><%-datatask.ItemName%> </td>
+                                <td><%-datatask.Quantity%> </td>
+                                <td><%-datatask.Price%> </td>
+
+                                <td><%= parseInt(datatask.Quantity)*parseFloat(datatask.Price) %></td>
+                            </tr>
+                            <% }); %>
+                            <%}else{%>
+                            <div class="text-center">
+                                <h6>No Items Added.</h6>
+                            </div>
+
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <!-- accepted payments column -->
+                <div class="col-xs-6">
+
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-6">
+                    <% if (tempItemData.EventTax!=null) {%>
+                    <div class="table-responsive">
+                        <table class="table" style="border:2px solid;">
+                            <tr>
+                                <th style="width:50%">Subtotal:</th>
+                                <td><%-tempItemData.EventTax.Subtotal %></td>
+                            </tr>
+                            <tr>
+                                <th>Tax (<%-tempItemData.EventTax.tax %>%) :</th>
+                                <td><%-tempItemData.EventTax.TaxAmount %></td>
+                            </tr>
+                            <tr>
+                                <th>Total:</th>
+                                <td><%-tempItemData.EventTax.GrandTotal %></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <% } %>
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- this row will not appear when printing -->
+        <br/>
+        <div class="row no-print">
+            <div class="col-xs-12">
+
+                <button type="button" class="btn btn-success pull-right" id="printDiv">
+                    <i class="fa fa-print"></i>Print
+                </button>
+                <a onclick="HTMLtoPDF()" class="btn btn-primary pull-right" style="margin-right: 5px;">
+                    <i class="fa fa-download"></i> Generate PDF
+                </a>
+            </div>
+        </div>
+    </section>
+  
+</script>

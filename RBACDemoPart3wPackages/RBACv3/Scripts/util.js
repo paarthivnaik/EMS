@@ -66,7 +66,7 @@ function post(role, route, mode) {
             if (resultID.hasOwnProperty("m_Item1")) {
                 res = resultID.m_Item1;
             }
-            if (res[0] > 0) {
+            if (res > 0) {
                 if (mode === 'Insert') {
                     ToastSuccess('Your Information Saved Successfully.')
                 }
@@ -453,13 +453,7 @@ function bind(route, sec) {
                 }
 
 
-                if ($(this).val(propval).val() != null && $(this).val(propval).val().indexOf(":Deleted") != -1) {
-
-                    $(this).parent().parent().find('strong').after("<span class='errormsg' style='color:red;'>&nbsp;&nbsp;&nbsp;This field is required</span>");
-                    $(this).addClass("error");
-                    $(this).attr('data-valt', 'required');
-                }
-
+            
                 if ($(this).is('select')) {
                     debugger;
                     if (($(this).prop("tagName") === 'SELECT') && (document.getElementById(this.id).multiple == true)) {
@@ -684,6 +678,15 @@ function bindRequiredData(route, role) {
                         var month = d.getMonth() < 9 ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1);
                         var year = d.getFullYear();
                         $(this).val(year + "-" + month + "-" + date);
+                    }
+                }
+                else if (($(this).hasClass('datepicker'))) {
+                    if (propval !== null && propval !== undefined) {
+                        var d = new Date(propval);
+                        var date = d.getDate() <= 9 ? ('0' + d.getDate()) : d.getDate();
+                        var month = d.getMonth() < 9 ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1);
+                        var year = d.getFullYear();
+                        $(this).val(month + "/" + date + "/" + year);
                     }
                 }
                 else if (($(this).attr('class') === 'summernote1')) {
@@ -2780,3 +2783,9 @@ function BindVendors(Vendordata) {
         }
     });
 }
+
+$('.datepicker').datepicker({
+    autoclose: true,
+    forceParse: false,
+    format: "dd/mm/yyyy"
+});

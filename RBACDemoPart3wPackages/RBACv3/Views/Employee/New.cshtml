@@ -95,7 +95,7 @@
                                 <strong class="m-b-xs">*Date Of Joining</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" id="DOJ" class="form-control datepicker" placeholder="Date of Joining" name="DOJ" data-attr="DOJ" data-valt="required">
+                                    <input type="date" id="DOJ" class="form-control datepicker" placeholder="Date of Joining" name="DOJ" data-attr="DOJ" data-valt="required">
 
                                 </div>
 
@@ -105,7 +105,7 @@
                                 <strong class="m-b-xs">*Date Of Birth</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" id="DOB" class="form-control datepicker" placeholder="DOB" name="DOB" data-attr="DOB" data-valt="required">
+                                    <input type="date" id="DOB" class="form-control datepicker" placeholder="DOB" name="DOB" data-attr="DOB" data-valt="required">
 
                                 </div>
 
@@ -204,17 +204,7 @@
 <script>
     $(document).ready(function () {
         BindLELV('CivilStatus,Gender,BloodType,Proof');
-        //Date picker
-        $('.datepicker').datepicker({
-            autoclose: true,
-            dateFormat: 'dd-mm-yy'
-        });
-
-        //$('#saveEvent').click(function () {
-        //    if (displayvalidation('Employeecreate-sec')) {
-        //        var resObj = post("Employeecreate-sec", 'EmployeeData/Save', 'Insert');
-        //    }
-        //});
+       
     })
     $('#saveEvent').click(function () {
         if (displayvalidation('Employeecreate-sec')) {

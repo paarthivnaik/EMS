@@ -3,7 +3,7 @@
 }
 
 
-<a class="btn btn-success" style="margin-bottom:10px" onclick="PopupForm('@Url.Action("AddOrEdit","Employee")')"><i class="fa fa-plus"></i> Add New</a>
+<a class="btn btn-success" style="margin-bottom:10px" href="/Events/Create"><i class="fa fa-plus"></i> Add New</a>
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Hover Data Table</h3>
@@ -45,7 +45,7 @@
                         { "data": "EventTypeValue" },
                         {
                             "data": "EventInfoID", "render": function (data) {
-                                return "<a class='btn btn-primary btn-sm' href=/Events/Edit?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
+                                return "<a class='btn btn-primary btn-sm' href=/Events/Edit?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' title='Add Items to events' style='margin-left:5px'href=/Events/AddItems?keyId=" + data + "><i class='fa fa-glass'></i></a>";
                             },
                             "orderable": false,
                             "searchable": false,
@@ -60,49 +60,7 @@
                 });
             });
 
-            function PopupForm(url) {
-                var formDiv = $('<div/>');
-                $.get(url)
-                .done(function (response) {
-                    formDiv.html(response);
-
-                    Popup = formDiv.dialog({
-                        autoOpen: true,
-                        resizable: false,
-                        title: 'Fill Employee Details',
-                        height: 500,
-                        width: 700,
-                        close: function () {
-                            Popup.dialog('destroy').remove();
-                        }
-
-                    });
-                });
-            }
-
-            function SubmitForm(form) {
-                $.validator.unobtrusive.parse(form);
-                if ($(form).valid()) {
-                    $.ajax({
-                        type: "POST",
-                        url: form.action,
-                        data: $(form).serialize(),
-                        success: function (data) {
-                            if (data.success) {
-                                Popup.dialog('close');
-                                dataTable.ajax.reload();
-
-                                $.notify(data.message, {
-                                    globalPosition: "top center",
-                                    className: "success"
-                                })
-
-                            }
-                        }
-                    });
-                }
-                return false;
-            }
+            
 
             function Delete(id) {
                 if (confirm('Are You Sure to Delete this Employee Record ?')) {

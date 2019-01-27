@@ -208,10 +208,7 @@
     $(document).ready(function () {
         BindLELV('CivilStatus,Gender,BloodType,Proof');
         //Date picker
-        $('.datepicker').datepicker({
-            autoclose: true,
-            format: 'dd/mm/yyyy',
-        });
+       
         var empId = GetQueryStringValues(window.location.href, 'keyId');
         bind("/api/EmployeeData/GetById?employeeId=" + empId, 'Employeecreate-sec');
        

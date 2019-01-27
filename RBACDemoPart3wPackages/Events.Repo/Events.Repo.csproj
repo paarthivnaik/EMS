@@ -49,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseContext.cs" />
+    <Compile Include="CustomerAmtPaid\CustomerAmtPaidContext.cs" />
+    <Compile Include="CustomerAmtPaid\CustomerAmtPaidRep.cs" />
+    <Compile Include="CustomerAmtPaid\ICustomerAmtPaidRep.cs" />
     <Compile Include="EmployeeRep\EmployeeContext.cs" />
     <Compile Include="EmployeeRep\EmployeeRepo.cs" />
     <Compile Include="EmployeeRep\IEmployeeRepo.cs" />

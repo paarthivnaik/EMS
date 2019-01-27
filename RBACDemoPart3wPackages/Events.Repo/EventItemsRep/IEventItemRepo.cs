@@ -13,5 +13,7 @@ namespace Events.Repo.EventItemsRep
        Task<List<EventItem>> AddItemsToEvent(List<EventItem> ObjItems);
        Task<object> GetById(long eventInfoId);
        Task<List<EventItemsFlat>> GetAll();
+       Task<bool> Delete(long eventItemId);
+       Task<object> GetItemDet(long eventInfoId);
     }
 }

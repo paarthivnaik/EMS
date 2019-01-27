@@ -25,6 +25,18 @@ namespace RBACv3.Controllers
             var result = await _repo.GetById(eventInfoId);
             return result;
         }
+        [HttpPost]
+        public async Task<bool> Delete(long eventItemId)
+        {
+            var result = await _repo.Delete(eventItemId);
+            return result;
+        }
+        [HttpPost]
+        public async Task<object> GetItemDet(long eventInfoId)
+        {
+            var result = await _repo.GetItemDet(eventInfoId);
+            return result;
+        }
         
     }
 }

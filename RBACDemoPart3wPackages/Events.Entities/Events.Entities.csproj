@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\CustomerAmtPaid.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeLeave.cs" />
     <Compile Include="Models\EventInfo.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Models\ListEntry.cs" />
     <Compile Include="Models\ListValue.cs" />
     <Compile Include="Models\ListValuesCustom.cs" />
+    <Compile Include="Models\Mapping\CustomerAmtPaidMap.cs" />
     <Compile Include="Models\Mapping\EmployeeLeaveMap.cs" />
     <Compile Include="Models\Mapping\EmployeeMap.cs" />
     <Compile Include="Models\Mapping\EventInfoMap.cs" />

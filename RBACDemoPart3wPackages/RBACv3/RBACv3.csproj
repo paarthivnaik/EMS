@@ -187,6 +187,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CustomerPaidDataController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeDataController.cs" />
     <Compile Include="Controllers\EventItemsDataController.cs" />
@@ -1288,6 +1289,9 @@
     <Content Include="Scripts\Home\DashboardV1.js" />
     <Content Include="Scripts\Home\DashboardV2-menu.js" />
     <Content Include="Scripts\Home\DashboardV2.js" />
+    <Content Include="Scripts\HTML to PDF\HTML to PDF\js\jquery-2.1.3.js" />
+    <Content Include="Scripts\HTML to PDF\HTML to PDF\js\jspdf.js" />
+    <Content Include="Scripts\HTML to PDF\HTML to PDF\js\pdfFromHTML.js" />
     <Content Include="Scripts\JQGrid\grid.locale-en.js" />
     <Content Include="Scripts\JQGrid\GridComponent.js" />
     <Content Include="Scripts\JQGrid\images\ui-bg_flat_75_aaaaaa_40x100.png" />
@@ -1724,6 +1728,19 @@
     <Content Include="Views\VendorPaid\New.cshtml" />
     <Content Include="Views\VendorPaid\_Edit.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\AddItems.cshtml" />
+    <Content Include="Views\Vendors\_VendorAssociatedEventEdit.cshtml" />
+    <Content Include="Views\VendorEvents\Edit.cshtml" />
+    <Content Include="Views\VendorEvents\Manage.cshtml" />
+    <Content Include="Views\VendorEvents\New.cshtml" />
+    <Content Include="Views\VendorEvents\_Edit.cshtml" />
+    <Content Include="Views\VendorEvents\_New.cshtml" />
+    <Content Include="Views\VendorReports\DashBoard.cshtml" />
+    <Content Include="Views\VendorReports\Ecode.cshtml" />
+    <Content Include="Views\VendorReports\Vcode.cshtml" />
+    <Content Include="Views\VendorReports\VECode.cshtml" />
+    <Content Include="Views\VendorReports\VendorRep.cshtml" />
+    <Content Include="Views\Events\_EventItemDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -41,6 +41,16 @@ namespace RBACv3.Controllers
             return View();
         }
 
-        
+        // GET: Events/Delete/5
+        public ActionResult AddItems(int keyId)
+        {
+            return View();
+        }
+        // GET: Events/Delete/5
+        public ActionResult EventItemDetails(int keyId)
+        {
+            ViewBag.eventInfoId = keyId;
+            return PartialView("_EventItemDetails");
+        }
     }
 }
