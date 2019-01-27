@@ -187,6 +187,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CustomerPaidController.cs" />
     <Compile Include="Controllers\CustomerPaidDataController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeDataController.cs" />
@@ -1741,6 +1742,8 @@
     <Content Include="Views\VendorReports\VECode.cshtml" />
     <Content Include="Views\VendorReports\VendorRep.cshtml" />
     <Content Include="Views\Events\_EventItemDetails.cshtml" />
+    <Content Include="Views\CustomerPaid\_New.cshtml" />
+    <Content Include="Views\CustomerPaid\_Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -39,7 +39,7 @@ namespace RBACv3.Controllers
             var result = await _custRepo.GetAll(eventInfoId);
             return result;
         }
-        [HttpGet]
+        [HttpPost]
         public async Task<bool> Delete(long CustomerAmtPaidId)
         {
             var result = await _custRepo.Delete(CustomerAmtPaidId);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace Events.Entities.Models
   public  class CustomerAmtPaid
     {
         public long CustomerAmtPaidID { get; set; }
+      [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string CustomerAmtPaidRefID { get; set; }
         public Nullable<long> EventInfoID { get; set; }
         public decimal Ammount { get; set; }

@@ -1,15 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Employee List";
+    ViewBag.Title = "Events Manage";
 }
 
 
 <a class="btn btn-success" style="margin-bottom:10px" href="/Events/Create"><i class="fa fa-plus"></i> Add New</a>
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Hover Data Table</h3>
+        <h3 class="box-title">Events Manage</h3>
     </div>
     <div class="box-body">
-        <table id="employeeTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+        <table id="eventsmanageTable" class="table table-bordered table-hover display nowrap" style="width:100%">
             <thead>
                 <tr>
                     <th>Event RefID</th>
@@ -29,7 +29,7 @@
         <script>
             var Popup, dataTable;
             $(document).ready(function () {
-                dataTable = $("#employeeTable").DataTable({
+                dataTable = $("#eventsmanageTable").DataTable({
                     "scrollX": true,
                     "ajax": {
                         "url": "/api/EventsData/GetAll",
@@ -41,7 +41,15 @@
                         { "data": "EventRefID" },
                         { "data": "CustomerName" },
                         { "data": "MobileNo" },
-                        { "data": "EventStartDate" },
+                         {
+                             "data": "EventStartDate", render: function (data, type, row) {
+                                 if (type === "sort" || type === "type") {
+                                     return data;
+                                 }
+                                 return moment(data).format("DD-MM-YYYY");
+                             }
+                         },
+                       
                         { "data": "EventTypeValue" },
                         {
                             "data": "EventInfoID", "render": function (data) {

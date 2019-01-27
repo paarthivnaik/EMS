@@ -47,7 +47,14 @@
                     <div class="col-lg-12">
                         <div class="row">
 
+                            <div class="form-group col-lg-12">
+                                <strong class="m-b-xs">*Event Code</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-map-marker input-group-addon"></i>
+                                    <input type="text" placeholder="EventRefID" id="EventRefID" class="form-control" data-attr="EventRefID" data-valt="required" readonly>
+                                </div>
 
+                            </div>
                             <div class="form-group col-lg-4">
                                 <strong class="m-b-xs">*Customer Name</strong>
                                 <div class="input-group m-b">
@@ -188,18 +195,80 @@
             </div>
             <div class="box-footer clearfix">
                 <button id="saveEvent" class="btn btn-sm btn-info btn-flat pull-left">Save Event</button>
-                <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">Back</a>
+                <a href="/Events/manage" class="btn btn-sm btn-default btn-flat pull-right">Back</a>
             </div>
         </div>
         <!-- /.box -->
     </div>
-    <!-- /.col -->
+    <!-- col -->
+        <div class="col-md-12">
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">Payments Details</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">Tab 2</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">Tab 3</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <a class="btn btn-success modal-link" data-toggle='modal' data-backdrop='static' style="margin-bottom:10px" href="/CustomerPaid/New?keyId=0"><i class="fa fa-plus"></i> Add New</a>
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Customer Payments</h3>
+                            </div>
+                            <div class="box-body">
+                                <table id="custPaidTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Bill NO</th>
+                                            <th>Ammount</th>
+                                            <th>Paid Date</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_2">
+                        The European languages are members of the same family. Their separate existence is a myth.
+                        For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
+                        in their grammar, their pronunciation and their most common words. Everyone realizes why a
+                        new common language would be desirable: one could refuse to pay expensive translators. To
+                        achieve this, it would be necessary to have uniform grammar, pronunciation and more common
+                        words. If several languages coalesce, the grammar of the resulting language is more simple
+                        and regular than that of the individual languages.
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_3">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting,
+                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
+                        sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+                        like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+            </div>
+            <!-- nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+     
+     
    
-</div>
+   
+    </div>
 <!-- /.row -->
 @section scripts{
 
     <script>
+        var  dataTable;
         $(document).ready(function () {
             BindLELV('EventType');
            
@@ -207,6 +276,42 @@
             if (keyId > 0) {
                 bind('/api/EventsData/GetById?eventInfoId=' + keyId, "create-sec");
             }
+            dataTable = $("#custPaidTable").DataTable({
+                "scrollX": true,
+                "ajax": {
+                    "url": "/api/CustomerPaidData/GetAll?eventInfoId=" + keyId,
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "CustomerAmtPaidRefID" },
+                    { "data": "Ammount" },
+                   
+                    {
+                        "data": "DateOfPaid", render: function (data, type, row) {
+                            if (type === "sort" || type === "type") {
+                                return data;
+                            }
+                            return moment(data).format("DD-MM-YYYY");
+                        }
+                    },
+                
+                    {
+                        "data": "CustomerAmtPaidID", "render": function (data) {
+                            return "<a class='btn btn-primary btn-sm modal-link' href=/CustomerPaid/New?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "150px"
+                    }
+
+                ],
+                "language": {
+
+                    "emptyTable": "No data found, Please click on <b>Add New</b> Button"
+                }
+            });
         })
         $('#saveEvent').click(function () {
             if (displayvalidation('create-sec')) {
@@ -215,6 +320,49 @@
                     $('[data-attr="EventInfoID"]').val(resObj);
             }
         });
+        function Delete(id) {
+
+            //////////////////////
+            iziToast.warning({
+                title: 'Delete Warning!',
+                message: 'Are you sure you want to Delete?',
+                timeout: false,
+                overlay: true,
+                color: 'yellow',
+                position: 'center',
+                buttons: [
+                    ['<button>Yes</button>', function (instance, toast) {
+                        debugger;
+
+                        result = GetJsonFromApi("/CustomerPaidData/Delete?CustomerAmtPaidId=" + id);
+
+
+                        if (result) {
+                            ToastSuccess('Deleted Sucessfully.');
+                            dataTable.ajax.reload();
+                        }
+                        else {
+                            ToastError("Error ocuured While doing operation")
+                        }
+
+                        instance.hide({
+                            transitionOut: 'fadeOutDown',
+
+                        }, toast, 'buttonName');
+
+
+                    }, true],
+                    ['<button>No</button>', function (instance, toast) {
+                        instance.hide({
+                            transitionOut: 'fadeOutDown',
+
+                        }, toast, 'buttonName');
+
+                    }]
+                ],
+
+            });
+        }
     </script>
 }
 
