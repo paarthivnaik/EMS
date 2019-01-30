@@ -86,7 +86,23 @@ namespace Events.Repo.CustomerAmtPaid
             {
                 using (_context = new CustomerAmtPaidContext())
                 {
-                    var resObj = await _context.CustomerAmtPaids.Where(x => x.CustomerAmtPaidID == CustomerAmtPaidId && x.Status == true).FirstOrDefaultAsync();
+                    //var resObj = await _context.CustomerAmtPaids.Where(x => x.CustomerAmtPaidID == CustomerAmtPaidId && x.Status == true).FirstOrDefaultAsync();
+                    var resObj = await (from a in _context.CustomerAmtPaids
+                                        join b in _context.EventInfoLights on a.EventInfoID equals b.EventInfoID
+                                        where a.CustomerAmtPaidID == CustomerAmtPaidId && a.Status == true
+                                        select new
+                                        {
+                                            a.CustomerAmtPaidID,
+                                            a.CustomerAmtPaidRefID,
+                                            a.Ammount,
+                                            a.DateOfPaid,
+                                            a.Description,
+                                            a.EventInfoID,
+                                            b.CustomerName,
+                                            b.EventTypeValue,
+                                            b.MobileNo
+                                        }).FirstOrDefaultAsync();
+
                     return resObj;
                 }
             }

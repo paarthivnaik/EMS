@@ -9,8 +9,9 @@
     </div>
 </div>
 
-<script src="~/Scripts/HTML to PDF/HTML to PDF/js/jspdf.js"></script>
-<script src="~/Scripts/HTML to PDF/HTML to PDF/js/pdfFromHTML.js"></script>
+@*<script src="~/Scripts/HTML to PDF/HTML to PDF/js/jspdf.js"></script>
+<script src="~/Scripts/HTML to PDF/HTML to PDF/js/pdfFromHTML.js"></script>*@
+<script src="~/Scripts/HTML to PDF/HTML to PDF/js/printPreview.js"></script>
 <script>
     function FormatDate(propval) {
         if (propval !== null && propval !== undefined) {
@@ -64,21 +65,29 @@
            document.body.innerHTML = originalContents;
            return false;
        }
-       $('#printDiv').on('click', function () {
-           printDiv();
-       })
-
+       //$('#printDiv').on('click', function () {
+       //    printDiv();
+       //})
+       $("#printDiv").printPreview({
+           obj2print: '#HTMLtoPDF',
+           width: '810',
+           
+       });
     });
 </script>
 <script type="text/template" id="textemplate">
     <section class="invoice">
         <div id="HTMLtoPDF">
+           
+            <div class="text-center">
+<h2>Quotation</h2>
+            </div>
             <!-- title row -->
             <div class="row">
                 <div class="col-xs-12">
                     <h2 class="page-header">
                         <i class="fa fa-globe"></i>Rock Star Events.
-                        <small class="pull-right">Date:@DateTime.Now</small>
+                        <small class="pull-right">Booking Date:@DateTime.Now</small>
                     </h2>
                 </div>
                 <!-- /.col -->
@@ -141,12 +150,12 @@
                             <% if (tempItemData.EventItems!=null && tempItemData.EventItems.length>0  ) {%>
                             <% _.each( tempItemData.EventItems, function(datatask){ %>
                             <tr>
-                                <td> <%-datatask.CategoryValue%> </td>
-                                <td><%-datatask.ItemName%> </td>
-                                <td><%-datatask.Quantity%> </td>
-                                <td><%-datatask.Price%> </td>
+                                <td><strong> <%-datatask.CategoryValue%></strong> </td>
+                                <td> <strong><%-datatask.ItemName%> </strong><br/><%-datatask.Description%></td>
+                                <td><strong><%-datatask.Quantity%></strong>  </td>
+                                <td><strong><%-datatask.Price%></strong>  </td>
 
-                                <td><%= parseInt(datatask.Quantity)*parseFloat(datatask.Price) %></td>
+                                <td><strong><%= parseInt(datatask.Quantity)*parseFloat(datatask.Price) %></strong> </td>
                             </tr>
                             <% }); %>
                             <%}else{%>
@@ -164,7 +173,15 @@
             <div class="row">
                 <!-- accepted payments column -->
                 <div class="col-xs-6">
-
+                    <div class="table-responsive">
+                        <table class="table" style="border:2px solid;">
+                            <tr>
+                                <th style="width:50%">GSTIN:</th>
+                                <td><strong>36AARFR9321G1ZT</strong> </td>
+                            </tr>
+                            
+                        </table>
+                    </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-6">
@@ -189,6 +206,23 @@
                 </div>
                 <!-- /.col -->
             </div>
+            <hr/>
+            <div class="text-center">
+               <b>COMPANY IS NOT RESPONSIBLE FOR ANY DISCREPANCIES IN OUTPUT</b> 
+                <hr/>
+               <div class="text-center">
+<b> <u>Terms & Conditions</u></b><br/>
+                   CHECK PROPERLY YOUR OUTPUTS <br/>
+                   50% Advance before starting the job work remaining after completion.<br/>
+                   Any order cancellations advance will not given back.<br/>
+               </div>
+                
+            </div>
+           <div>
+               <div class="pull-left"><strong>Receivers Signature</strong></div>
+               <div class="pull-right"><strong>From Rockstar</strong> </div>
+           </div>
+            <hr/>
         </div>
         <!-- /.row -->
         <!-- this row will not appear when printing -->

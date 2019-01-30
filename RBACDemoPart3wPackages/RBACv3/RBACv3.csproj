@@ -1292,7 +1292,10 @@
     <Content Include="Scripts\Home\DashboardV2.js" />
     <Content Include="Scripts\HTML to PDF\HTML to PDF\js\jquery-2.1.3.js" />
     <Content Include="Scripts\HTML to PDF\HTML to PDF\js\jspdf.js" />
+    <Content Include="Scripts\HTML to PDF\HTML to PDF\js\jspdf.min.js" />
     <Content Include="Scripts\HTML to PDF\HTML to PDF\js\pdfFromHTML.js" />
+    <Content Include="Scripts\HTML to PDF\HTML to PDF\js\printPreview.js" />
+    <Content Include="Scripts\HTML to PDF\HTML to PDF\js\printThis.js" />
     <Content Include="Scripts\JQGrid\grid.locale-en.js" />
     <Content Include="Scripts\JQGrid\GridComponent.js" />
     <Content Include="Scripts\JQGrid\images\ui-bg_flat_75_aaaaaa_40x100.png" />
@@ -1744,6 +1747,7 @@
     <Content Include="Views\Events\_EventItemDetails.cshtml" />
     <Content Include="Views\CustomerPaid\_New.cshtml" />
     <Content Include="Views\CustomerPaid\_Edit.cshtml" />
+    <Content Include="Views\CustomerPaid\_CustInvoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -19,5 +19,10 @@ namespace RBACv3.Controllers
             ViewBag.custPaidId = custPaidId;
             return PartialView("_Edit");
         }
+        public ActionResult CustInvoice(long keyId)
+        {
+            ViewBag.custPaidId = keyId;
+            return PartialView("_CustInvoice");
+        }
     }
 }
