@@ -82,9 +82,7 @@
                                     <i class="fa fa-glass input-group-addon"></i>
                                     <select class="form-control EventType" id="EventType" name="EventType" data-attr="EventType" data-listentry="" data-valt="required">
                                         <option value="0">-- Select --</option>
-                                        <option value="1">Mehandi</option>
-                                        <option value="2">Sangeeth</option>
-                                        <option value="3">Birth Day</option>
+                                       
                                     </select>
                                 </div>
                             </div>
@@ -110,27 +108,7 @@
 
                             </div>
                             
-                            <div class="form-group col-lg-4" >
-                                <strong class="m-b-xs">Package Name</strong>
-
-                                <div class="input-group m-b">
-                                    <i class="fa fa-gift input-group-addon"></i>
-                                    <select class="form-control" id="Package" name="Package" data-attr="Package" data-listentry="">
-                                        <option value="0">-- Select --</option>
-                                        <option value="1">Mehandi</option>
-                                        <option value="2">Sangeeth</option>
-                                        <option value="3">Birth Day</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-4" >
-                                <strong class="m-b-xs">* Package Price</strong>
-                                <div class="input-group m-b">
-                                    <i class="fa fa-money input-group-addon"></i>
-                                    <input type="text" placeholder="Package Cost" id="PackagePrice" class="form-control" data-attr="PackagePrice">
-                                </div>
-
-                            </div>
+                           
                             <div class="form-group col-lg-4" >
                                 <strong class="m-b-xs">*Total Cost</strong>
                                 <div class="input-group m-b">
@@ -197,125 +175,7 @@
         <!-- /.box -->
     </div>
     <!-- /.col -->
-    <div class="col-md-12">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title"><strong>Event Items</strong> </h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <i class="fa fa-minus"></i>
-                    </button>
-
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="" data-role="create-item-sec">
-                    <fieldset>
-                        <legend>Event Items</legend>
-                        <div class="col-lg-12">
-                            <div class="row" data-role="Item-add-sec">
-
-
-                                <div class="form-group col-lg-3">
-                                    <strong class="m-b-xs">*Category</strong>
-                                    <div class="input-group m-b">
-                                        <i class="fa fa-glass input-group-addon"></i>
-                                        <select class="form-control Categories" id="Categories" name="Categories" data-attr="Categories" data-listentry="" data-valt="required">
-                                            <option value="0">-- Select --</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-3">
-                                    <strong class="m-b-xs">*Items</strong>
-
-                                    <div class="input-group m-b">
-                                        <i class="fa fa-cubes input-group-addon"></i>
-                                        <select class="form-control" id="Items" name="Items" data-attr="Items" data-listentry="" data-valt="required">
-                                            <option value="0">-- Select --</option>
-                                            @*<option value="1">Mehandi</option>
-                                            <option value="2">Sangeeth</option>
-                                            <option value="3">Birth Day</option>*@
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-2">
-                                    <strong class="m-b-xs">*Quantity</strong>
-                                    <div class="input-group m-b">
-                                        <i class="fa fa-hourglass input-group-addon"></i>
-                                        <input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity" name="Quantity">
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-2">
-                                    <strong class="m-b-xs">*Unit Price</strong>
-
-                                    <div class="input-group m-b">
-                                        <i class="fa fa-money input-group-addon"></i>
-                                        <input type="text" placeholder="Price" class="form-control"  id="Price" name="Price" onkeyup="SubTotalPrice()">
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-1">
-                                    <strong class="m-b-xs">*Total</strong>
-
-                                    <div class="input-group m-b">
-                                        @*<i class="fa fa-money input-group-addon"></i>*@
-                                        <input type="text" placeholder="Price" class="form-control" id="SubTotalPrice" name="Price" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-1">
-                                    <div class="input-group m-b" style="padding-top: 8px;">
-                                        <div class="input-group m-b">
-
-                                            <button type="button" class="btn bg-purple btn-flat margin" onclick="AddItem()"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr style="border:1px solid blue" />
-                            
-                            <div class="" id="appendItem">
-
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-lg-8">
-                                    <strong class="m-b-xs">Total</strong>
-                                    <div class="input-group m-b">
-                                        <i class="fa fa-money input-group-addon"></i>
-                                        <input type="text" placeholder="Price" class="form-control" data-attr="TotalPrice" id="TotalPrice" name="Price" value="Total Price" readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-2">
-                                    <strong class="m-b-xs">.</strong>
-                                    <div class="input-group m-b">
-                                        <i class="fa fa-money input-group-addon"></i>
-                                        <input type="text" placeholder="Price" class="form-control" data-attr="TotalPrice" id="TotalPriceValue" name="Price" value="Total Price" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-2">
-                                    <strong class="m-b-xs">.</strong>
-                                    <div class="input-group m-b">
-                                        <button id="saveQuotation" class="btn btn-sm btn-info btn-flat pull-left" onclick="SaveQuatation()"><i class="fa fa-save"></i> Save Quotation</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </fieldset>
-
-                           
-</div>
-                <!-- /.row -->
-            </div>
-        </div>
-        <!-- /.box -->
-    </div>
+   
 </div>
 <!-- /.row -->
  
@@ -328,9 +188,7 @@
    
     $(document).ready(function () {
         BindLELV('EventType,Categories');        
-        $('.datepicker').datepicker({
-            autoclose: true
-        });
+      
         $('#saveEvent').click(function () {
             if (displayvalidation('create-sec')) {
                 var resObj = post("create-sec", 'EventsData/Save', 'Insert');
@@ -340,124 +198,8 @@
         });      
         
     })
-    $('#Categories').change(function ()
-    {
-        $('#Items').addClass($('#Categories :selected').text());
+   
 
-        BindLELV($('#Categories :selected').text())
-    })
-    function AddItem()
-    {
-        var itemHtml = '<div class="row addeditems" id="ItemRow_' + ItemsID + '">' +
-        '<input type="hidden" placeholder="EventItemID" class="" data-attr="EventItemID" id="EventItemID_' + ItemsID + '" name="EventItemID"   readonly >' +
-
-            ' <div class="form-group col-lg-3">' +
-                                '<strong class="m-b-xs">*Category</strong>'+
-                                '<div class="input-group m-b">'+
-                                    '<i class="fa fa-glass input-group-addon"></i>'+
-                                   '<input type="text" placeholder="Categories" class="form-control" data-attr="CategoryValue" id="CategoryValue_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').text() + '" readonly >' +
-                                '</div>'+
-                            '</div>'+
-                            
-        '<input type="hidden" placeholder="Categories" class="form-control" data-attr="CategoryID" id="CategoryID_' + ItemsID + '" name="Category"  value="' + $('#Categories :selected').val() + '" readonly >' +
-            '<div class="form-group col-lg-3">' +
-                                '<strong class="m-b-xs">*Items</strong>'+
-
-                                '<div class="input-group m-b">'+
-                                    '<i class="fa fa-cubes input-group-addon"></i>' +
-                                    
-        '<input type="text" placeholder="Categories" class="form-control" data-attr="ItemValue" id="Items_' + ItemsID + '" name="Items"  value="' + $('#Items :selected').text() + '" readonly >' +
-          '<input type="hidden" placeholder="Categories" class="form-control" data-attr="ItemID" id="ItemID_' + ItemsID + '" name="Items"  value="' + $('#Items :selected').val() + '" readonly >' +
-
-                                    '</div></div>' +
-
-                                    '<div class="form-group col-lg-2"><strong class="m-b-xs">*Quantity</strong><div class="input-group m-b"><i class="fa fa-hourglass input-group-addon"></i>' +
-                                    '<input type="text" placeholder="Quantity" class="form-control" data-attr="Quantity" id="Quantity_' + ItemsID + '" name="Quantity" onkeyup="TotalPrice()" value="' + $('#Quantity').val() + '"  >' +
-                                    '</div></div><div class="form-group col-lg-2"><strong class="m-b-xs">*Price</strong><div class="input-group m-b"><i class="fa fa-money input-group-addon"></i>' +
-                                    '<input type="text" placeholder="Price" class="form-control price" data-attr="Price" id="Price_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" value="' + $('#Price').val() + '"   ></div></div>' +
-
-                                    '<div class="form-group col-lg-1">' +
-        '<strong class="m-b-xs">*Total</strong>' +
-
-        '<div class="input-group m-b">' +
-        //'<i class="fa fa-money input-group-addon"></i>' +
-        '<input type="text" placeholder="Price" class="form-control" id="TotalPrice_' + ItemsID + '" name="Price" onkeyup="TotalPrice()" readonly>' +
-        '</div>' +
-        '</div>' +
-                                     '<div class="form-group col-lg-1">' +
-                                '<div class="input-group m-b" style="padding-top: 8px;">' +
-                                    '<div class="input-group m-b">' +
-                                        
-                                        '<button type="button" class="btn bg-maroon btn-flat margin" onclick="DeleteItem(' + ItemsID + ')" title="Delete Item" ><i class="fa fa-trash" aria-hidden="true"></i></button>' +
-                                    '</div></div></div></div>';
-        CategoriesID++;
-        ItemsID++;        
-        $('#appendItem').append(itemHtml);
-        TotalPrice()
-    }
-    function DeleteItem(id)
-    {
-        $('#ItemRow_' + id).remove();
-        TotalPrice();
-    }
-
-    function SubTotalPrice()
-    {
-        
-        if($('#Quantity').val() != '' && $('#Price').val() != '')
-        {
-           
-            $('#SubTotalPrice').val(parseInt($('#Quantity').val()) * parseInt($('#Price').val()));
-        }
-    }
-
-    function TotalPrice()
-    {
-        debugger;
-        var total = 0;
-        $('[data-attr="Price"]').each(function () {
-            if ($(this).val()!='')
-            {
-                if ($('#Quantity_' + $(this).attr('id').split('_')[1]).val() != '')
-                {
-                    var total_Price = parseInt($('#Quantity_' + $(this).attr('id').split('_')[1]).val()) * parseInt($(this).val());
-                    $('#TotalPrice_' + $(this).attr('id').split('_')[1]).val(total_Price);                   
-                    total += total_Price;
-                }
-                
-            }
-                
-            
-            
-        })
-        $('#TotalPriceValue').val(total);
-    }
-    function SaveQuatation()
-    {
-        var EventInfoID= $('[data-attr="EventInfoID"]').val();
-        var itemsLst = [];        
-        var s = 0;
-        $('.addeditems').each(function () {
-            var obj = new Object();
-            var id = $(this).attr('id');           
-            $("#" + id + " [data-attr]").each(function () {
-                obj[$(this).data('attr')] = $(this).val();
-            })            
-            obj['EventInfoID']=EventInfoID;
-            obj['Status'] = true;
-            itemsLst[s] = obj;
-            s++;
-        })
-        debugger;
-        var saveitems = PostJsonToApi('EventItemsData/AddItemsToEvent', JSON.stringify(itemsLst));
-        s = 0;
-        $('.addeditems').each(function () {            
-            var id = $(this).attr('id');            
-            $("#" + id + " [data-attr='EventItemID']").val(saveitems[s].EventItemID);
-            s++;
-        })
-
-    }
 
 </script>
 

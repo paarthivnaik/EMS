@@ -29,9 +29,7 @@ namespace Events.Entities.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(200);
 
-            this.Property(t => t.PackageValue)
-                .HasMaxLength(100);
-
+          
             this.Property(t => t.Venue)
                 .IsRequired()
                 .HasMaxLength(500);
@@ -53,14 +51,13 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.EventTypeValue).HasColumnName("EventTypeValue");
             this.Property(t => t.EventStartDate).HasColumnName("EventStartDate");
             this.Property(t => t.EventEndDate).HasColumnName("EventEndDate");
-            this.Property(t => t.Package).HasColumnName("Package");
-            this.Property(t => t.PackageValue).HasColumnName("PackageValue");
+           
             this.Property(t => t.Venue).HasColumnName("Venue");
             this.Property(t => t.Manager).HasColumnName("Manager");
             this.Property(t => t.ManagerMobile).HasColumnName("ManagerMobile");
             this.Property(t => t.PackagePrice).HasColumnName("PackagePrice");
             this.Property(t => t.TotalPrice).HasColumnName("TotalPrice");
-            this.Property(t => t.AdvancePrice).HasColumnName("AdvancePrice");
+          
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
             this.Property(t => t.CreatedOn).HasColumnName("CreatedOn");
             this.Property(t => t.ModifiedBy).HasColumnName("ModifiedBy");

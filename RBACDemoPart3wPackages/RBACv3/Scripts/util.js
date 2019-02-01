@@ -25,21 +25,25 @@ function post(role, route, mode) {
             obj[$(this).data('attr')] = selVal;
             obj[$(this).data('attr') + 'Value'] = selText;
         }
-        else if ($(this).prop("tagName") === 'DIV') {
-            obj[$(this).data('attr')] = $(this).next().find('.note-editable').html();
-        }
+       
         else if ($(this)[0].hasAttribute("data-flags")) {
             var res = $(this).val().split(':');
-            obj[$(this).data('attr')] = res[0].trim();
-            obj[$(this).data('flags')] = res[1].trim();
+            if (res != undefined && res != "" && res.length > 0) {
+                obj[$(this).data('attr')] = res[0].trim();
+                obj[$(this).data('flags')] = res[1].trim();
+            }
         }
-        else if ($(this)[0].hasAttribute("data-currency")) {
-            var selText = $("#" + this.id + " option:selected").html() === '---Select Currency---' ? null : $("#" + this.id + " option:selected").html();
-            obj[$(this).data('attr')] = selText;
+        else if ($(this).prop("tagName") === 'SELECT' && $(this)[0].hasAttribute("data-text")) {
+            var selVal = $("#" + this.id + " option:selected").html() === '---Select---' ? null : $("#" + this.id + " option:selected").html();
+            obj[$(this).data('attr')] = selVal;
+        }
+        else if ($(this).prop("type") === 'file') {
+            obj[$(this).data('attr')] = $(this).text();
         }
         else if ($(this).is(':checkbox') || $(this).is(':radio')) {
             obj[$(this).data('attr')] = $(this).prop('checked');
         }
+
     });
 
     /* Read Mandatory section */
@@ -2787,5 +2791,5 @@ function BindVendors(Vendordata) {
 $('.datepicker').datepicker({
     autoclose: true,
     forceParse: false,
-    format: "dd/mm/yyyy"
+   
 });

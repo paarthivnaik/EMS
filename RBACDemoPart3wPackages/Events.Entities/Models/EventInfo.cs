@@ -16,14 +16,13 @@ namespace Events.Entities.Models
         public string EventTypeValue { get; set; }
         public Nullable<System.DateTime> EventStartDate { get; set; }
         public Nullable<System.DateTime> EventEndDate { get; set; }
-        public Nullable<long> Package { get; set; }
-        public string PackageValue { get; set; }
+       
         public string Venue { get; set; }
         public string Manager { get; set; }
         public string ManagerMobile { get; set; }
         public Nullable<decimal> PackagePrice { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
-        public Nullable<decimal> AdvancePrice { get; set; }
+       
         public long CreatedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public Nullable<long> ModifiedBy { get; set; }

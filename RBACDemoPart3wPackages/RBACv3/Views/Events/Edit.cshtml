@@ -25,8 +25,7 @@
         background-color: #ffffff;
     }
 </style>
-<link href="~/AdminLTE/plugins/datepicker/css/datepicker3.css" rel="stylesheet" />
-<link href="~/AdminLTE/plugins/iziToast/iziToast.min.css" rel="stylesheet" />
+
 <!-- /.row -->
 <div class="row">
     <div class="col-md-12">
@@ -47,7 +46,7 @@
                     <div class="col-lg-12">
                         <div class="row">
 
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-4">
                                 <strong class="m-b-xs">*Event Code</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-map-marker input-group-addon"></i>
@@ -99,7 +98,7 @@
                                 <strong class="m-b-xs">*Event Start Date</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" id="entStartDate" class="form-control datepicker" placeholder="Event Start Date" name="EventStartDate" data-attr="EventStartDate" data-valt="required">
+                                    <input type="text" id="EventStartDate" class="form-control datepicker" placeholder="Event Start Date" name="EventStartDate" data-attr="EventStartDate" data-valt="required">
 
                                 </div>
 
@@ -108,33 +107,14 @@
                                 <strong class="m-b-xs">*Event End Date</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
-                                    <input type="text" id="eventEndDate" class="form-control datepicker" placeholder="Event End Date" name="EventEndDate" data-attr="EventEndDate" data-valt="required">
+                                    <input type="text" id="EventEndDate" class="form-control datepicker" placeholder="Event End Date" name="EventEndDate" data-attr="EventEndDate" data-valt="required">
 
                                 </div>
 
                             </div>
 
-                            <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">Package Name</strong>
-
-                                <div class="input-group m-b">
-                                    <i class="fa fa-gift input-group-addon"></i>
-                                    <select class="form-control" id="Package" name="Package" data-attr="Package" data-listentry="">
-                                        <option value="0">-- Select --</option>
-                                        <option value="1">Mehandi</option>
-                                        <option value="2">Sangeeth</option>
-                                        <option value="3">Birth Day</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">* Package Price</strong>
-                                <div class="input-group m-b">
-                                    <i class="fa fa-money input-group-addon"></i>
-                                    <input type="text" placeholder="Package Cost" id="PackagePrice" class="form-control" data-attr="PackagePrice">
-                                </div>
-
-                            </div>
+                           
+                            
                             <div class="form-group col-lg-4">
                                 <strong class="m-b-xs">*Total Cost</strong>
                                 <div class="input-group m-b">
@@ -143,15 +123,6 @@
                                 </div>
 
                             </div>
-                            <div class="form-group col-lg-4">
-                                <strong class="m-b-xs">Advance</strong>
-                                <div class="input-group m-b">
-                                    <i class="fa fa-usd input-group-addon"></i>
-                                    <input type="number" placeholder="Advance" id="AdvancePrice" class="form-control" data-attr="AdvancePrice">
-                                </div>
-
-                            </div>
-
                             <div class="form-group col-lg-4">
                                 <strong class="m-b-xs">*Event Manager Name</strong>
                                 <div class="input-group m-b">
@@ -251,6 +222,7 @@
         $(document).ready(function () {
             BindLELV('EventType');
            
+
             keyId = GetQueryStringValues(window.location.href, 'keyId');
             if (keyId > 0) {
                 bind('/api/EventsData/GetById?eventInfoId=' + keyId, "create-sec");
