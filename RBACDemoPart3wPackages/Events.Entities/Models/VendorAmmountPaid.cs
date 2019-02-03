@@ -12,6 +12,8 @@ namespace Events.Entities.Models
         public long VendorAmmountPaidID { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public string BillNo { get; set; }
+        public string Particular { get; set; }
+        public string Description { get; set; }
         public long VendorEventID { get; set; }
         public decimal AmmountPaid { get; set; }
         public System.DateTime PaidDate { get; set; }

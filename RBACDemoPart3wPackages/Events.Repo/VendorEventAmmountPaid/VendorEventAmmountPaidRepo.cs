@@ -146,7 +146,10 @@ namespace Events.Repo.VendorEventAmmountPaid
                                             a.Status,
                                             b.VendorID,
                                             b.EventInfoIDValue,
-                                            b.EventInfoID
+                                            b.EventInfoID,
+                                            a.Particular,
+                                            a.Description,
+                                            a.BillNo
                                         }).FirstOrDefaultAsync();
                     return resObj;
                 }

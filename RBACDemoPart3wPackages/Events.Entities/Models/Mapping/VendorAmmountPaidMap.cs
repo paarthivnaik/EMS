@@ -16,6 +16,8 @@ namespace Events.Entities.Models.Mapping
             // Properties
             this.Property(t => t.BillNo)
                 .HasMaxLength(10);
+            this.Property(t => t.Particular)
+               .HasMaxLength(250);
             // Properties
             // Table & Column Mappings
             this.ToTable("VendorAmmountPaid");
@@ -29,7 +31,8 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.ModifiedBy).HasColumnName("ModifiedBy");
             this.Property(t => t.ModifiedOn).HasColumnName("ModifiedOn");
             this.Property(t => t.BillNo).HasColumnName("BillNo");
-           
+            this.Property(t => t.Particular).HasColumnName("Particular");
+            this.Property(t => t.Description).HasColumnName("Description");
 
         }
     }

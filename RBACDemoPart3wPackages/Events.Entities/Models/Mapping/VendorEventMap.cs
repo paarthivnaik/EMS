@@ -30,7 +30,7 @@ namespace Events.Entities.Models.Mapping
           this.Property(t => t.EventInfoIDValue).HasColumnName("EventInfoIDValue");
           this.Property(t => t.IsSettled).HasColumnName("IsSettled");
 
-
+          this.Property(t => t.Description).HasColumnName("Description");
       }
     }
 }

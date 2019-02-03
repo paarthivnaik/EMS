@@ -23,7 +23,7 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <div data-role="Basicdata-sec">
-                                <div class="form-group col-lg-3">
+                                <div class="form-group col-lg-6">
                                     <strong class="m-b-xs">*Event Code</strong>
 
                                     <div class="input-group m-b">
@@ -31,7 +31,7 @@
                                         <input type="text" id="EventInfoIDValue" class="form-control" placeholder="Event Code" name="EventInfoIDValue" data-attr="EventInfoIDValue" data-valt="required" maxlength="200" readonly>
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-3">
+                                <div class="form-group col-lg-6">
                                     <strong class="m-b-xs">*Vendor Code</strong>
 
                                     <div class="input-group m-b">
@@ -42,9 +42,21 @@
                                 <input type="hidden" data-attr="VendorEventID" id="mainId"/>
                                 <input type="hidden" data-attr="Ammmount" id="Totalammount" />
                             </div>
-                          
-
-                            <div class="form-group col-lg-3">
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">*Particular</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-money input-group-addon"></i>
+                                    <input type="text" placeholder="Particular" class="form-control" data-attr="Particular" id="Particular" name="Particular" data-valt="required" maxlength="250">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <strong class="m-b-xs">*Description</strong>
+                                <div class="input-group m-b">
+                                    <i class="fa fa-money input-group-addon"></i>
+                                    <input type="text" placeholder="Description" class="form-control" data-attr="Description" id="Description" name="Description" maxlength="250">
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-6">
                                 <strong class="m-b-xs">*Paid Date</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-calendar input-group-addon"></i>
@@ -52,7 +64,7 @@
 
                                 </div>
                             </div>
-                            <div class="form-group col-lg-3">
+                            <div class="form-group col-lg-6">
                                 <strong class="m-b-xs">*Ammount Pable</strong>
                                 <div class="input-group m-b">
                                     <i class="fa fa-money input-group-addon"></i>
@@ -104,8 +116,10 @@
                 <table id="ammountPaidTable" class="table table-bordered table-hover display nowrap" style="width:100%">
                     <thead>
                         <tr>
+                         
                             <th>Bill No</th>
-                            <th>Program Date</th>
+                            <th>Particulars</th>
+                            <th>Paid Date</th>
                             <th>Ammmount</th>
                             <th></th>
                         </tr>
@@ -129,6 +143,7 @@
         var entId = GetQueryStringValues(window.location.href, 'keyId');
         bind("/api/VendorEventsData/GetDataByEvent?vendorEventId=" + entId, 'Basicdata-sec');
         associatedEvents(entId);
+       
     });
     $('#btnAmmount').click(function () {
         if (displayvalidation('VendorEventcreate-sec')) {
@@ -150,7 +165,7 @@
     });
 
     function associatedEvents(vendorid) {
-         dataTable = $("#ammountPaidTable").DataTable({
+        dataTable = $("#ammountPaidTable").DataTable({
             "scrollX": true,
             "ajax": {
                 "url": "/api/VendorPaidData/GetById?VendorEventID=" + vendorid,
@@ -159,7 +174,9 @@
                 "dataSrc": ""
             },
             "columns": [
+                
                  { "data": "BillNo" },
+                   { "data": "Particular" },
                  {
                      "data": "PaidDate", render: function (data, type, row) {
                          if (type === "sort" || type === "type") {

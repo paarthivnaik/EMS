@@ -22,5 +22,6 @@ namespace Events.Entities.Models
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string EventInfoIDValue { get; set; }
         public bool IsSettled { get; set; }
+        public string Description { get; set; }
     }
 }

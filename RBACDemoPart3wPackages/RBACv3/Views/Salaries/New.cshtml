@@ -89,7 +89,6 @@
                         </div>
                         <section data-role="mandatory-sec">
                             <input type="hidden" data-attr="SalaryPaidID" id="KeyId" value="0" />
-
                             <input type="hidden" data-attr="CreatedBy" value="0" />
                             <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
                             <input type="hidden" data-attr="ModifiedBy" />
@@ -141,6 +140,7 @@
                     if (resObj > 0) {
 
                         $('#KeyId').val(resObj);
+                       
                         itemCostHistory(empId);
 
                     }
@@ -204,7 +204,24 @@
             $("#ItemCostHistory").html(Itemtemplate1(Itemtempdata));
 
 
+            var t = $('#tblAverageRating').DataTable({
+               
+                dom: 'Bfrtip',
+                buttons: [
+                   {
+                       extend: 'print',
+                       title: 'Salary Recap of Employee :' + $('#EmployeeCode').val(),
+                       
+                   },
+    {
+        extend: 'pdf',
+        title: 'Salary Recap of Employee :' + $('#EmployeeCode').val()
+    }
+                ],
+                "order": [[1, 'asc']]
+            });
 
+            
 
         };
     </script>
@@ -217,17 +234,7 @@
             <div class="box-header">
                 <h3 class="box-title">Salary Recap</h3>
 
-                <div class="box-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default" id="pdf"><i class="fa fa-file-pdf-o"></i> PDF</button>
-                        </div>
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="fa fa-file-excel-o"></i> Excel</button>
-                        </div>
-                    </div>
-
-                </div>
+               
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive no-padding">

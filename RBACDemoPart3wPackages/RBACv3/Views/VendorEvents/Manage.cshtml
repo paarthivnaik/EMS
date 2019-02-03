@@ -15,7 +15,7 @@
             <thead>
                 <tr>
                     <th>Vendor Code</th>
-                    <th>Event Cide</th>
+                    <th>Event Code</th>
                     <th>Vendor Name</th>
                     <th>Mobile No</th>
                     <th>Programe Date</th>
@@ -58,7 +58,7 @@
                         { "data": "TotalPaidAmmount" },
                         {
                             "data": "VendorEventID", "render": function (data) {
-                                return "<a id='click_me' class='btn btn-primary btn-sm modal-link' href='/VendorEvents/Edit?KeyId=" + data + "'data-toggle='modal' data-backdrop='static'><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a><a class='btn btn-primary btn-sm' title='Pay Ammount to Vendor'style='margin-left:5px' href=/VendorPaid/New?keyId=" + data + "><i class='fa fa-paypal'></i><strong> Pay</strong></a>";
+                                return "<a id='click_me' class='btn btn-primary btn-sm modal-link' href='/VendorEvents/Edit?KeyId=" + data + "'data-toggle='modal' data-backdrop='static'><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-primary btn-sm' title='Pay Ammount to Vendor'style='margin-left:5px' href=/VendorPaid/New?keyId=" + data + "><i class='fa fa-paypal'></i><strong> Pay</strong></a>";
                             },
                             "orderable": false,
                             "searchable": false,
