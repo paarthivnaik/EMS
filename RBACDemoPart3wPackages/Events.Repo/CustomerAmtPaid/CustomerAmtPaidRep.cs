@@ -100,7 +100,9 @@ namespace Events.Repo.CustomerAmtPaid
                                             a.EventInfoID,
                                             b.CustomerName,
                                             b.EventTypeValue,
-                                            b.MobileNo
+                                            b.MobileNo,
+                                            b.EventRefID,
+                                            a.Particular
                                         }).FirstOrDefaultAsync();
 
                     return resObj;

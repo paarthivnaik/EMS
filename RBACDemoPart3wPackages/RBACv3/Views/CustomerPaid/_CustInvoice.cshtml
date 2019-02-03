@@ -1,4 +1,96 @@
-﻿
+﻿<style>
+    .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
+
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
+
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.top table td.title {
+        font-size: 35px;
+        line-height: 45px;
+        color: #333;
+    }
+
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
+
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+
+    .invoice-box table tr.item td{
+        border-bottom: 1px solid #eee;
+    }
+
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
+
+    /*media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }*/
+
+    /** RTL **/
+    .rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
+
+    .rtl table {
+        text-align: right;
+    }
+
+    .rtl table tr td:nth-child(2) {
+        text-align: left;
+    }
+</style>
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
     <h3 class="modal-title modal-head text-center">Customer Invoice</h3>
@@ -6,105 +98,102 @@
 </div>
 
 <div class="modal-body">
-    <div id="custInvoicetemp">
+    <div id="custInvoicetemp" class="custInvoicetemp">
+
     </div>
+ 
 </div>
 
 
 <script>
+    var custpaidId = '@ViewBag.custPaidId';
+    var tempCustData = "";
     $(document).ready(function () {
         var template1 = _.template($("#invoiceTemplate").html());
         debugger;
-        var tempData = GetJsonFromApi('/EventItemsData/GetItemDet?eventInfoId=' + infoId);
-        if (tempData != null && tempData != "") {
-
-            temp = new Object();
-            temp.EventRefID = tempData.EventRefID;
-            temp.CustomerName = tempData.CustomerName;
-            temp.EventTypeValue = tempData.EventTypeValue;
-            temp.MobileNo = tempData.MobileNo;
-            temp.EventStartDate = tempData.EventStartDate;
-            temp.EventEndDate = tempData.EventEndDate;
-            temp.Venue = tempData.Venue;
-            temp.EventItems = tempData.EventItems;
-            temp.EventTax = tempData.EventTax;
-            tempItemData = temp;
-
-        }
-
-
-
-
-        $("#eventItemsDetails").html(template1(tempItemData));
+        tempCustData = GetJsonFromApi('/CustomerPaidData/GetById?CustomerAmtPaidId=' + custpaidId);
+        
+        $("#custInvoicetemp").html(template1(tempCustData));
+        
     });
 </script>
-
 <script type="text/template" id="invoiceTemplate">
-    <div style="margin:5% 40% 0% 33%;float:left; width:500px; box-shadow:0 0 3px #aaa; height:auto;color:#666;">
-        <div style="width:100%; padding:10px; float:left; background:#1ca8dd; color:#fff; font-size:30px; text-align:center;">
-            Invoice
-        </div>
-        <div style="width:100%; padding:0px 0px;border-bottom:1px solid rgba(0,0,0,0.2);float:left;">
-            <div style="width:30%; float:left;padding:10px;">
+    <div class="invoice-box">
+        <div class="text-center"> <b class="title">Bill</b></div>
+        <hr />
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                ROCKSTAR EVENTS
+                            </td>
 
-                <span style="font-size:14px;float:left; width:100%;">
-                    Haneefa
-                </span>
-                <span style="font-size:14px;float:left;width:100%;">
-                    21, jessika street ,
-                    shennoanagarnagar
-                </span>
-                <span style="font-size:14px;float:left;width:100%;">
-                    jessika@gmail.com
-                </span>
-            </div>
+                            <td>
+                                Invoice #: <%- tempCustData.CustomerAmtPaidRefID %><br>
+                                Created:<%- tempCustData.DateOfPaid %>
 
-            <div style="width:40%; float:right;padding:">
-                <span style="font-size:14px;float:right;  padding:10px; text-align:right;">
-                    <b>Date : </b>2017-05-04
-                </span>
-                <span style="font-size:14px;float:right;  padding:10px; text-align:right;">
-                    <b>Invoice# : </b>SDO-10035
-                </span>
-            </div>
-        </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                Rockstar Events.<br>
+                                ADRESS: PLOT NO :77/8 H .NO 3/6-42/C2  SHOP NO 2 <br>
+                                NEAR USHA  MULAPUDI  ROAD  <br>
+                                KUKATPALLY HYDERABAD-500072<br>
 
+                            </td>
 
-
-        <div style="width:100%; padding:0px; float:left;">
-
-            <div style="width:100%;float:left;background:#efefef;">
-                <span style="float:left; text-align:left;padding:10px;width:50%;color:#888;font-weight:600;">
-                    Decription
-                </span>
-                <span style="font-weight:600;float:left;padding:10px ;width:40%;color:#888;text-align:right;">
-                    Amount
-                </span>
-            </div>
-
-            <div style="width:100%;float:left;">
-                <span style="float:left; text-align:left;padding:10px;width:50%;color:#888;">
-                    session with Jessika test
+                            <td>
+                                Event Code   :<%- tempCustData.EventRefID %><br>
+                                Customer Name : <%- tempCustData.CustomerName %><br>
+                                Mobile        : <%- tempCustData.MobileNo %><br>
+                                Event         : <%- tempCustData.EventTypeValue %><br>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
 
-                    <span style="font-size:10px; float:left; width:100%;">
-                        (Text Consulting)
-                    </span>
-                </span>
-                <span style="font-weight:normal;float:left;padding:10px ;width:40%;color:#888;text-align:right;">
-                    373 INR
-                </span>
-            </div>
+            <tr class="heading">
+                <td>
+                    Particulat
+                </td>
+
+                <td>
+                    Ammount
+                </td>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    <%- tempCustData.Particular %>
+                </td>
+
+                <td>
+                    <%- tempCustData.Ammount %>
+                </td>
+            </tr>
 
 
-            <div style="width:100%;float:left; background:#fff;">
+            <tr class="total">
+                <td></td>
 
-                <span style="font-weight:600;float:right;padding:10px 0px;width:40%;color:#666;text-align:center;">
-                    Total : 373 INR
-                </span>
-            </div>
-        </div>
+                <td>
+                    Total: <%- tempCustData.Ammount %>
+                </td>
+            </tr>
+        </table>
     </div>
-
 </script>
+
+

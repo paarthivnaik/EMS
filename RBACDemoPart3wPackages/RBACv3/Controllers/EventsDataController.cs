@@ -16,7 +16,7 @@ namespace RBACv3.Controllers
     {
          private IEventsRepo _eventRepo = new EventsRepo();
         [HttpPost]
-        public async Task<long> Save(EventInfo obj)
+         public async Task<Tuple<long, string>> Save(EventInfo obj)
         {
             obj.CreatedBy = User.Identity.GetUserId();
             var result = await _eventRepo.Save(obj);
@@ -42,7 +42,11 @@ namespace RBACv3.Controllers
              var result = await _eventRepo.GetAll();
              return result;
          }
-        
+         [HttpPost]
+         public async Task<bool> Delete(int eventInfoId)
+         {
+             return await _eventRepo.Delete(eventInfoId);
+         }
         
     }
 }

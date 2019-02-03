@@ -55,7 +55,6 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.Venue).HasColumnName("Venue");
             this.Property(t => t.Manager).HasColumnName("Manager");
             this.Property(t => t.ManagerMobile).HasColumnName("ManagerMobile");
-            this.Property(t => t.PackagePrice).HasColumnName("PackagePrice");
             this.Property(t => t.TotalPrice).HasColumnName("TotalPrice");
           
             this.Property(t => t.CreatedBy).HasColumnName("CreatedBy");
@@ -63,6 +62,8 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.ModifiedBy).HasColumnName("ModifiedBy");
             this.Property(t => t.ModifiedOn).HasColumnName("ModifiedOn");
             this.Property(t => t.Status).HasColumnName("Status");
+            this.Property(t => t.IsConfirm).HasColumnName("IsConfirm");
+            this.Property(t => t.IfFNF).HasColumnName("IfFNF");
         }
     }
 }

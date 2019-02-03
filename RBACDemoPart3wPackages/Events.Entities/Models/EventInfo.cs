@@ -20,7 +20,7 @@ namespace Events.Entities.Models
         public string Venue { get; set; }
         public string Manager { get; set; }
         public string ManagerMobile { get; set; }
-        public Nullable<decimal> PackagePrice { get; set; }
+      
         public Nullable<decimal> TotalPrice { get; set; }
        
         public long CreatedBy { get; set; }
@@ -28,5 +28,7 @@ namespace Events.Entities.Models
         public Nullable<long> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public bool Status { get; set; }
+        public bool IsConfirm { get; set; }
+        public bool IfFNF { get; set; }
     }
 }

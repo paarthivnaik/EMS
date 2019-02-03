@@ -21,5 +21,6 @@ namespace Events.Entities.Models
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public bool Status { get; set; }
         public string Description { get; set; }
+        public string Particular { get; set; }
     }
 }

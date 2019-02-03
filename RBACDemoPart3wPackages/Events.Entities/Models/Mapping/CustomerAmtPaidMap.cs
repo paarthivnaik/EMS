@@ -19,7 +19,8 @@ namespace Events.Entities.Models.Mapping
                 .HasMaxLength(10);
             this.Property(t => t.Description)
                 .HasMaxLength(250);
-
+            this.Property(t => t.Particular)
+             .HasMaxLength(250);
             // Table & Column Mappings
             this.ToTable("CustomerAmtPaid");
             this.Property(t => t.CustomerAmtPaidID).HasColumnName("CustomerAmtPaidID");
@@ -32,6 +33,7 @@ namespace Events.Entities.Models.Mapping
             this.Property(t => t.ModifiedBy).HasColumnName("ModifiedBy");
             this.Property(t => t.ModifiedOn).HasColumnName("ModifiedOn");
             this.Property(t => t.Description).HasColumnName("Description");
+            this.Property(t => t.Particular).HasColumnName("Particular");
             this.Property(t => t.Status).HasColumnName("Status");
 
             

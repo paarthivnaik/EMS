@@ -14,7 +14,7 @@ namespace Events.Repo.EventsRepo
     public class EventsRepo : IEventsRepo
     {
         private EventsContext _context;
-        public async Task<long> Save(Events.Entities.Models.EventInfo obj)
+        public async Task<Tuple<long, string>> Save(Events.Entities.Models.EventInfo obj)
         {
             using (_context = new EventsContext())
             {
@@ -25,7 +25,9 @@ namespace Events.Repo.EventsRepo
                     obj.Status = true;
                     _context.Entry(obj).State = obj.EventInfoID == 0 ? EntityState.Added : EntityState.Modified;
                     await _context.SaveChangesAsync();
-                    return obj.EventInfoID;
+                    var res = new Tuple<long, string>(obj.EventInfoID, obj.EventRefID);
+                    return res;
+                    
 
                 }
 
@@ -40,12 +42,12 @@ namespace Events.Repo.EventsRepo
                                                     validationError.ErrorMessage);
                         }
                     }
-                    return 0;
+                    return null;
                 }
                 catch (Exception exception)
                 {
 
-                    return 0;
+                    return null;
                 }
             }
         }
@@ -111,7 +113,7 @@ namespace Events.Repo.EventsRepo
             {
                 using (_context = new EventsContext())
                 {
-                    var resObj = await _context.EventInfos.Where(x => x.Status == true).ToListAsync();
+                    var resObj = await _context.EventInfos.Where(x => x.Status == true && x.IfFNF==false).ToListAsync();
                     return resObj;
                 }
             }
@@ -123,9 +125,56 @@ namespace Events.Repo.EventsRepo
 
         }
 
-        public Task<bool> Delete(long eventInfoId)
+        public async Task<bool> Delete(long eventInfoId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (_context = new EventsContext())
+                {
+                    var delEmpEntries = new Events.Entities.Models.EventInfo()
+                    {
+
+                        EventInfoID = eventInfoId,
+                        Status = false,
+                        CustomerName = String.Empty,
+                        MobileNo = string.Empty,
+                        CreatedBy = 1,
+                        CreatedOn = DateTime.Now,
+                        EventTypeValue = string.Empty,
+                        EventType=1,
+                        EventStartDate=DateTime.Now,
+                        EventEndDate=DateTime.Now,
+                        Manager=string.Empty,
+                        ManagerMobile=string.Empty,
+                        Venue=string.Empty,
+                        TotalPrice=200,
+                        
+
+                    };
+                    _context.EventInfos.Attach(delEmpEntries);
+                    _context.Entry(delEmpEntries).Property(x => x.Status).IsModified = true;
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Trace.TraceInformation("Property: {0} Error: {1}",
+                                                validationError.PropertyName,
+                                                validationError.ErrorMessage);
+                    }
+                }
+                return false;
+            }
+            catch (Exception exception)
+            {
+
+                return false;
+            }
         }
     }
 }

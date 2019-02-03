@@ -27,7 +27,7 @@
 
     @section scripts{
         <script>
-            var Popup, dataTable;
+            var dataTable;
             $(document).ready(function () {
                 dataTable = $("#eventsmanageTable").DataTable({
                     "scrollX": true,
@@ -71,24 +71,47 @@
             
 
             function Delete(id) {
-                if (confirm('Are You Sure to Delete this Employee Record ?')) {
-                    $.ajax({
-                        type: "POST",
-                        url: '@Url.Action("Delete","Employee")/' + id,
-                        success: function (data) {
-                            if (data.success) {
+
+                //////////////////////
+                iziToast.warning({
+                    title: 'Delete Warning!',
+                    message: 'Are you sure you want to Delete?',
+                    timeout: false,
+                    overlay: true,
+                    color: 'yellow',
+                    position: 'center',
+                    buttons: [
+                        ['<button>Yes</button>', function (instance, toast) {
+                            debugger;
+
+                            result = GetJsonFromApi("/EventsData/Delete?eventInfoId=" + id);
+
+
+                            if (result) {
+                                ToastSuccess('Deleted Sucessfully.');
                                 dataTable.ajax.reload();
-
-                                $.notify(data.message, {
-                                    globalPosition: "top center",
-                                    className: "success"
-                                })
-
                             }
-                        }
+                            else {
+                                ToastError("Error ocuured While doing operation")
+                            }
 
-                    });
-                }
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+
+                        }, true],
+                        ['<button>No</button>', function (instance, toast) {
+                            instance.hide({
+                                transitionOut: 'fadeOutDown',
+
+                            }, toast, 'buttonName');
+
+                        }]
+                    ],
+
+                });
             }
         </script>
     }

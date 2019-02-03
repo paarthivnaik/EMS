@@ -754,7 +754,7 @@ function GetJsonFromApi(route) {
     var result = '';
     $.ajax({
         url: apiBaseUrl + route,
-        type: "POST",
+        type: "Get",
         data: {},
         dataType: "json",
         async: false,
