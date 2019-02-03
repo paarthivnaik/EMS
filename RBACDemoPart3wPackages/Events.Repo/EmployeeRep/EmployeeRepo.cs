@@ -13,7 +13,7 @@ namespace Events.Repo.EmployeeRep
     public class EmployeeRepo : IEmployeeRepo
     {
         private EmployeeContext _context;
-        public async Task<string[]> Save(Entities.Models.Employee obj)
+        public async Task<Tuple<long, string>> Save(Entities.Models.Employee obj)
         {
             try
             {
@@ -23,9 +23,8 @@ namespace Events.Repo.EmployeeRep
                     obj.Status = true;
                     _context.Entry(obj).State = obj.EmployeeID == 0 ? EntityState.Added : EntityState.Modified;
                     await _context.SaveChangesAsync();
-                    string[] res = new string[2];
-                    res[0] = obj.EmployeeID.ToString();
-                    res[1] = obj.EmployeeCode;
+                    
+                    var res = new Tuple<long, string>(obj.EmployeeID, obj.EmployeeCode);
                     return res;
                 }
             }
@@ -48,7 +47,7 @@ namespace Events.Repo.EmployeeRep
             }
         }
 
-        public async Task<string[]> Update(Entities.Models.Employee obj)
+        public async Task<Tuple<long, string>> Update(Entities.Models.Employee obj)
         {
 
             try
@@ -61,10 +60,9 @@ namespace Events.Repo.EmployeeRep
                     _context.Entry(obj).Property(x => x.Status).IsModified = false;
                     _context.Entry(obj).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
-                    string[] res = new string[2];
-                    res[0] = obj.EmployeeID.ToString();
-                    res[1] = obj.EmployeeCode;
+                    var res = new Tuple<long, string>(obj.EmployeeID, obj.EmployeeCode);
                     return res;
+                   
                     
                 }
             }

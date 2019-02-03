@@ -35,14 +35,14 @@ namespace RBACv3.Controllers
              var result = await _eventRepo.GetById(eventInfoId);
              return result;
          }
-        
-         [HttpPost]
+
+         [HttpGet]
          public async Task<List<EventInfo>> GetAll()
          {
              var result = await _eventRepo.GetAll();
              return result;
          }
-         [HttpPost]
+       [HttpGet]
          public async Task<bool> Delete(int eventInfoId)
          {
              return await _eventRepo.Delete(eventInfoId);

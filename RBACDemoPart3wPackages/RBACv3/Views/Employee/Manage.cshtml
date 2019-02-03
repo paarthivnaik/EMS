@@ -30,7 +30,7 @@
 
 
     <script>
-            var Popup, dataTable;
+            var dataTable;
             $(document).ready(function () {
                 dataTable = $("#employeeTable").DataTable({
                     "scrollX": true,
@@ -55,7 +55,7 @@
                         { "data": "PackageAmmount" },
                         {
                             "data": "EmployeeID", "render": function (data) {
-                                return "<a class='btn btn-primary btn-sm' href=/Employee/Edit?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-info btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-eye'></i></a>";
+                                return "<a class='btn btn-primary btn-sm' href=/Employee/Edit?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a>";
                             },
                             "orderable": false,
                             "searchable": false,

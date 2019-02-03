@@ -263,7 +263,7 @@
                 
                     {
                         "data": "CustomerAmtPaidID", "render": function (data) {
-                            return "<a class='btn btn-primary btn-sm modal-link' href=/CustomerPaid/New?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-primary btn-sm modal-link' href=/CustomerPaid/CustInvoice?keyId=" + data + "><i class='fa fa-eye'></i></a>";
+                            return "<a class='btn btn-primary btn-sm modal-link' href=/CustomerPaid/New?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-primary btn-sm modal-link'style='margin-left:5px' href=/CustomerPaid/CustInvoice?keyId=" + data + "><i class='fa fa-eye'></i></a>";
                         },
                         "orderable": false,
                         "searchable": false,
@@ -277,11 +277,23 @@
                 }
             });
         })
+       
+
         $('#saveEvent').click(function () {
             if (displayvalidation('create-sec')) {
-                var resObj = post("create-sec", 'EventsData/Save', 'Insert');
-                if (resObj > 0)
-                    $('[data-attr="EventInfoID"]').val(resObj);
+                if ($('#KeyId').val() > 0) {
+                    mode = 'Update';
+                }
+                else {
+                    mode = 'Insert';
+                }
+                var resObj = post("create-sec", 'EventsData/Save', mode);
+                debugger;
+                if (resObj.m_Item1 > 0) {
+                    $('#KeyId').val(resObj.m_Item1);
+                    $('#EventRefID').val(resObj.m_Item2);
+                }
+
             }
         });
         function Delete(id) {

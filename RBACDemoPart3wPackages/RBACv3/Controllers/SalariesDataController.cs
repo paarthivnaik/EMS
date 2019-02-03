@@ -40,18 +40,18 @@ namespace RBACv3.Controllers
             var result = await _salRepo.GetAll();
             return result;
         }
-        [HttpPost]
+         [HttpGet]
         public async Task<object> GetByEmpId(long employeeId)
         {
             var result = await _salRepo.GetByEmpId(employeeId);
             return result;
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<object> GetReport(DateTime fromdate, DateTime todate)
         {
             return await _salRepo.GetReport(fromdate, todate);
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<object> GetReport(string empCode)
         {
             return await _salRepo.GetReport(empCode);

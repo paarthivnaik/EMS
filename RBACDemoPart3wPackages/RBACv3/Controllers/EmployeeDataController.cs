@@ -14,14 +14,14 @@ namespace RBACv3.Controllers
     {
         private IEmployeeRepo _empRepo = new EmployeeRepo();
         [HttpPost]
-        public async Task<string[]> Save(Employee obj)
+        public async Task<Tuple<long, string>> Save(Employee obj)
         {
             obj.CreatedBy = User.Identity.GetUserId();
             var result = await _empRepo.Save(obj);
             return result;
         }
         [HttpPost]
-        public async Task<string[]> Update(Employee obj)
+        public async Task<Tuple<long, string>> Update(Employee obj)
         {
             obj.ModifiedBy = User.Identity.GetUserId();
             var result = await _empRepo.Update(obj);

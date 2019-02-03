@@ -19,19 +19,19 @@ namespace RBACv3.Controllers
         {
             return await _repo.AddItemsToEvent(ObjItems);
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<object> GetById(long eventInfoId)
         {
             var result = await _repo.GetById(eventInfoId);
             return result;
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<bool> Delete(long eventItemId)
         {
             var result = await _repo.Delete(eventItemId);
             return result;
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<object> GetItemDet(long eventInfoId)
         {
             var result = await _repo.GetItemDet(eventInfoId);

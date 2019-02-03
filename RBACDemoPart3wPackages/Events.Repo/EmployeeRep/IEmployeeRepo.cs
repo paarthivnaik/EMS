@@ -9,8 +9,8 @@ namespace Events.Repo.EmployeeRep
 {
   public  interface IEmployeeRepo
     {
-      Task<string[]> Save(Employee obj);
-      Task<string[]> Update(Employee obj);
+      Task<Tuple<long, string>> Save(Employee obj);
+      Task<Tuple<long, string>> Update(Employee obj);
         Task<object> GetById(long employeeId);
         Task<object> GetByEmpId(long employeeId);
         Task<List<Employee>> GetAll();

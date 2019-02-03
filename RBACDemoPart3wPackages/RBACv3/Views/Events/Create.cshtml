@@ -197,14 +197,25 @@
         BindLELV('EventType,Categories');        
         
        
+     
         $('#saveEvent').click(function () {
             if (displayvalidation('create-sec')) {
-                var resObj = post("create-sec", 'EventsData/Save', 'Insert');
-                if (resObj.m_Item1 > 0)
-                    $('[data-attr="EventInfoID"]').val(resObj.m_Item1);
-                $('#EventRefID').val(resObj.m_Item2);
+                if ($('#KeyId').val() > 0) {
+                    mode = 'Update';
+                }
+                else {
+                    mode = 'Insert';
+                }
+                var resObj = post("create-sec", 'EventsData/Save', mode);
+                debugger;
+                if (resObj.m_Item1 > 0) {
+                    $('#KeyId').val(resObj.m_Item1);
+                    $('#EventRefID').val(resObj.m_Item2);
+                }
+
             }
-        });      
+        });
+
         
     })
    

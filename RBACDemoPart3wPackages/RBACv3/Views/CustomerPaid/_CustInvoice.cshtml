@@ -98,12 +98,16 @@
 </div>
 
 <div class="modal-body">
-    <div id="custInvoicetemp" class="custInvoicetemp">
+    <div id="HTMLtoPDF">
 
     </div>
- 
+    <button type="button" class="btn btn-success pull-right" id="printDiv">
+        <i class="fa fa-print"></i>Print
+    </button>
 </div>
-
+<script src="~/Scripts/HTML to PDF/HTML to PDF/js/jspdf.js"></script>
+<script src="~/Scripts/HTML to PDF/HTML to PDF/js/pdfFromHTML.js"></script>
+<script src="~/Scripts/HTML to PDF/HTML to PDF/js/printPreview.js"></script>
 
 <script>
     var custpaidId = '@ViewBag.custPaidId';
@@ -113,8 +117,24 @@
         debugger;
         tempCustData = GetJsonFromApi('/CustomerPaidData/GetById?CustomerAmtPaidId=' + custpaidId);
         
-        $("#custInvoicetemp").html(template1(tempCustData));
+        $("#HTMLtoPDF").html(template1(tempCustData));
+        function printDiv() {
+            var printContents = document.getElementById("HTMLtoPDF").innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            window.focus()
+
+            window.close();
+            document.body.innerHTML = originalContents;
+            return false;
+        }
         
+        $("#printDiv").printPreview({
+            obj2print: '#HTMLtoPDF',
+            width: '810',
+
+        });
     });
 </script>
 <script type="text/template" id="invoiceTemplate">

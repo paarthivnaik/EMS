@@ -110,6 +110,7 @@
         <div id="ItemCostHistory">
         </div>
     </div>
+   
 
 </div>
 <!-- /.row -->
@@ -171,7 +172,7 @@
         var StartDate = null;
         var EndDate = null;
         function itemCostHistory(empId) {
-
+           
             _.templateSettings.variable = "ml";
             var Itemtemplate1 = _.template($("#CostItemtempt").html());
             var expData = GetJsonFromApi('/SalariesData/GetByEmpId?employeeId=' + empId);

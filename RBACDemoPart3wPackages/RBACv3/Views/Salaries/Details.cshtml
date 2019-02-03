@@ -117,6 +117,7 @@
         var expData = null;
         function itemCostHistory(fromdate, todate, empCode, mode) {
             debugger;
+            $('#ItemCostHistory').empty();
             _.templateSettings.variable = "ml";
             var Itemtemplate1 = _.template($("#CostItemtempt").html());
             if (mode === 'empDate') {
