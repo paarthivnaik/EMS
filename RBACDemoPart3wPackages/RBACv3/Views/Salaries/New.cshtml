@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Create an Expense";
+    ViewBag.Title = "Payrole";
 }
 
 <!-- /.row -->
@@ -7,7 +7,7 @@
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title"><strong>Expenses</strong> </h3>
+                <h3 class="box-title"><strong>Payrole</strong> </h3>
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse">
                         <i class="fa fa-minus"></i>
@@ -106,16 +106,56 @@
             </div>
         </div>
         <!-- /.box -->
-        <div id="ItemCostHistory">
-        </div>
+       
     </div>
-   
+
+    <div class="col-md-12">
+        <!-- Custom Tabs -->
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" data-toggle="tab">Salary Recap</a></li>
+
+
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                   
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Customer Payments</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="salaryPaidTable" class="table table-bordered table-hover display nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th >EmployeeCode</th>
+                                        <th>Month</th>
+                                        <th>Salary</th>
+                                        <th>Incentives</th>
+                                        <th>Bonous </th>
+                                       <th></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- nav-tabs-custom -->
+
+    </div>
+
 
 </div>
 <!-- /.row -->
 @section Scripts{
     <script src="~/Scripts/util.js"></script>
     <script>
+        var dataTable;
         $(document).ready(function () {
             BindLELV('Particulars');
             debugger;
@@ -140,7 +180,7 @@
                     if (resObj > 0) {
 
                         $('#KeyId').val(resObj);
-                       
+
                         itemCostHistory(empId);
 
                     }
@@ -172,115 +212,52 @@
         var StartDate = null;
         var EndDate = null;
         function itemCostHistory(empId) {
-           
-            _.templateSettings.variable = "ml";
-            var Itemtemplate1 = _.template($("#CostItemtempt").html());
-            var expData = GetJsonFromApi('/SalariesData/GetByEmpId?employeeId=' + empId);
-            debugger;
-            for (var i = 0; i < expData.length; i++) {
-                temp = new Object();
-                temp.SNO = i + 1;
-                temp.SalaryPaidID = expData[i].SalaryPaidID;
-                temp.EmployeeCode = expData[i].EmployeeCode;
-                temp.PaidMonth = expData[i].PaidMonth;
-                temp.Salary = expData[i].Salary;
-                temp.Incentives = expData[i].Incentives;
-                temp.Bonous = expData[i].Bonous;
-                temp.Description = expData[i].Description;
-                temp.CreateDate = expData[i].CreateDate;
-
-                if (temp.PaidMonth != null) {
-                    var d = new Date(temp.PaidMonth.split('T')[0]);
-                    var date = d.getDate() <= 9 ? ('0' + d.getDate()) : d.getDate();
-                    var month = d.getMonth() < 9 ? ('0' + (d.getMonth() + 1)) : (d.getMonth() + 1);
-                    var year = d.getFullYear();
-                    temp.PaidMonth = date + "/" + month + "/" + year;
-                }
-                tempSum = parseFloat(temp.Incentives) + parseFloat(temp.Salary) + parseFloat(temp.Bonous);
-                temp.Total = tempSum;
-                Itemtempdata[i] = temp;
-
-            }
-            $("#ItemCostHistory").html(Itemtemplate1(Itemtempdata));
 
 
-            var t = $('#tblAverageRating').DataTable({
-               
-                dom: 'Bfrtip',
-                buttons: [
-                   {
-                       extend: 'print',
-                       title: 'Salary Recap of Employee :' + $('#EmployeeCode').val(),
-                       
-                   },
-    {
-        extend: 'pdf',
-        title: 'Salary Recap of Employee :' + $('#EmployeeCode').val()
-    }
+            dataTable = $("#salaryPaidTable").DataTable({
+                
+                "ajax": {
+                    "url": "/api/SalariesData/GetByEmpId?employeeId=" + empId,
+                    "type": "GET",
+                    "datatype": "json",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "EmployeeCode" },
+
+                    {
+                        "data": "PaidMonth", render: function (data, type, row) {
+                            if (type === "sort" || type === "type") {
+                                return data;
+                            }
+                            return moment(data).format("DD-MM-YYYY");
+                        }
+                    },
+                      { "data": "Salary" },
+                     { "data": "Incentives" },
+                      { "data": "Bonous" },
+
+                    {
+                        "data": "SalaryPaidID", "render": function (data) {
+                            return "<a class='btn btn-primary btn-sm modal-link' href=/CustomerPaid/New?keyId=" + data + "><i class='fa fa-pencil'></i></a><a class='btn btn-danger btn-sm' style='margin-left:5px' onclick=Delete(" + data + ")><i class='fa fa-trash'></i></a><a class='btn btn-primary btn-sm modal-link'style='margin-left:5px' href=/CustomerPaid/CustInvoice?keyId=" + data + "><i class='fa fa-eye'></i></a>";
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "150px"
+                    }
+
                 ],
-                "order": [[1, 'asc']]
-            });
+                "language": {
 
-            
+                    "emptyTable": "No data found, Please click on <b>Add New</b> Button"
+                }
+            });
+  
+
 
         };
     </script>
 
 
-    <script type="text/template" id="CostItemtempt">
-
-
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">Salary Recap</h3>
-
-               
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-                <div class="" style="margin-top:0px !important;">
-                    <table id="tblAverageRating" class=" example table table-striped table-bordered table-hover dataTable no-footer" width="100%" role="grid" style="width: 100%;">
-                        <thead>
-                            <tr role="row" style="background-color: #6d747e54 !important;color:#2f2c2c;">
-                                <th style="text-align:center">S.No </th>
-                                <th style="text-align:center">EmployeeCode </th>
-                                <th style="text-align:center">Month</th>
-                                <th style="text-align:center">Salary</th>
-                                <th style="text-align:center">Incentives</th>
-                                <th style="text-align:center">Bonous </th>
-                                <th style="text-align:center">Total </th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% _.each( ml, function(listCostHist){%>
-                            <tr>
-                                <td style="text-align:center"><%- listCostHist.SNO %></td>
-                                <td style="text-align:center"><%- listCostHist.EmployeeCode %></td>
-                                <td style="text-align:center"><%- listCostHist.PaidMonth %></td>
-                                <td style="text-align:center"><%- listCostHist.Salary %></td>
-                                <td style="text-align:center"><%- listCostHist.Incentives %></td>
-                                <td style="text-align:center"><%- listCostHist.Bonous %></td>
-                                <td style="text-align:center"><b><%- listCostHist.Total %></b></td>
-
-                            </tr>
-
-                            <% }); %>
-
-
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-
-
-
-    </script>
 }
 
