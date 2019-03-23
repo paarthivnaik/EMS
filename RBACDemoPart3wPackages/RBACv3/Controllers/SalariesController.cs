@@ -17,9 +17,10 @@ namespace RBACv3.Controllers
         {
             return View();
         }
-        public ActionResult Edit()
+        public ActionResult Edit(long keyId)
         {
-            return View();
+            ViewBag.SalaryPaidId = keyId;
+            return PartialView("_Edit");
         }
         public ActionResult Details()
         {

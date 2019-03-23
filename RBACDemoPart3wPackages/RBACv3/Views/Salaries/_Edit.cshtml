@@ -1,0 +1,136 @@
+﻿
+<div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h2 class="modal-title modal-head-left">Payroll Edit</h2>
+
+</div>
+
+<div class="modal-body">
+
+
+
+    <div class="row" data-role="EditSaldet-sec">
+
+        <div class="col-lg-12">
+           
+                <div data-role="basicData-sec">
+                    <input type="hidden" data-attr="EmployeeID" />
+                    <div class="form-group col-lg-6">
+                        <strong class="m-b-xs">Employee Code</strong>
+                        <div class="input-group m-b">
+                            <i class="fa fa-hashtag input-group-addon"></i>
+                            <input type="text" id="EmployeeCode1" class="form-control" placeholder="Employee Code" name="Employee Code" data-attr="EmployeeCode" readonly>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <strong class="m-b-xs">Employee Name</strong>
+                        <div class="input-group m-b">
+                            <i class="fa fa-user input-group-addon"></i>
+                            <input type="text" id="FirstName1" class="form-control" placeholder="Employee Name" name="FirstName" data-attr="FirstName" readonly>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <strong class="m-b-xs">*Paid Month</strong>
+                    <div class="input-group m-b">
+                        <i class="fa fa-calendar input-group-addon"></i>
+                        <input type="text" id="PaidMonth1" class="form-control datepicker" placeholder="Month of Paid" name="PaidMonth" data-attr="PaidMonth" data-valt="required">
+
+                    </div>
+
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <strong class="m-b-xs">*Salary Ammount</strong>
+                    <div class="input-group m-b">
+                        <i class="fa fa-money input-group-addon"></i>
+                        <input type="text" placeholder="Salary Ammount" class="form-control" data-attr="Salary" id="Salary1" name="Salary" data-valt="required" onkeypress="return isNumberKeyDecimal(event, 'Salary')">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-6">
+                    <strong class="m-b-xs">Incentives</strong>
+                    <div class="input-group m-b">
+                        <i class="fa fa-money input-group-addon"></i>
+                        <input type="text" placeholder="Incentives Ammount" class="form-control" data-attr="Incentives" id="Incentives1" name="Incentives" data-valt="required" onkeypress="return isNumberKeyDecimal(event, 'Incentives')">
+                    </div>
+                </div>
+                <div class="form-group col-lg-6">
+                    <strong class="m-b-xs">Bonous</strong>
+                    <div class="input-group m-b">
+                        <i class="fa fa-money input-group-addon"></i>
+                        <input type="text" placeholder="Bonous Ammount" class="form-control" data-attr="Bonous" id="Bonous1" name="Bonous" data-valt="required" onkeypress="return isNumberKeyDecimal(event, 'Bonous')">
+                    </div>
+                </div>
+
+                <div class="form-group col-lg-12">
+                    <strong class="m-b-xs">Description</strong>
+
+                    <div class="input-group m-b">
+                        <i class="fa fa-pencil input-group-addon"></i>
+                        <input type="text" placeholder="Description" class="form-control" data-attr="Description" id="Description1" name="Description">
+                    </div>
+                </div>
+
+           
+
+        </div>
+     
+            <input type="hidden" data-attr="SalaryPaidID" id="KeyIdpop" value="0" />
+            <input type="hidden" data-attr="CreatedBy" value="0" />
+            <input type="hidden" data-attr="CreatedOn" value="@DateTime.Now" />
+            <input type="hidden" data-attr="ModifiedBy" />
+            <input type="hidden" data-attr="ModifiedOn" />
+            <input type="hidden" data-attr="Status" value="true" />
+
+      
+    </div>
+
+
+
+
+
+</div>
+
+
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="button" id="saveSalEdit" class="btn btn-primary">Save changes</button>
+</div>
+
+<script>
+    var salPiadId = '@ViewBag.SalaryPaidId'
+    $(document).ready(function () {
+       
+        bind("/api/SalariesData/GetById?salPaidId=" + salPiadId, 'EditSaldet-sec');
+        //Date picker
+        $('.datepicker').datepicker({
+            autoclose: true,
+            dateFormat: 'dd-mm-yy'
+        });
+    });
+    $('#saveSalEdit').click(function () {
+        if (displayvalidation('EditSaldet-sec')) {
+            if ($('#KeyIdpop').val() > 0) {
+                mode = 'Update';
+            }
+            else {
+                mode = 'Insert';
+            }
+            var resObj = post("EditSaldet-sec", 'SalariesData/Save', mode);
+            if (resObj > 0) {
+
+                $('#KeyIdpop').val(resObj);
+                var salId = GetQueryStringValues(window.location.href, 'keyId');
+                dataTable.ajax.url("/api/SalariesData/GetByEmpId?employeeId=" + salId).load();
+                  
+
+            }
+
+        }
+    });
+</script>

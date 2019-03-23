@@ -1728,7 +1728,7 @@
     <Content Include="Views\Vendors\Edit.cshtml" />
     <Content Include="Views\Salaries\Manage.cshtml" />
     <Content Include="Views\Salaries\New.cshtml" />
-    <Content Include="Views\Salaries\Edit.cshtml" />
+    <Content Include="Views\Salaries\_Edit.cshtml" />
     <Content Include="Views\Salaries\Details.cshtml" />
     <Content Include="Views\VendorPaid\New.cshtml" />
     <Content Include="Views\VendorPaid\_Edit.cshtml" />

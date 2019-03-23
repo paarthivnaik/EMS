@@ -93,7 +93,26 @@ namespace Events.Repo.SalaryRep
             {
                 using (_context = new EmployeeContext())
                 {
-                    var resObj = await _context.SalaryPaids.Where(x => x.SalaryPaidID == salaryPaidId&& x.Status == true).FirstOrDefaultAsync();
+                    var resObj = await (from a in _context.SalaryPaids
+                                join b in _context.Employees on a.EmployeeID equals b.EmployeeID
+                                where a.SalaryPaidID==salaryPaidId && a.Status==true
+                                select new
+                                {
+                                    a.Bonous,
+                                    a.CreatedBy,
+                                    a.CreatedOn,
+                                    a.Description,
+                                    a.EmployeeCode,
+                                    a.EmployeeID,
+                                    a.Incentives,
+                                    a.ModifiedBy,
+                                    a.ModifiedOn,
+                                    a.PaidMonth,
+                                    a.Salary,
+                                    a.SalaryPaidID,
+                                    a.Status,
+                                    b.FirstName
+                                }).FirstOrDefaultAsync();
                     return resObj;
                 }
             }
